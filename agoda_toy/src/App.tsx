@@ -1,9 +1,18 @@
+import reset from 'styled-reset';
+import { createGlobalStyle } from 'styled-components';
+
 function App() {
   return (
     <>
-      <div>project</div>
+      <Global>
+        <div>project</div>
+      </Global>
     </>
   );
 }
+
+const Global = createGlobalStyle`
+    ${reset}
+  `;
 
 export default App;
