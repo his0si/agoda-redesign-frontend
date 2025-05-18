@@ -264,25 +264,41 @@ const FormSection = styled.section`
 
 const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
-  gap: 0.8rem; 
-  position: relative; 
+  gap: 0;
+  position: relative;
 
-  & > *:not(:last-child) { 
+  & > *:not(:last-child) {
     position: relative;
     &::after {
       content: '';
       position: absolute;
-      right: calc(-0.4rem - 0.04rem); 
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
-      height: 1.76rem; 
-      width: 0.08rem; 
-      background-color: ${({ theme }) => theme.colors.gray300}; 
+      height: 1.76rem;
+      width: 0.08rem;
+      background-color: ${({ theme }) => theme.colors.gray300};
     }
   }
 
   & > * {
-    flex: 1; 
+    flex: 1;
+    border-radius: 16px 0 0 16px;
+  }
+
+  & > *:last-child {
+    border-radius: 0 16px 16px 0;
+    margin-left: -0.08rem;
+    border-left: none;
+    &::after {
+      content: none;
+    }
+  }
+
+  &:focus-within {
+    & > * {
+      border-radius: 16px;
+    }
   }
 `;
 
