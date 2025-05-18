@@ -25,7 +25,7 @@ const FONT = ({ weight, size, lineHeight }: FontStyle): string => {
   return `
     font-family: 'SUIT';
     font-weight: ${weight};
-    font-size: ${size}px;
+    font-size: ${size}rem;
     line-height: ${lineHeight}%;
   `;
 };
