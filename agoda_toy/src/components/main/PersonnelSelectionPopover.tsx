@@ -88,9 +88,9 @@ const PopoverContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: 280px; // Adjust as needed based on content
-  position: absolute; // To position it relative to the SearchInput
-  top: 100%; // Position it below the SearchInput
+  min-width: 250px; 
+  position: absolute; 
+  top: 100%; 
   left: 0;
   z-index: 10; // Ensure it's above other elements
   margin-top: 8px; // Small gap from the input
@@ -125,31 +125,26 @@ const Controls = styled.div`
 `;
 
 const ControlButton = styled.button`
-  background-color: transparent;
-  border: 1px solid #757575;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  border: 1px solid #757575;
   color: #333;
-  transition: background-color 0.2s;
-  font-size: 20px;
-  font-weight: 300;
+  padding: 0;
+  cursor: pointer;
   line-height: 1;
+  outline: none;
 
-  &:hover:not(:disabled) {
-    background-color: rgba(0, 0, 0, 0.05);
+  &:focus {
+    outline: none;
   }
 
   &:disabled {
     cursor: not-allowed;
     border-color: #e0e0e0;
-    color: #e0e0e0;
   }
 `;
+
 
 const CountText = styled.span`
   font-size: 16px;

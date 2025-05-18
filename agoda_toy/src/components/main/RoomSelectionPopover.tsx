@@ -67,15 +67,17 @@ export default RoomSelectionPopover;
 // Styles are similar to PersonnelSelectionPopover, consider a common styled component if DRY is a priority
 const PopoverContainer = styled.div`
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   padding: 12px;
-  min-width: 220px;
+  min-width: 255px; 
+  min-height: 30px;
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 10;
-  margin-top: 4px;
+  margin-top: 8px;
+  font-family: 'SUIT', sans-serif;
 `;
 
 const CounterRow = styled.div`
@@ -85,9 +87,10 @@ const CounterRow = styled.div`
 `;
 
 const LabelText = styled.span`
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: #333;
+  line-height: 1.4;
 `;
 
 const Controls = styled.div`
@@ -95,37 +98,31 @@ const Controls = styled.div`
   align-items: center;
   gap: 8px;
 `;
-
 const ControlButton = styled.button`
-  background-color: transparent;
-  border: 1px solid #757575;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  border: 1px solid #757575;
   color: #333;
-  transition: background-color 0.2s;
-  font-size: 18px;
-  font-weight: 300;
+  padding: 0;
+  cursor: pointer;
   line-height: 1;
+  outline: none;
 
-  &:hover:not(:disabled) {
-    background-color: rgba(0, 0, 0, 0.05);
+  &:focus {
+    outline: none;
   }
 
   &:disabled {
     cursor: not-allowed;
     border-color: #e0e0e0;
-    color: #e0e0e0;
   }
 `;
 
 const CountText = styled.span`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  min-width: 18px;
+  color: #333;
+  min-width: 24px;
   text-align: center;
 `; 
