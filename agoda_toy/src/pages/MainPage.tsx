@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchWidget from '../components/main/SearchWidget';
 
-// 배경 이미지 경로 (public 폴더 기준)
 const BACKGROUND_IMAGE_URL = '/images/background.png';
 
 interface MainPageProps {}
