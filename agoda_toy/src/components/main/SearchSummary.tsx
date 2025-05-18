@@ -40,7 +40,7 @@ export default function SearchSummary({
       {/* rule: button 태그 에는 type 명시 필수 */}
       <SearchButton type="button" onClick={onSearchClick} aria-label="Search">
         {/* <LuSearch /> */}
-        <img src="/images/main_icn_search.svg" alt="Search" style={{ width: '100%', height: '100%' }} />
+        <img src="/images/main_icn_search.svg" alt="Search" style={{ width: '45%', height: '70%' }} />
       </SearchButton>
     </SummaryContainer>
   );
@@ -56,14 +56,14 @@ const SummaryContainer = styled.aside<{ theme: DefaultTheme }>`
   padding: 1.6rem; 
   width: 18rem; 
   min-height: 16.8rem; 
-  border-radius: 16px 16px 56px 16px; // 20px 20px 70px 20px -> 16px 16px 56px 16px
+  border-radius: 20px 20px 60px 20px; 
   box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.25); // 0px 10px 10px 0px -> 0px 8px 8px 0px
 `;
 
 const InfoSection = styled.div`
   width: 100%;
   margin-bottom: 1.6rem; // 버튼과의 간격, rem 단위 사용 2rem -> 1.6rem
-  margin-top: 2rem; // 콘텐츠를 아래로 내리기 위해 추가
+  margin-top: 2.4rem; // 기존 2rem에서 0.4rem 증가시켜 텍스트를 아래로 이동
 `;
 
 const InfoItem = styled.div`
@@ -75,17 +75,17 @@ const InfoItem = styled.div`
 
 const LabelText = styled.p<{ theme: DefaultTheme }>`
   font-family: 'SUIT', sans-serif;
-  font-size: 9.6px; // 12px -> 9.6px
-  font-weight: 500;
+  font-size: 13px; 
+  font-weight: 300; 
   line-height: 1.4;
-  opacity: 0.8;
-  margin-bottom: 0.24rem; // 0.3rem -> 0.24rem
+  margin-bottom: 0.1em; 
 `;
 
 const ValueText = styled.p<{ theme: DefaultTheme }>`
   font-family: 'SUIT', sans-serif;
-  font-size: 12.8px; // 16px -> 12.8px
-  font-weight: 400;
+  font-size: 12.8px; 
+  opacity: 0.8;
+  font-weight: 300;
   line-height: 1.4;
 `;
 
@@ -93,20 +93,19 @@ const SearchButton = styled.button<{ theme: DefaultTheme }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.primary}; // Changed from transparent
-  color: ${({ theme }) => theme.colors.white}; // Ensure icon/text contrast if any text is added
+  background-color: rgba(255, 255, 255, 0.15); // 투명도 20%의 하얀색 배경
   border: none;
-  border-radius: 50%; // 원형 버튼
+  padding: 0; // 내부 여백 제거
+  border-radius: 50%; // 원형 클릭 영역 유지
   width: 4.8rem; // 버튼 크기, rem 단위 사용 6rem -> 4.8rem
   height: 4.8rem; // 버튼 크기, rem 단위 사용 6rem -> 4.8rem
   cursor: pointer;
-  font-size: 2.24rem; // 아이콘 크기, rem 단위 사용 2.8rem -> 2.24rem
-  box-shadow: 0 0.16rem 0.4rem rgba(0, 0, 0, 0.2); // rem 단위 사용 0 0.2rem 0.5rem -> 0 0.16rem 0.4rem
+  box-shadow: none; // 그림자 제거
   align-self: flex-end; // 오른쪽 정렬로 변경
   margin-top: auto; // InfoSection 아래로 밀어내기
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out; // 부드러운 배경색 변경 효과 추가
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray100}; // Updated
+    background-color: rgba(255, 255, 255, 0.3); // 호버 시 투명도 30%의 하얀색 배경 (예시)
   }
 `; 
