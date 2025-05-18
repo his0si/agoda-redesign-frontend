@@ -5,10 +5,27 @@ import SearchSummary from './SearchSummary';
 import { LuMapPin, LuCalendarDays, LuUsers, LuBedDouble } from 'react-icons/lu';
 import PersonnelSelectionPopover from './PersonnelSelectionPopover';
 import RoomSelectionPopover from './RoomSelectionPopover';
+import Calendar, { type CalendarRef } from './Calendar';
 
 interface SearchWidgetProps {}
 
-// Helper function to parse personnel string (e.g., "성인 5명, 어린이 1명")
+const formatDateToString = (date: Date | null): string => {
+  if (!date) return '';
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}년 ${month}월 ${day}일`;
+};
+
+const parseDateFromString = (dateStr: string): Date | null => {
+  const parts = dateStr.match(/(\d{4})년 (\d{2})월 (\d{2})일/);
+  if (parts) {
+    return new Date(parseInt(parts[1], 10), parseInt(parts[2], 10) - 1, parseInt(parts[3], 10));
+  }
+  return null;
+};
+
+// Helper function to parse personnel string
 const parsePersonnel = (personnelStr: string): { adults: number; children: number } => {
   const adultsMatch = personnelStr.match(/성인 (\d+)명/);
   const childrenMatch = personnelStr.match(/어린이 (\d+)명/);
@@ -18,24 +35,29 @@ const parsePersonnel = (personnelStr: string): { adults: number; children: numbe
   };
 };
 
-// Helper function to parse rooms string (e.g., "객실 1개")
+// Helper function to parse rooms string
 const parseRooms = (roomsStr: string): number => {
   const roomsMatch = roomsStr.match(/객실 (\d+)개?/);
   return roomsMatch ? parseInt(roomsMatch[1], 10) : 0;
 };
 
 export default function SearchWidget(props: SearchWidgetProps) {
+  const today = new Date();
+  today.setHours(0,0,0,0); // Normalize today's date
+  const defaultCheckOutDate = new Date(today);
+  defaultCheckOutDate.setDate(today.getDate() + 2); // Default 2-night stay
+
   const initialSearchData = {
     destination: '도쿄',
-    checkInDate: '2025년 04월 15일',
-    checkOutDate: '2025년 04월 20일',
-    personnel: '성인 0명',
-    rooms: '객실 0',
+    // checkInDate and checkOutDate will be set by useState using formatted dates
+    personnel: '성인 0명', // Default to 0, will show placeholder
+    rooms: '객실 0',     // Default to 0, will show placeholder
   };
 
   const [destination, setDestination] = useState(initialSearchData.destination);
-  const [checkInDate, setCheckInDate] = useState(initialSearchData.checkInDate);
-  const [checkOutDate, setCheckOutDate] = useState(initialSearchData.checkOutDate);
+  const [checkInDate, setCheckInDate] = useState(formatDateToString(today));
+  const [checkOutDate, setCheckOutDate] = useState(formatDateToString(defaultCheckOutDate));
+  const [hasUserSelectedDates, setHasUserSelectedDates] = useState(false);
 
   const initialPersonnel = parsePersonnel(initialSearchData.personnel);
   const [adults, setAdultsState] = useState(initialPersonnel.adults);
@@ -44,12 +66,15 @@ export default function SearchWidget(props: SearchWidgetProps) {
 
   const [isPersonnelPopoverOpen, setIsPersonnelPopoverOpen] = useState(false);
   const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const [personnelInteracted, setPersonnelInteracted] = useState(false);
   const [roomInteracted, setRoomInteracted] = useState(false);
 
   const personnelRef = useRef<HTMLDivElement>(null);
   const roomRef = useRef<HTMLDivElement>(null);
+  const dateInputsWrapperRef = useRef<HTMLDivElement>(null); // Renamed from calendarRef for clarity
+  const calendarComponentRef = useRef<CalendarRef>(null); // Ref for Calendar component instance
 
   const handleAdultsChange = (count: number) => {
     setAdultsState(count);
@@ -72,7 +97,7 @@ export default function SearchWidget(props: SearchWidgetProps) {
   const isPersonnelActive = personnelInteracted && (adults > 0 || children > 0);
   const isRoomActive = roomInteracted && rooms > 0;
 
-  // Close popover when clicking outside
+  // Close popovers and calendar when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (personnelRef.current && !personnelRef.current.contains(event.target as Node)) {
@@ -81,12 +106,30 @@ export default function SearchWidget(props: SearchWidgetProps) {
       if (roomRef.current && !roomRef.current.contains(event.target as Node)) {
         setIsRoomPopoverOpen(false);
       }
+      if (isCalendarOpen && dateInputsWrapperRef.current && !dateInputsWrapperRef.current.contains(event.target as Node)) {
+        // Check if the click is outside the calendar popup itself too
+        const calendarPopupElement = document.querySelector('.calendar-popup-container');
+        if (calendarPopupElement && !calendarPopupElement.contains(event.target as Node)) {
+          if (calendarComponentRef.current) {
+            const selection = calendarComponentRef.current.getSelection();
+            if (selection.start) { // Only update if at least a start date is selected
+              setCheckInDate(formatDateToString(selection.start));
+              setCheckOutDate(formatDateToString(selection.end)); // selection.end can be null
+              setHasUserSelectedDates(true);
+            } else { // If no date was selected in the calendar, revert to original or do nothing
+                // For now, let's assume if nothing selected, we keep existing dates.
+                // Or, reset to default if that's desired.
+            }
+          }
+          setIsCalendarOpen(false);
+        }
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isCalendarOpen]);
 
   return (
     <MainFlexWrapper>
@@ -99,18 +142,21 @@ export default function SearchWidget(props: SearchWidgetProps) {
             onClick={() => {
               setIsPersonnelPopoverOpen(false);
               setIsRoomPopoverOpen(false);
+              setIsCalendarOpen(false);
             }}
           />
-          <DateInputsWrapper>
+          <DateInputsWrapper ref={dateInputsWrapperRef}>
             <SearchInput
               icon={<LuCalendarDays />}
               value={checkInDate}
               placeholder="날짜 선택"
               isDateField={true}
               onClick={() => {
+                setIsCalendarOpen(!isCalendarOpen);
                 setIsPersonnelPopoverOpen(false);
                 setIsRoomPopoverOpen(false);
               }}
+              isActiveSelection={hasUserSelectedDates}
             />
             <SearchInput
               icon={<LuCalendarDays />}
@@ -118,11 +164,21 @@ export default function SearchWidget(props: SearchWidgetProps) {
               placeholder="날짜 선택"
               isDateField={true}
               onClick={() => {
+                setIsCalendarOpen(!isCalendarOpen);
                 setIsPersonnelPopoverOpen(false);
                 setIsRoomPopoverOpen(false);
               }}
+              isActiveSelection={hasUserSelectedDates}
             />
+            {isCalendarOpen && (
+              <Calendar
+                ref={calendarComponentRef}
+                initialStartDate={parseDateFromString(checkInDate)}
+                initialEndDate={parseDateFromString(checkOutDate)}
+              />
+            )}
           </DateInputsWrapper>
+          {/* OccupancyInputsWrapper and SearchSummary remain the same */}
           <OccupancyInputsWrapper>
             <PopoverWrapper ref={personnelRef}>
               <SearchInput
@@ -132,6 +188,7 @@ export default function SearchWidget(props: SearchWidgetProps) {
                 onClick={() => {
                   setIsPersonnelPopoverOpen(!isPersonnelPopoverOpen);
                   setIsRoomPopoverOpen(false);
+                  setIsCalendarOpen(false);
                 }}
                 isActiveSelection={isPersonnelActive}
               />
@@ -152,6 +209,7 @@ export default function SearchWidget(props: SearchWidgetProps) {
                 onClick={() => {
                   setIsRoomPopoverOpen(!isRoomPopoverOpen);
                   setIsPersonnelPopoverOpen(false);
+                  setIsCalendarOpen(false);
                 }}
                 isActiveSelection={isRoomActive}
               />
@@ -167,7 +225,7 @@ export default function SearchWidget(props: SearchWidgetProps) {
       </FormCard>
       <SearchSummary
         destination={destination}
-        dateRange={`${checkInDate} - ${checkOutDate}`}
+        dateRange={checkInDate && checkOutDate ? `${checkInDate} - ${checkOutDate}` : (checkInDate || '날짜 미정')}
         rooms={roomsSummary}
         personnel={personnelSummary}
       />
@@ -177,66 +235,66 @@ export default function SearchWidget(props: SearchWidgetProps) {
 
 const MainFlexWrapper = styled.div`
   display: flex;
-  min-width: 65rem; // 기본 최소 너비 설정으로 FormCard 너비 확보 90rem -> 72rem
-  max-width: 96rem; // 최대 너비 (사용자 설정 유지) 120rem -> 96rem
-  width: 100%; // 부모 너비에 맞추되, min-width 이상, max-width 이하로 제한됨
-  gap: 0rem; /* Gap between the two cards */
+  min-width: 65rem; 
+  max-width: 96rem; 
+  width: 100%; 
+  gap: 0rem; 
 `;
 
 const FormCard = styled.div<{ theme: DefaultTheme }>`
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 56px 16px 16px 16px; // 70px 20px 20px 20px -> 56px 16px 16px 16px
-  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15); // 0 0.5rem 1.5rem -> 0 0.4rem 1.2rem
-  overflow: visible; /* Changed from hidden to visible */
-  flex: 1; /* Allow this card to grow */
-  display: flex; /* To make FormSection fill it if FormSection has flex-grow */
-  align-items: center; /* New: Vertically center FormSection */
-  /* justify-content: center; // This would horizontally center FormSection if it didn't have its own margin auto */
+  border-radius: 56px 16px 16px 16px; 
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15); 
+  overflow: visible; 
+  flex: 1; 
+  display: flex; 
+  align-items: center; 
 `;
 
 const FormSection = styled.section`
-  flex-grow: 1; // Tries to grow within FormCard
-  padding: 1.2rem; // 1.5rem -> 1.2rem
+  flex-grow: 1; 
+  padding: 1.2rem; 
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; // 0.75rem -> 0.6rem
-  max-width: 36rem; // Adjusted from 44rem to reduce input field width
-  width: 100%;      // New: Ensure it takes full width up to max-width
-  margin: 0 auto;   // New: Center FormSection within FormCard
+  gap: 0.6rem; 
+  max-width: 36rem; 
+  width: 100%;      
+  margin: 0 auto;   
 `;
 
 const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
-  gap: 0.8rem; // 날짜 입력 필드 사이 간격 1rem -> 0.8rem
+  gap: 0.8rem; 
+  position: relative; 
 
-  & > *:not(:last-child) { // Target the first SearchInput in this pair
+  & > *:not(:last-child) { 
     position: relative;
     &::after {
       content: '';
       position: absolute;
-      right: calc(-0.4rem - 0.04rem); // -0.5rem - 0.05rem -> -0.4rem - 0.04rem
+      right: calc(-0.4rem - 0.04rem); 
       top: 50%;
       transform: translateY(-50%);
-      height: 1.76rem; // 2.2rem -> 1.76rem
-      width: 0.08rem; // 0.1rem -> 0.08rem
-      background-color: ${({ theme }) => theme.colors.gray300}; // Updated from #d1d5db
+      height: 1.76rem; 
+      width: 0.08rem; 
+      background-color: ${({ theme }) => theme.colors.gray300}; 
     }
   }
 
   & > * {
-    flex: 1; // 각 필드가 동일한 너비를 가지도록
+    flex: 1; 
   }
 `;
 
 const OccupancyInputsWrapper = styled.div`
   display: flex;
-  gap: 0.8rem; // 인원/객실 입력 필드 사이 간격 1rem -> 0.8rem
+  gap: 0.8rem; 
   & > * {
-    flex: 1; // 각 필드가 동일한 너비를 가지도록
+    flex: 1; 
   }
 `;
 
 const PopoverWrapper = styled.div`
   position: relative;
-  flex: 1; // Ensure it takes up space in the flex layout
-`; 
+  flex: 1; 
+`;

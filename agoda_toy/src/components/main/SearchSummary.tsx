@@ -108,4 +108,11 @@ const SearchButton = styled.button<{ theme: DefaultTheme }>`
   &:hover {
     background-color: rgba(255, 255, 255, 0.3); // 호버 시 투명도 30%의 하얀색 배경 (예시)
   }
+
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    outline: none;
+  }
 `; 

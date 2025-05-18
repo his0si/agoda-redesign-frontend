@@ -28,7 +28,7 @@ const MainPageContainer = styled.main`
   width: 100vw;
   min-height: 100vh;
   position: relative;
-  overflow: hidden; // 이미지가 컨테이너를 벗어나지 않도록
+  overflow-y: auto; // Changed from overflow: hidden to allow vertical scrolling
   background-image: url(${BACKGROUND_IMAGE_URL});
   background-size: cover;
   background-position: center;
