@@ -1,15 +1,19 @@
 import reset from 'styled-reset';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from './styles/theme/theme';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage';
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Global>
-          <div>project</div>
-        </Global>
-        <ThemedBox> Theme 테스트</ThemedBox>
+        <Global />
+        <Router>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </>
   );
