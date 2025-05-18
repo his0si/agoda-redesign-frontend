@@ -31,14 +31,14 @@ const InputContainer = styled.button<{ $isDateField: boolean; theme: DefaultThem
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray100}; // Updated from #F3F4F6
-  border-radius: 1.4rem; // 14px
-  padding: 1.5rem;
+  border-radius: 1.12rem; // 14px -> 11.2px
+  padding: 1.2rem; // 1.5rem -> 1.2rem
   border: none;
   cursor: pointer;
   text-align: left;
   width: 100%;
   font-family: 'SUIT', sans-serif; // Added explicit font-family
-  font-size: 14px; // Explicit font size
+  font-size: 11.2px; // Explicit font size 14px -> 11.2px
   font-weight: 500; // Explicit font weight
   line-height: 1.4; // Added explicit line-height for better readability
 
@@ -48,9 +48,9 @@ const InputContainer = styled.button<{ $isDateField: boolean; theme: DefaultThem
 `;
 
 const IconWrapper = styled.span<{ theme: DefaultTheme }>`
-  margin-right: 1rem;
+  margin-right: 0.8rem; // 1rem -> 0.8rem
   color: ${({ theme }) => theme.colors.gray900}; // Updated from #555555
-  font-size: 2rem; // 아이콘 크기 (react-icons 사용 시), rem 단위 사용
+  font-size: 1.6rem; // 아이콘 크기 (react-icons 사용 시), rem 단위 사용 2rem -> 1.6rem
   display: flex;
   align-items: center;
 `;

@@ -70,16 +70,16 @@ export default function SearchWidget(props: SearchWidgetProps) {
 
 const MainFlexWrapper = styled.div`
   display: flex;
-  min-width: 90rem; // 기본 최소 너비 설정으로 FormCard 너비 확보
-  max-width: 120rem; // 최대 너비 (사용자 설정 유지)
+  min-width: 65rem; // 기본 최소 너비 설정으로 FormCard 너비 확보 90rem -> 72rem
+  max-width: 96rem; // 최대 너비 (사용자 설정 유지) 120rem -> 96rem
   width: 100%; // 부모 너비에 맞추되, min-width 이상, max-width 이하로 제한됨
   gap: 0rem; /* Gap between the two cards */
 `;
 
 const FormCard = styled.div<{ theme: DefaultTheme }>`
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 70px 20px 20px 20px;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  border-radius: 56px 16px 16px 16px; // 70px 20px 20px 20px -> 56px 16px 16px 16px
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15); // 0 0.5rem 1.5rem -> 0 0.4rem 1.2rem
   overflow: hidden; /* To clip FormSection if needed */
   flex: 1; /* Allow this card to grow */
   display: flex; /* To make FormSection fill it if FormSection has flex-grow */
@@ -89,29 +89,29 @@ const FormCard = styled.div<{ theme: DefaultTheme }>`
 
 const FormSection = styled.section`
   flex-grow: 1; // Tries to grow within FormCard
-  padding: 1.5rem;
+  padding: 1.2rem; // 1.5rem -> 1.2rem
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-width: 55rem; // New: Limit max width of the form section
+  gap: 0.6rem; // 0.75rem -> 0.6rem
+  max-width: 36rem; // Adjusted from 44rem to reduce input field width
   width: 100%;      // New: Ensure it takes full width up to max-width
   margin: 0 auto;   // New: Center FormSection within FormCard
 `;
 
 const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
-  gap: 1rem; // 날짜 입력 필드 사이 간격
+  gap: 0.8rem; // 날짜 입력 필드 사이 간격 1rem -> 0.8rem
 
   & > *:not(:last-child) { // Target the first SearchInput in this pair
     position: relative;
     &::after {
       content: '';
       position: absolute;
-      right: calc(-0.5rem - 0.05rem);
+      right: calc(-0.4rem - 0.04rem); // -0.5rem - 0.05rem -> -0.4rem - 0.04rem
       top: 50%;
       transform: translateY(-50%);
-      height: 2.2rem;
-      width: 0.1rem;
+      height: 1.76rem; // 2.2rem -> 1.76rem
+      width: 0.08rem; // 0.1rem -> 0.08rem
       background-color: ${({ theme }) => theme.colors.gray300}; // Updated from #d1d5db
     }
   }
@@ -123,7 +123,7 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
 
 const OccupancyInputsWrapper = styled.div`
   display: flex;
-  gap: 1rem; // 인원/객실 입력 필드 사이 간격
+  gap: 0.8rem; // 인원/객실 입력 필드 사이 간격 1rem -> 0.8rem
   & > * {
     flex: 1; // 각 필드가 동일한 너비를 가지도록
   }
