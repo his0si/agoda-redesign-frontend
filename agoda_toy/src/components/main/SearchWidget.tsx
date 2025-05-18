@@ -1,20 +1,92 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { type DefaultTheme } from 'styled-components';
 import SearchInput from './SearchInput';
 import SearchSummary from './SearchSummary';
 import { LuMapPin, LuCalendarDays, LuUsers, LuBedDouble } from 'react-icons/lu';
+import PersonnelSelectionPopover from './PersonnelSelectionPopover';
+import RoomSelectionPopover from './RoomSelectionPopover';
 
 interface SearchWidgetProps {}
 
+// Helper function to parse personnel string (e.g., "성인 5명, 어린이 1명")
+const parsePersonnel = (personnelStr: string): { adults: number; children: number } => {
+  const adultsMatch = personnelStr.match(/성인 (\d+)명/);
+  const childrenMatch = personnelStr.match(/어린이 (\d+)명/);
+  return {
+    adults: adultsMatch ? parseInt(adultsMatch[1], 10) : 0,
+    children: childrenMatch ? parseInt(childrenMatch[1], 10) : 0,
+  };
+};
+
+// Helper function to parse rooms string (e.g., "객실 1개")
+const parseRooms = (roomsStr: string): number => {
+  const roomsMatch = roomsStr.match(/객실 (\d+)개?/);
+  return roomsMatch ? parseInt(roomsMatch[1], 10) : 0;
+};
+
 export default function SearchWidget(props: SearchWidgetProps) {
-  // 임시 데이터 (실제 구현에서는 상태나 props로 관리)
-  const searchData = {
+  const initialSearchData = {
     destination: '도쿄',
     checkInDate: '2025년 04월 15일',
     checkOutDate: '2025년 04월 20일',
-    personnel: '성인 5명',
-    rooms: '객실 1',
+    personnel: '성인 0명',
+    rooms: '객실 0',
   };
+
+  const [destination, setDestination] = useState(initialSearchData.destination);
+  const [checkInDate, setCheckInDate] = useState(initialSearchData.checkInDate);
+  const [checkOutDate, setCheckOutDate] = useState(initialSearchData.checkOutDate);
+
+  const initialPersonnel = parsePersonnel(initialSearchData.personnel);
+  const [adults, setAdultsState] = useState(initialPersonnel.adults);
+  const [children, setChildrenState] = useState(initialPersonnel.children);
+  const [rooms, setRoomsState] = useState(parseRooms(initialSearchData.rooms));
+
+  const [isPersonnelPopoverOpen, setIsPersonnelPopoverOpen] = useState(false);
+  const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
+
+  const [personnelInteracted, setPersonnelInteracted] = useState(false);
+  const [roomInteracted, setRoomInteracted] = useState(false);
+
+  const personnelRef = useRef<HTMLDivElement>(null);
+  const roomRef = useRef<HTMLDivElement>(null);
+
+  const handleAdultsChange = (count: number) => {
+    setAdultsState(count);
+    setPersonnelInteracted(true);
+  };
+
+  const handleChildrenChange = (count: number) => {
+    setChildrenState(count);
+    setPersonnelInteracted(true);
+  };
+
+  const handleRoomsChange = (count: number) => {
+    setRoomsState(count);
+    setRoomInteracted(true);
+  };
+
+  const personnelSummary = adults === 0 && children === 0 ? "인원 선택" : `성인 ${adults}명${children > 0 ? `, 어린이 ${children}명` : ''}`;
+  const roomsSummary = rooms === 0 ? "객실 선택" : `객실 ${rooms}개`;
+  
+  const isPersonnelActive = personnelInteracted && (adults > 0 || children > 0);
+  const isRoomActive = roomInteracted && rooms > 0;
+
+  // Close popover when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (personnelRef.current && !personnelRef.current.contains(event.target as Node)) {
+        setIsPersonnelPopoverOpen(false);
+      }
+      if (roomRef.current && !roomRef.current.contains(event.target as Node)) {
+        setIsRoomPopoverOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <MainFlexWrapper>
@@ -22,47 +94,82 @@ export default function SearchWidget(props: SearchWidgetProps) {
         <FormSection>
           <SearchInput
             icon={<LuMapPin />}
-            // label="목적지" // 디자인상 보이지 않으므로 주석 처리 또는 HiddenLabel 사용
-            value={searchData.destination}
+            value={destination}
             placeholder="어디로 떠나시나요?"
+            onClick={() => {
+              setIsPersonnelPopoverOpen(false);
+              setIsRoomPopoverOpen(false);
+            }}
           />
           <DateInputsWrapper>
             <SearchInput
               icon={<LuCalendarDays />}
-              // label="체크인"
-              value={searchData.checkInDate}
+              value={checkInDate}
               placeholder="날짜 선택"
               isDateField={true}
+              onClick={() => {
+                setIsPersonnelPopoverOpen(false);
+                setIsRoomPopoverOpen(false);
+              }}
             />
             <SearchInput
               icon={<LuCalendarDays />}
-              // label="체크아웃"
-              value={searchData.checkOutDate}
+              value={checkOutDate}
               placeholder="날짜 선택"
               isDateField={true}
+              onClick={() => {
+                setIsPersonnelPopoverOpen(false);
+                setIsRoomPopoverOpen(false);
+              }}
             />
           </DateInputsWrapper>
           <OccupancyInputsWrapper>
-            <SearchInput
-              icon={<LuUsers />}
-              // label="인원"
-              value={searchData.personnel}
-              placeholder="인원 선택"
-            />
-            <SearchInput
-              icon={<LuBedDouble />}
-              // label="객실"
-              value={searchData.rooms}
-              placeholder="객실 선택"
-            />
+            <PopoverWrapper ref={personnelRef}>
+              <SearchInput
+                icon={<LuUsers />}
+                value={adults === 0 && children === 0 && !personnelInteracted ? "" : personnelSummary}
+                placeholder="인원 선택"
+                onClick={() => {
+                  setIsPersonnelPopoverOpen(!isPersonnelPopoverOpen);
+                  setIsRoomPopoverOpen(false);
+                }}
+                isActiveSelection={isPersonnelActive}
+              />
+              {isPersonnelPopoverOpen && (
+                <PersonnelSelectionPopover
+                  adults={adults}
+                  children={children}
+                  onAdultsChange={handleAdultsChange}
+                  onChildrenChange={handleChildrenChange}
+                />
+              )}
+            </PopoverWrapper>
+            <PopoverWrapper ref={roomRef}>
+              <SearchInput
+                icon={<LuBedDouble />}
+                value={rooms === 0 && !roomInteracted ? "" : roomsSummary}
+                placeholder="객실 선택"
+                onClick={() => {
+                  setIsRoomPopoverOpen(!isRoomPopoverOpen);
+                  setIsPersonnelPopoverOpen(false);
+                }}
+                isActiveSelection={isRoomActive}
+              />
+              {isRoomPopoverOpen && (
+                <RoomSelectionPopover
+                  rooms={rooms}
+                  onRoomsChange={handleRoomsChange}
+                />
+              )}
+            </PopoverWrapper>
           </OccupancyInputsWrapper>
         </FormSection>
       </FormCard>
       <SearchSummary
-        destination={searchData.destination}
-        dateRange={`${searchData.checkInDate} - ${searchData.checkOutDate}`}
-        rooms={searchData.rooms}
-        personnel={searchData.personnel}
+        destination={destination}
+        dateRange={`${checkInDate} - ${checkOutDate}`}
+        rooms={roomsSummary}
+        personnel={personnelSummary}
       />
     </MainFlexWrapper>
   );
@@ -80,7 +187,7 @@ const FormCard = styled.div<{ theme: DefaultTheme }>`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 56px 16px 16px 16px; // 70px 20px 20px 20px -> 56px 16px 16px 16px
   box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15); // 0 0.5rem 1.5rem -> 0 0.4rem 1.2rem
-  overflow: hidden; /* To clip FormSection if needed */
+  overflow: visible; /* Changed from hidden to visible */
   flex: 1; /* Allow this card to grow */
   display: flex; /* To make FormSection fill it if FormSection has flex-grow */
   align-items: center; /* New: Vertically center FormSection */
@@ -127,4 +234,9 @@ const OccupancyInputsWrapper = styled.div`
   & > * {
     flex: 1; // 각 필드가 동일한 너비를 가지도록
   }
+`;
+
+const PopoverWrapper = styled.div`
+  position: relative;
+  flex: 1; // Ensure it takes up space in the flex layout
 `; 

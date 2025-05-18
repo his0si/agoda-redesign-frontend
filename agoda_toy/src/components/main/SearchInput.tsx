@@ -8,6 +8,7 @@ interface SearchInputProps {
   placeholder: string;
   isDateField?: boolean; // 날짜 필드인지 여부 (스타일링 다르게 할 수 있음)
   onClick?: () => void; // 클릭 이벤트 핸들러 (예: 날짜 선택기 열기)
+  isActiveSelection?: boolean; // New prop
   // label?: string; // 디자인상 보이지 않아 우선 제외, 필요시 HiddenLabel 등으로 추가
 }
 
@@ -17,12 +18,15 @@ export default function SearchInput({
   placeholder,
   isDateField = false,
   onClick,
+  isActiveSelection = false, // Default to false
 }: SearchInputProps) {
   return (
     // rule: button 태그에는 type 명시 필수
     <InputContainer type="button" onClick={onClick} $isDateField={isDateField}>
       <IconWrapper>{icon}</IconWrapper>
-      <TextValue $hasValue={!!value}>{value || placeholder}</TextValue>
+      <TextValue $hasValue={!!value} $isActiveSelection={isActiveSelection}>
+        {value || placeholder}
+      </TextValue>
     </InputContainer>
   );
 }
@@ -55,8 +59,14 @@ const IconWrapper = styled.span<{ theme: DefaultTheme }>`
   align-items: center;
 `;
 
-const TextValue = styled.span<{ $hasValue: boolean; theme: DefaultTheme }>`
-  color: ${({ theme, $hasValue }) =>
-    $hasValue ? theme.colors.black : theme.colors.gray300}; // Updated
+const TextValue = styled.span<{
+  $hasValue: boolean;
+  $isActiveSelection: boolean; // Added new prop type
+  theme: DefaultTheme;
+}>`
+  color: ${({ theme, $hasValue, $isActiveSelection }) => {
+    if (!$hasValue) return theme.colors.gray300; // Placeholder text is always gray
+    return $isActiveSelection ? theme.colors.black : theme.colors.gray300; // Value text is black if active, gray if default/inactive
+  }};
   flex-grow: 1;
 `; 
