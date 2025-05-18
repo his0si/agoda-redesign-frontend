@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
-import styled, { type DefaultTheme } from 'styled-components';
+import styled, { type DefaultTheme, css } from 'styled-components';
 
 interface SearchInputProps {
   icon: ReactNode;
@@ -9,6 +9,7 @@ interface SearchInputProps {
   isDateField?: boolean; // 날짜 필드인지 여부 (스타일링 다르게 할 수 있음)
   onClick?: () => void; // 클릭 이벤트 핸들러 (예: 날짜 선택기 열기)
   isActiveSelection?: boolean; // New prop
+  $transparentBgAndBorders?: boolean; // New prop
   // label?: string; // 디자인상 보이지 않아 우선 제외, 필요시 HiddenLabel 등으로 추가
 }
 
@@ -19,10 +20,11 @@ export default function SearchInput({
   isDateField = false,
   onClick,
   isActiveSelection = false, // Default to false
+  $transparentBgAndBorders = false, // Default to false
 }: SearchInputProps) {
   return (
     // rule: button 태그에는 type 명시 필수
-    <InputContainer type="button" onClick={onClick} $isDateField={isDateField}>
+    <InputContainer type="button" onClick={onClick} $isDateField={isDateField} $transparentBgAndBorders={$transparentBgAndBorders}>
       <IconWrapper>{icon}</IconWrapper>
       <TextValue $hasValue={!!value} $isActiveSelection={isActiveSelection}>
         {value || placeholder}
@@ -31,7 +33,11 @@ export default function SearchInput({
   );
 }
 
-const InputContainer = styled.button<{ $isDateField: boolean; theme: DefaultTheme }>`
+const InputContainer = styled.button<{
+  $isDateField: boolean;
+  $transparentBgAndBorders: boolean; // Added prop type
+  theme: DefaultTheme;
+}>`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray100}; // Updated from #F3F4F6
@@ -49,6 +55,18 @@ const InputContainer = styled.button<{ $isDateField: boolean; theme: DefaultThem
   &:hover {
     filter: brightness(0.95);
   }
+
+  ${({ $transparentBgAndBorders }) =>
+    $transparentBgAndBorders &&
+    css`
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none; /* Ensure no shadow if it had one */
+      &:hover {
+        filter: none; /* Remove hover effect if transparent */
+        /* Or apply a different hover suitable for this context */
+      }
+    `}
 `;
 
 const IconWrapper = styled.span<{ theme: DefaultTheme }>`
