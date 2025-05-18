@@ -1,6 +1,6 @@
 import reset from 'styled-reset';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from './theme';
+import theme from './styles/theme/theme';
 
 function App() {
   return (
