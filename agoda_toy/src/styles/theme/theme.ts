@@ -25,37 +25,37 @@ const FONT = ({ weight, size, lineHeight }: FontStyle): string => {
   return `
     font-family: 'SUIT';
     font-weight: ${weight};
-    font-size: ${size}rem;
+    font-size: ${size} rem;
     line-height: ${lineHeight}%;
   `;
 };
 
 const fonts = {
   display: {
-    lg: FONT({ weight: 800, size: 48, lineHeight: 100 }),
-    md: FONT({ weight: 800, size: 36, lineHeight: 100 }),
-    sm: FONT({ weight: 800, size: 30, lineHeight: 100 }),
+    lg: FONT({ weight: 800, size: 3, lineHeight: 100 }),
+    md: FONT({ weight: 800, size: 2.25, lineHeight: 100 }),
+    sm: FONT({ weight: 800, size: 1.875, lineHeight: 100 }),
   },
   headline: {
-    lg: FONT({ weight: 800, size: 24, lineHeight: 100 }),
-    md: FONT({ weight: 800, size: 20, lineHeight: 100 }),
-    sm: FONT({ weight: 700, size: 20, lineHeight: 100 }),
+    lg: FONT({ weight: 800, size: 1.5, lineHeight: 100 }),
+    md: FONT({ weight: 800, size: 1.25, lineHeight: 100 }),
+    sm: FONT({ weight: 700, size: 1.25, lineHeight: 100 }),
   },
   title: {
-    lg: FONT({ weight: 600, size: 18, lineHeight: 100 }),
-    md: FONT({ weight: 600, size: 16, lineHeight: 0 }),
-    sm: FONT({ weight: 400, size: 16, lineHeight: 0 }),
+    lg: FONT({ weight: 600, size: 1.125, lineHeight: 100 }),
+    md: FONT({ weight: 600, size: 1, lineHeight: 0 }),
+    sm: FONT({ weight: 400, size: 1, lineHeight: 0 }),
   },
   body: {
-    lg: FONT({ weight: 500, size: 18, lineHeight: 0 }),
-    md: FONT({ weight: 400, size: 16, lineHeight: 140 }),
-    sm: FONT({ weight: 700, size: 14, lineHeight: 0 }),
+    lg: FONT({ weight: 500, size: 1.125, lineHeight: 0 }),
+    md: FONT({ weight: 400, size: 1, lineHeight: 140 }),
+    sm: FONT({ weight: 700, size: 0.875, lineHeight: 0 }),
   },
   caption: {
-    lg: FONT({ weight: 500, size: 16, lineHeight: 100 }),
-    md: FONT({ weight: 500, size: 14, lineHeight: 0 }),
-    sm: FONT({ weight: 400, size: 14, lineHeight: 100 }),
-    xsmall: FONT({ weight: 500, size: 12, lineHeight: 100 }),
+    lg: FONT({ weight: 500, size: 1, lineHeight: 100 }),
+    md: FONT({ weight: 500, size: 0.875, lineHeight: 0 }),
+    sm: FONT({ weight: 400, size: 0.875, lineHeight: 100 }),
+    xsmall: FONT({ weight: 500, size: 0.75, lineHeight: 100 }),
   },
 };
 
