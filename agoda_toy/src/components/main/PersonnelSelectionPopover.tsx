@@ -47,7 +47,7 @@ interface PersonnelSelectionPopoverProps {
   children: number;
   onAdultsChange: (count: number) => void;
   onChildrenChange: (count: number) => void;
-  onClose?: () => void; // Optional: for a close button or clicking outside
+  onClose?: () => void; 
 }
 
 const PersonnelSelectionPopover: React.FC<PersonnelSelectionPopoverProps> = ({
