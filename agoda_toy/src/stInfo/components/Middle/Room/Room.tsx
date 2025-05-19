@@ -16,6 +16,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1.625rem;
+  margin-top: 8.75rem;
 `;
 
 const RoomTitle = styled.h1`
