@@ -3,6 +3,7 @@
     "composite": true, // 프로젝트 참조용 필수
     "skipLibCheck": true
   },
+
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
