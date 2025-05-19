@@ -1,22 +1,41 @@
-import styled from 'styled-components';
-import Button from '../../Button';
+import styled, { css } from 'styled-components';
+import ToiletIcon from '../../../assets/svgs/toilet.svg?react';
+import BookBtn from '@stInfo/components/BookBtn';
 
-export default function RoomCard() {
+interface RoomCardProps {
+  image: string;
+  title: string;
+  description: string;
+  realprice: string;
+  saleprice: string;
+}
+
+export default function RoomCard({
+  image,
+  title,
+  description,
+  realprice,
+  saleprice,
+}: RoomCardProps) {
   return (
     <Container>
-      <ImgCard />
-      <CardContent>
-        <CardContentFrame>
-          <p>슈페리어 트윈</p>
-          <p>싱글베드 2개</p>
-          <div>화장실이미지?</div>
-        </CardContentFrame>
-        <CardContentFrame>
-          <p>￦ 310,597</p>
-          <p>￦ 275,928</p>
-        </CardContentFrame>
-      </CardContent>
-      <Button />
+      <ImageBox imageUrl={image} />
+      <Frame>
+        <CardContent>
+          <CardContentFrame>
+            <RoomNameBedFrame>
+              <RoomName>{title}</RoomName>
+              <RoomBed>{description}</RoomBed>
+            </RoomNameBedFrame>
+            <ToiletIcons />
+          </CardContentFrame>
+          <PriceFrame>
+            <RealPrice>{realprice}</RealPrice>
+            <RoomPrice>{saleprice}</RoomPrice>
+          </PriceFrame>
+        </CardContent>
+        <BookBtn />
+      </Frame>
     </Container>
   );
 }
@@ -34,11 +53,24 @@ const Container = styled.div`
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
-const ImgCard = styled.img`
+const Frame = styled.div`
+  display: flex;
+  padding: 0rem 0.25rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: stretch;
+`;
+
+const ImgCard = (imageUrl: string) => css`
   height: 13.6875rem;
   align-self: stretch;
   border-radius: 0.5rem;
-  background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+  background: url(${imageUrl}) lightgray 50% / cover no-repeat;
+`;
+
+const ImageBox = styled.div<{ imageUrl: string }>`
+  ${({ imageUrl }) => ImgCard(imageUrl)}
 `;
 
 const CardContent = styled.div`
@@ -54,4 +86,70 @@ const CardContentFrame = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   align-self: stretch;
+  width: 19.9rem;
+`;
+
+const PriceFrame = styled.div`
+  display: flex;
+  padding: 0rem 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+
+  width: 10.8rem;
+  height: 4.44rem;
+`;
+
+const ToiletIcons = styled(ToiletIcon)`
+  display: flex;
+  width: 2.5rem;
+  height: 1.5rem;
+  padding: 0.625rem;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const RoomNameBedFrame = styled.div`
+  display: flex;
+  width: 9.375rem;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const RoomName = styled.h1`
+  ${({ theme }) => theme.fonts.headline.md};
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+`;
+
+const RoomBed = styled.p`
+  ${({ theme }) => theme.fonts.body.lg};
+  color: ${({ theme }) => theme.colors.gray900};
+  display: flex;
+  padding: 0rem 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const RealPrice = styled.p`
+  font-family: SUIT;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  text-decoration-line: line-through;
+  ${({ theme }) => theme.fonts.headline.md};
+  color: ${({ theme }) => theme.colors.gray600};
+`;
+
+const RoomPrice = styled.p`
+  ${({ theme }) => theme.fonts.display.sm};
+  display: flex;
+  padding: 0.25rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 `;
