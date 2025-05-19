@@ -12,12 +12,18 @@ export default function Amen() {
 
 const Container = styled.div`
   display: flex;
-  width: 87.5rem;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 4.125rem;
+  align-items: center;
+  gap: 3.6875rem;
+  align-self: stretch;
+  height: 18.2rem;
 `;
 
 const Title = styled.h1`
   ${({ theme }) => theme.fonts.display.sm};
+  display: flex;
+  padding: 0rem 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
 `;
