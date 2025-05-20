@@ -9,6 +9,7 @@ export default defineConfig({
     alias: [
       { find: '@stInfo', replacement: '/src/stInfo' },
       { find: '@stInfo/assets', replacement: '/src/setInfo/assets' },
+      { find: '@stList', replacement: '/src/stList' },
     ],
   },
 });
