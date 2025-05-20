@@ -1,14 +1,17 @@
 import reset from 'styled-reset';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from './styles/theme/theme';
 import StInfo from './stInfo/page/StInfo';
+import { Route, RouterProvider, Routes } from 'react-router-dom';
+import Layout from './common/layout/MainLayout';
+import router from './router';
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <Global />
-        <StInfo />
+        <RouterProvider router={router} />
       </ThemeProvider>
     </>
   );
