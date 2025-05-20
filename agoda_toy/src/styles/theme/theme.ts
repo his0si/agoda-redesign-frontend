@@ -43,17 +43,17 @@ const fonts = {
   },
   title: {
     lg: FONT({ weight: 600, size: 1.125, lineHeight: 100 }),
-    md: FONT({ weight: 600, size: 1, lineHeight: 0 }),
-    sm: FONT({ weight: 400, size: 1, lineHeight: 0 }),
+    md: FONT({ weight: 600, size: 1, lineHeight: 150 }),
+    sm: FONT({ weight: 400, size: 1, lineHeight: 150 }),
   },
   body: {
-    lg: FONT({ weight: 500, size: 1.125, lineHeight: 0 }),
+    lg: FONT({ weight: 500, size: 1.125, lineHeight: 150 }),
     md: FONT({ weight: 400, size: 1, lineHeight: 140 }),
-    sm: FONT({ weight: 700, size: 0.875, lineHeight: 0 }),
+    sm: FONT({ weight: 700, size: 0.875, lineHeight: 150 }),
   },
   caption: {
     lg: FONT({ weight: 500, size: 1, lineHeight: 100 }),
-    md: FONT({ weight: 500, size: 0.875, lineHeight: 0 }),
+    md: FONT({ weight: 500, size: 0.875, lineHeight: 150 }),
     sm: FONT({ weight: 400, size: 0.875, lineHeight: 100 }),
     xsmall: FONT({ weight: 500, size: 0.75, lineHeight: 100 }),
   },
