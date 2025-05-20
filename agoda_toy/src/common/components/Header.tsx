@@ -1,5 +1,82 @@
-import React from 'react';
+import AgodaLogoIcon from '../../assets/img_gnb_logo.png';
+import styled from 'styled-components';
+import ProfileIcon from '../../assets/pro_small.svg?react';
+import GlobalIcon from '../../assets/icn_gnb_lang.svg?react';
+
+const HEADER_LIST = ['교통', '숙소', '엑티비티', '프로모션'];
 
 export default function Header() {
-  return <div>Header</div>;
+  return (
+    <HeaderContainer>
+      <Frame>
+        <HeaderLeft>
+          <AgodaLogo />
+          {HEADER_LIST.map((text) => (
+            <HeaderText key={text}>{text}</HeaderText>
+          ))}
+        </HeaderLeft>
+        <HeaderRight>
+          <Global />
+          <Profile />
+        </HeaderRight>
+      </Frame>
+    </HeaderContainer>
+  );
 }
+
+const HeaderContainer = styled.header`
+  display: flex;
+  height: 4rem;
+  padding: 1.0625rem 8.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+`;
+
+const Frame = styled.div`
+  display: flex;
+  width: 103rem;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4.875rem;
+`;
+
+const HeaderRight = styled.div`
+  display: flex;
+  padding: 0.125rem 0rem;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const AgodaLogo = styled.div`
+  width: 4.60606rem;
+  height: 2.375rem;
+  aspect-ratio: 73.7/38;
+  background: url(${AgodaLogoIcon}) lightgray 50% / cover no-repeat;
+`;
+
+const HeaderText = styled.div`
+  ${({ theme }) => theme.fonts.headline.sm};
+  display: flex;
+  height: 1.4375rem;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Global = styled(GlobalIcon)`
+  width: 1.625rem;
+  height: 1.625rem;
+  aspect-ratio: 1/1;
+`;
+
+const Profile = styled(ProfileIcon)`
+  width: 2.3125rem;
+  height: 2.3125rem;
+`;
