@@ -7,9 +7,9 @@ import StayPrice from './StayPrice';
 
 interface StayCardProps {
   imageUrl: string;
-  name: string;
+  korname: string;
   engName: string;
-  type: number;
+  star: number;
   review: number;
   reviewCount: number;
   tags: string[];
@@ -21,10 +21,10 @@ interface StayCardProps {
 
 export default function StayCard({
   imageUrl,
-  name,
+  korname,
   review,
   engName,
-  type,
+  star,
   reviewCount,
   tags,
   location,
@@ -38,7 +38,7 @@ export default function StayCard({
       <Frame>
         <LeftContent>
           <NameReviewFrame>
-            <StayName name={name} type={type} engName={engName} />
+            <StayName korname={korname} star={star} engName={engName} />
             <StayReview review={review} reviewCount={reviewCount} />
           </NameReviewFrame>
           <StayTag tags={tags} />

@@ -14,8 +14,8 @@ import styled from 'styled-components';
 const STAY_LIST = [
   {
     imageUrl: StayPic1,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -27,8 +27,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic2,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -40,8 +40,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic3,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -53,8 +53,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic4,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -66,8 +66,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic5,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -79,8 +79,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic6,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -92,8 +92,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic7,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
@@ -105,8 +105,8 @@ const STAY_LIST = [
   },
   {
     imageUrl: StayPic8,
-    name: '힐튼 도쿄 오다이바',
-    type: 4,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,

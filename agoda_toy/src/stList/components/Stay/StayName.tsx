@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 interface StayNameProps {
-  name: string;
-  type: number;
+  korname: string;
+  star: number;
   engName: string;
 }
 
-export default function StayName({ name, type, engName }: StayNameProps) {
+export default function StayName({ korname, star, engName }: StayNameProps) {
   return (
     <>
       <TitleTypeFrame>
-        <StayTitle>{name}</StayTitle>
-        <StayType>{type}성 호텔</StayType>
+        <StayTitle>{korname}</StayTitle>
+        <StayType>{star}성 호텔</StayType>
       </TitleTypeFrame>
       <StayEngName>{engName}</StayEngName>
       <></>
