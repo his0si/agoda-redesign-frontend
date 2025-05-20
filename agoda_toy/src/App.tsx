@@ -1,6 +1,8 @@
 import reset from 'styled-reset';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from './styles/theme/theme';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage';
 import StInfo from './stInfo/page/StInfo';
 
 function App() {
@@ -8,7 +10,11 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Global />
-        <StInfo />
+        <Router>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </>
   );
