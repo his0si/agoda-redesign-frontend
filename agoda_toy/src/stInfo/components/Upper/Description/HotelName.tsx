@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import IconHotelBottomScore from '@stInfo/assets/svgs/icn_hotel_bottom_score.svg?react';
+import { IconStar } from '@stInfo/components/common/Rate';
 
 export default function HotelName() {
   return (
@@ -82,9 +82,4 @@ const HotelBottom = styled.div`
 const HotelBottomReview = styled.p`
   margin: 0;
   ${({ theme }) => theme.fonts.headline.md};
-`;
-
-const IconStar = styled(IconHotelBottomScore)`
-  width: 1.115rem;
-  height: 1.0625rem;
 `;
