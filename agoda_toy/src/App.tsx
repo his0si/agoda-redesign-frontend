@@ -1,11 +1,7 @@
 import reset from 'styled-reset';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from './styles/theme/theme';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import StInfo from './stInfo/page/StInfo';
-import { Route, RouterProvider, Routes } from 'react-router-dom';
-import Layout from './common/layout/MainLayout';
+import { RouterProvider } from 'react-router-dom';
 import router from './router';
 
 function App() {
