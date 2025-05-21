@@ -5,9 +5,12 @@ import styled from 'styled-components';
 import IconSearch from '../../assets/svgs/Property 1=Default.svg?react';
 import { WrapSvgIcon } from '../../styles/Svg';
 
-export default function Search() {
+interface SearchProps {
+  width?: string;
+}
+export default function Search({ width = '59rem' }: SearchProps) {
   return (
-    <Container>
+    <Container $width={width}>
       <TypoSearchLocation>
         <SearchLocationIcon />
         도쿄
@@ -25,12 +28,12 @@ export default function Search() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ $width: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.625rem;
-  width: 59rem;
+  width: ${({ $width }) => $width};
   height: 2.88rem;
   margin-bottom: 1.75rem;
 

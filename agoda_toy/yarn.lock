@@ -468,12 +468,20 @@
 
 "@tanstack/query-core@5.76.0":
   version "5.76.0"
+<<<<<<< HEAD
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.76.0.tgz#3b4d5d34ce307ba0cf7d1a3e90d7adcdc6c46be0"
+=======
   resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.76.0.tgz"
+>>>>>>> develop
   integrity sha512-FN375hb8ctzfNAlex5gHI6+WDXTNpe0nbxp/d2YJtnP+IBM6OUm7zcaoCW6T63BawGOYZBbKC0iPvr41TteNVg==
 
 "@tanstack/react-query@^5.76.1":
   version "5.76.1"
+<<<<<<< HEAD
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.76.1.tgz#ac8a19f99dfec1452a44fe22d46680c396c21152"
+=======
   resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-5.76.1.tgz"
+>>>>>>> develop
   integrity sha512-YxdLZVGN4QkT5YT1HKZQWiIlcgauIXEIsMOTSjvyD5wLYK8YVvKZUPAysMqossFJJfDpJW3pFn7WNZuPOqq+fw==
   dependencies:
     "@tanstack/query-core" "5.76.0"
@@ -566,7 +574,7 @@
     "@types/history" "^4.7.11"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^19.1.4":
+"@types/react@*", "@types/react@^19.1.2":
   version "19.1.4"
   resolved "https://registry.npmjs.org/@types/react/-/react-19.1.4.tgz"
   integrity sha512-EB1yiiYdvySuIITtD5lhW4yPyJ31RkJkkDw794LaQYrxCSaQV/47y5o1FMC4zF9ZyjUjzJMZwbovEnT5yHTW6g==
@@ -1004,7 +1012,11 @@ convert-source-map@^2.0.0:
 
 cookie@^1.0.1:
   version "1.0.2"
+<<<<<<< HEAD
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-1.0.2.tgz#27360701532116bd3f1f9416929d176afe1e4610"
+=======
   resolved "https://registry.npmjs.org/cookie/-/cookie-1.0.2.tgz"
+>>>>>>> develop
   integrity sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==
 
 cosmiconfig@^8.1.3:

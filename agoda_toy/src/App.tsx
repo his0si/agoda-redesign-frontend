@@ -1,8 +1,8 @@
-import reset from 'styled-reset';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from './styles/theme/theme';
 import { RouterProvider } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import reset from 'styled-reset';
 import router from './router';
+import theme from './styles/theme/theme';
 
 function App() {
   return (
