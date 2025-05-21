@@ -23,11 +23,13 @@ export default function FooterTravel() {
     <Container>
       <TitleContainer>
         <FooterTravelTitle>추천 여행지</FooterTravelTitle>
-        {TRAVEL_HEADLINE.map(({ text, clicked }) => (
-          <FooterTravelHeadlineClicked $clicked={clicked} key={text}>
-            {text}
-          </FooterTravelHeadlineClicked>
-        ))}
+        <TravelTitleFrame>
+          {TRAVEL_HEADLINE.map(({ text, clicked }) => (
+            <FooterTravelHeadlineClicked $clicked={clicked} key={text}>
+              {text}
+            </FooterTravelHeadlineClicked>
+          ))}
+        </TravelTitleFrame>
       </TitleContainer>
       <Countries>
         {COUNTRY_LIST.map(({ pro, hotels }) => (
@@ -44,6 +46,11 @@ export default function FooterTravel() {
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   height: 22.25rem;
   flex-shrink: 0;
   align-self: stretch;
@@ -51,6 +58,8 @@ const Container = styled.div`
   border-radius: 1.5rem;
   border: 1px solid var(--AGODA-Gray100, #f3f4f6);
   background: var(--AGODA-White, #fff);
+
+  gap: 2.56rem;
 `;
 
 const TitleContainer = styled.div`
@@ -58,6 +67,14 @@ const TitleContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1.75rem;
+  width: 77.4rem;
+  height: 5.63rem;
+`;
+
+const TravelTitleFrame = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3.75rem;
 `;
 
 const FooterTravelTitle = styled.h1`
@@ -70,12 +87,15 @@ const FooterTravelHeadlineClicked = styled.h2<{ $clicked?: boolean }>`
   color: ${({ $clicked, theme }) =>
     $clicked ? theme.colors.black : theme.colors.gray600};
   text-align: center;
+  text-decoration-line: ${({ $clicked }) => ($clicked ? 'underline' : 'none')};
 `;
 
 const Countries = styled.div`
   display: inline-flex;
   align-items: flex-start;
   gap: 1.375rem;
+
+  width: 77.4rem;
 `;
 
 const CountryFrame = styled.div`
