@@ -98,8 +98,11 @@ const ArrowButton = styled.button`
   align-items: center;
   width: 3.9375rem;
   padding: 0;
+
+  font: ${({ theme }) => theme.fonts.body.lg};
   background-color: #fff;
   cursor: pointer;
+  border: none;
 
   &:focus {
     outline: none;
@@ -107,6 +110,7 @@ const ArrowButton = styled.button`
 
   &:hover {
     border: none;
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -114,13 +118,15 @@ const ArrowRightIcon = styled(ArrowRightIc)`
   width: 0.4375rem;
   height: 0.875rem;
   flex-shrink: 0;
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 const ArrowLeftIcon = styled(ArrowLeftIc)`
   width: 0.4375rem;
   height: 0.875rem;
+  flex-shrink: 0;
 `;
 
-const PaginationText = styled.span`
-  font: ${({ theme }) => theme.fonts.body.lg};
-`;
+const PaginationText = styled.span``;
