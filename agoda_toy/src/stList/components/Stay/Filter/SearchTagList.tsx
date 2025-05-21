@@ -5,6 +5,7 @@ const SEARCH_TAG_LIST = [
   { tagName: '선예약 후지불' },
   { tagName: '지금 바로 결제' },
   { tagName: '세탁기' },
+  { tagName: '인터넷' },
   { tagName: '금연' },
   { tagName: '흡연구역' },
   { tagName: '인터넷' },
@@ -13,17 +14,32 @@ const SEARCH_TAG_LIST = [
 
 export default function SearchTagList() {
   return (
-    <Container>
-      <SearchTagListHeader>도쿄 인기 검색 조건</SearchTagListHeader>
-      {SEARCH_TAG_LIST.map((tag) => (
-        <SearchTag tagName={tag.tagName} />
-      ))}
-    </Container>
+    <PopularSearchFilterBox>
+      <PopularSearchListHeader>도쿄 인기 검색 조건</PopularSearchListHeader>
+      <TagList>
+        {SEARCH_TAG_LIST.map((tag) => (
+          <SearchTag tagName={tag.tagName} />
+        ))}
+      </TagList>
+    </PopularSearchFilterBox>
   );
 }
 
-const Container = styled.div`
+const PopularSearchFilterBox = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+
+  width: 16.9375rem;
+  height: 11.0625rem;
+  flex-shrink: 0;
+`;
+
+const TagList = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 18.75rem;
   height: 8.75rem;
   align-items: center;
   align-content: center;
@@ -33,6 +49,6 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-const SearchTagListHeader = styled.p`
+const PopularSearchListHeader = styled.p`
   font: ${({ theme }) => theme.fonts.caption.md};
 `;
