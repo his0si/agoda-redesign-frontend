@@ -59,7 +59,7 @@ const AgodaLogo = styled.div`
   width: 4.60606rem;
   height: 2.375rem;
   aspect-ratio: 73.7/38;
-  background: url(${AgodaLogoIcon}) lightgray 50% / cover no-repeat;
+  background: url(${AgodaLogoIcon}) center / cover no-repeat;
 `;
 
 const HeaderText = styled.div`
