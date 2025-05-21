@@ -99,7 +99,7 @@ const Global = styled(GlobalIcon)<IconProps>`
   height: 1.625rem;
   aspect-ratio: 1/1;
   path {
-    fill: ${({ isMainPage }) => (isMainPage ? 'white' : '#4B5563')}; // Assuming default icon color is #4B5563
+    fill: white;
   }
 `;
 
@@ -107,6 +107,6 @@ const Profile = styled(ProfileIcon)<IconProps>`
   width: 2.3125rem;
   height: 2.3125rem;
   path {
-    fill: ${({ isMainPage }) => (isMainPage ? 'white' : '#4B5563')}; // Assuming default icon color is #4B5563
+    fill: white;
   }
 `;
