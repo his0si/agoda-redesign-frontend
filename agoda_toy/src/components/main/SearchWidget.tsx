@@ -14,11 +14,11 @@ const formatDateToString = (date: Date | null): string => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  return `${year}년 ${month}월 ${day}일`;
+  return `${year}.${month}.${day}`;
 };
 
 const parseDateFromString = (dateStr: string): Date | null => {
-  const parts = dateStr.match(/(\d{4})년 (\d{2})월 (\d{2})일/);
+  const parts = dateStr.match(/(\d{4})\.(\d{2})\.(\d{2})/);
   if (parts) {
     return new Date(parseInt(parts[1], 10), parseInt(parts[2], 10) - 1, parseInt(parts[3], 10));
   }
@@ -235,16 +235,16 @@ export default function SearchWidget(props: SearchWidgetProps) {
 
 const MainFlexWrapper = styled.div`
   display: flex;
-  min-width: 65rem; 
-  max-width: 96rem; 
+  min-width: 81.25rem;
+  max-width: 120rem;
   width: 100%; 
   gap: 0rem; 
 `;
 
 const FormCard = styled.div<{ theme: DefaultTheme }>`
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 56px 16px 16px 16px; 
-  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15); 
+  border-radius: 70px 20px 20px 20px;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
   overflow: visible; 
   flex: 1; 
   display: flex; 
@@ -253,11 +253,11 @@ const FormCard = styled.div<{ theme: DefaultTheme }>`
 
 const FormSection = styled.section`
   flex-grow: 1; 
-  padding: 1.2rem; 
+  padding: 4.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; 
-  max-width: 36rem; 
+  gap: 0.5rem;
+  max-width: 45rem;
   width: 100%;      
   margin: 0 auto;   
 `;
@@ -266,6 +266,7 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   gap: 0;
   position: relative;
+  margin-top: 1.5rem;
 
   & > *:not(:last-child) {
     position: relative;
@@ -275,20 +276,20 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      height: 1.76rem;
-      width: 0.08rem;
+      height: 2.2rem;
+      width: 0.1rem;
       background-color: ${({ theme }) => theme.colors.gray300};
     }
   }
 
   & > * {
     flex: 1;
-    border-radius: 16px 0 0 16px;
+    border-radius: 20px 0 0 20px;
   }
 
   & > *:last-child {
-    border-radius: 0 16px 16px 0;
-    margin-left: -0.08rem;
+    border-radius: 0 20px 20px 0;
+    margin-left: -0.1rem;
     border-left: none;
     &::after {
       content: none;
@@ -297,14 +298,15 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
 
   &:focus-within {
     & > * {
-      border-radius: 16px;
+      border-radius: 20px;
     }
   }
 `;
 
 const OccupancyInputsWrapper = styled.div`
   display: flex;
-  gap: 0.8rem; 
+  gap: 1rem;
+  margin-top: 0.5rem;
   & > * {
     flex: 1; 
   }
