@@ -77,7 +77,18 @@ const PageNumber = styled.button<{ $active: boolean }>`
   font: ${({ theme }) => theme.fonts.body.lg};
   color: ${({ theme, $active }) =>
     $active ? theme.colors.primary : theme.colors.black};
+  padding: 0;
   cursor: pointer;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    border: none;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 const ArrowButton = styled.button`
@@ -89,6 +100,14 @@ const ArrowButton = styled.button`
   padding: 0;
   background-color: #fff;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    border: none;
+  }
 `;
 
 const ArrowRightIcon = styled(ArrowRightIc)`
