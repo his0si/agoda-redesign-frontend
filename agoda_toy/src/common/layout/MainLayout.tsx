@@ -17,4 +17,8 @@ export default function Layout() {
 
 const LayoutWrapper = styled.main`
   width: 120rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
