@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import image1 from '../../assets/img_gnb_logo.png';
-import image2 from '../../assets/footer/image 4.png';
-import image3 from '../../assets/footer/image 5.png';
-import image4 from '../../assets/footer/image 6.png';
+import image1 from '../../assets/footer/image8.png';
+import image2 from '../../assets/footer/image4.png';
+import image3 from '../../assets/footer/image5.png';
+import image4 from '../../assets/footer/image6.png';
 
 const FOOTER_TEXT =
   'All material herein @ 2005-2025 Agoda Company Pte. Ltd., All Rights Reserved.';
@@ -31,10 +31,11 @@ export default function FooterBottom() {
 
 const Container = styled.div`
   display: flex;
-  height: 17.5rem;
+  height: 8.8rem;
   padding: 4.3125rem 14.0625rem;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   gap: 0.5rem;
   align-self: stretch;
 
@@ -53,18 +54,20 @@ const FooterText = styled.p`
   ${({ theme }) => theme.fonts.caption.lg};
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
+  margin-bottom: 0.5rem;
 `;
 
 const ImgFrame = styled.div`
   display: flex;
   align-items: center;
-  gap: 10.875rem;
   align-self: stretch;
+  justify-content: space-between;
+  width: 90.4rem;
 `;
 
 const FooterImg = styled.div<{ $bgImg: string }>`
   width: 9.375rem;
   height: 3.75rem;
   aspect-ratio: 5/2;
-  background: url($bgImg});
+  background: ${({ $bgImg }) => `url("${$bgImg}") center / cover no-repeat`};
 `;
