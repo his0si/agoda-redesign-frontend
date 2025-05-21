@@ -14,11 +14,11 @@ const formatDateToString = (date: Date | null): string => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  return `${year}년 ${month}월 ${day}일`;
+  return `${year}.${month}.${day}`;
 };
 
 const parseDateFromString = (dateStr: string): Date | null => {
-  const parts = dateStr.match(/(\d{4})년 (\d{2})월 (\d{2})일/);
+  const parts = dateStr.match(/(\d{4})\.(\d{2})\.(\d{2})/);
   if (parts) {
     return new Date(parseInt(parts[1], 10), parseInt(parts[2], 10) - 1, parseInt(parts[3], 10));
   }
@@ -253,10 +253,10 @@ const FormCard = styled.div<{ theme: DefaultTheme }>`
 
 const FormSection = styled.section`
   flex-grow: 1; 
-  padding: 1.5rem;
+  padding: 4.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
   max-width: 45rem;
   width: 100%;      
   margin: 0 auto;   
@@ -266,6 +266,7 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   gap: 0;
   position: relative;
+  margin-top: 1.5rem;
 
   & > *:not(:last-child) {
     position: relative;
@@ -305,6 +306,7 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
 const OccupancyInputsWrapper = styled.div`
   display: flex;
   gap: 1rem;
+  margin-top: 0.5rem;
   & > * {
     flex: 1; 
   }
