@@ -10,8 +10,8 @@ export default function StayAmenityTag({ tags }: StayAmenityTagProps) {
       <TagInfo>
         숙소 제공 사항
         <TagList>
-          {tags.map((tag) => (
-            <Tag>{tag}</Tag>
+          {tags.map((tag, idx) => (
+            <Tag key={idx}>{tag}</Tag>
           ))}
         </TagList>
       </TagInfo>

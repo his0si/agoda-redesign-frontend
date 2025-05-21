@@ -1,21 +1,23 @@
-import styled from 'styled-components';
 import SortingIc from '@stList/assets/svgs/sorting.svg?react';
-import { SpaceBetweenFlex } from '@/styles/common/common';
+import styled from 'styled-components';
 
 export default function StayCardListHeader() {
   return (
     <Container>
-      <Text>숙소 검색 결과 1,000개 이상</Text>
+      <StayResultHeader>숙소 검색 결과 1,000개 이상</StayResultHeader>
       <Sorting>
         <SortingIcon />
-        <Text>정렬</Text>
+        <StayResultHeader>정렬</StayResultHeader>
       </Sorting>
     </Container>
   );
 }
-const Container = styled(SpaceBetweenFlex)``;
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
-const Text = styled.p`
+const StayResultHeader = styled.p`
   font: ${({ theme }) => theme.fonts.headline.lg};
 `;
 

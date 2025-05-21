@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import StayReview from './StayReview';
 import StayName from './StayName';
-import StayTag from './StayTag';
+import StayTag from './StayAmenityTag';
 import StayAddress from './StayLocation';
 import StayPrice from './StayPrice';
 
