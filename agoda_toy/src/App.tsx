@@ -1,9 +1,10 @@
+import StList from '@stList/page/StList';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from './styles/theme/theme';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-import StInfo from './stInfo/page/StInfo';
+import theme from './styles/theme/theme';
+import Layout from './common/layout/MainLayout';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route element={<Layout />}>
+              <Route path="/staylist" element={<StList />} />
+            </Route>
           </Routes>
         </Router>
       </ThemeProvider>
