@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export default function HeaderOnlyLayout() {
   return (
     <>
-      <Header />
+      <Header isMainPage={true} />
       <LayoutWrapper>
         <Outlet />
       </LayoutWrapper>

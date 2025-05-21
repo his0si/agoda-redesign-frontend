@@ -5,26 +5,30 @@ import GlobalIcon from '../../assets/icn_gnb_lang.svg?react';
 
 const HEADER_LIST = ['교통', '숙소', '엑티비티', '프로모션'];
 
-export default function Header() {
+interface HeaderProps {
+  isMainPage?: boolean;
+}
+
+export default function Header({ isMainPage }: HeaderProps) {
   return (
-    <HeaderContainer>
+    <HeaderContainer isMainPage={isMainPage}>
       <Frame>
         <HeaderLeft>
           <AgodaLogo />
           {HEADER_LIST.map((text) => (
-            <HeaderText key={text}>{text}</HeaderText>
+            <HeaderText key={text} isMainPage={isMainPage}>{text}</HeaderText>
           ))}
         </HeaderLeft>
         <HeaderRight>
-          <Global />
-          <Profile />
+          <Global isMainPage={isMainPage} />
+          <Profile isMainPage={isMainPage} />
         </HeaderRight>
       </Frame>
     </HeaderContainer>
   );
 }
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.header<HeaderProps>`
   display: flex;
   height: 4rem;
   padding: 1.0625rem 8.5rem;
@@ -33,6 +37,17 @@ const HeaderContainer = styled.header`
   align-items: flex-start;
   gap: 0.5rem;
   align-self: stretch;
+  background-color: ${({ isMainPage }) => (isMainPage ? 'rgba(255, 255, 255, 0.5)' : 'white')};
+
+  ${({ isMainPage }) =>
+    isMainPage &&
+    `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; // Ensure header stays on top
+  `}
 `;
 
 const Frame = styled.div`
@@ -62,21 +77,36 @@ const AgodaLogo = styled.div`
   background: url(${AgodaLogoIcon}) center / cover no-repeat;
 `;
 
-const HeaderText = styled.div`
+interface HeaderTextProps {
+  isMainPage?: boolean;
+}
+
+const HeaderText = styled.div<HeaderTextProps>`
   ${({ theme }) => theme.fonts.headline.sm};
   display: flex;
   height: 1.4375rem;
   flex-direction: column;
   justify-content: center;
+  color: ${({ isMainPage, theme }) => (isMainPage ? 'white' : theme.colors.black)};
 `;
 
-const Global = styled(GlobalIcon)`
+interface IconProps {
+  isMainPage?: boolean;
+}
+
+const Global = styled(GlobalIcon)<IconProps>`
   width: 1.625rem;
   height: 1.625rem;
   aspect-ratio: 1/1;
+  path {
+    fill: ${({ isMainPage }) => (isMainPage ? 'white' : '#4B5563')}; // Assuming default icon color is #4B5563
+  }
 `;
 
-const Profile = styled(ProfileIcon)`
+const Profile = styled(ProfileIcon)<IconProps>`
   width: 2.3125rem;
   height: 2.3125rem;
+  path {
+    fill: ${({ isMainPage }) => (isMainPage ? 'white' : '#4B5563')}; // Assuming default icon color is #4B5563
+  }
 `;

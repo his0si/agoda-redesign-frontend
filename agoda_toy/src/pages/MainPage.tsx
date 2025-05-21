@@ -23,11 +23,10 @@ const MainPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100vw;
-  min-height: 100vh;
+  height: 150vh;
   position: relative;
-  overflow-y: auto; // Changed from overflow: hidden to allow vertical scrolling
+  overflow-y: auto;
   background-image: url(${BACKGROUND_IMAGE_URL});
   background-size: cover;
   background-position: center;
@@ -38,10 +37,12 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 1; // 배경 이미지 위에 위치
-  padding: 2rem; // 콘텐츠 주변 여백
-  transform: translateY(-2.5rem); // Shift the content up
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 2.5rem));
+  z-index: 1;
+  padding: 2rem;
 `;
 
 const CatchphraseText = styled.h1`
@@ -51,6 +52,7 @@ const CatchphraseText = styled.h1`
   font-size: 37.5px;
   font-weight: 200;
   line-height: normal;
+  margin-top: 7rem;
   margin-bottom: 0.625rem;
   span {
     font-style: italic !important;
