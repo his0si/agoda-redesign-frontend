@@ -41,6 +41,7 @@ const ContentWrapper = styled.div`
   position: relative;
   z-index: 1; // 배경 이미지 위에 위치
   padding: 2rem; // 콘텐츠 주변 여백
+  transform: translateY(-2.5rem); // Shift the content up
 `;
 
 const CatchphraseText = styled.h1`
