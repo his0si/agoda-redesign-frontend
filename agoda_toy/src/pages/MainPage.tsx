@@ -23,11 +23,10 @@ const MainPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100vw;
-  min-height: 100vh;
+  height: 150vh;
   position: relative;
-  overflow-y: auto; // Changed from overflow: hidden to allow vertical scrolling
+  overflow-y: auto;
   background-image: url(${BACKGROUND_IMAGE_URL});
   background-size: cover;
   background-position: center;
@@ -38,27 +37,31 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 1; // 배경 이미지 위에 위치
-  padding: 2rem; // 콘텐츠 주변 여백
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 2.5rem));
+  z-index: 1;
+  padding: 2rem;
 `;
 
 const CatchphraseText = styled.h1`
   color: var(--AGODA-White, #FFF);
   text-align: center;
   font-family: SUIT;
-  font-size: 30px;
+  font-size: 37.5px;
   font-weight: 200;
   line-height: normal;
-  margin-bottom: 0.5rem; // 3rem에서 0.5rem으로 수정 (아이콘과의 간격)
+  margin-top: 7rem;
+  margin-bottom: 0.625rem;
   span {
     font-style: italic !important;
   }
 `;
 
 const GlitterIcon = styled.img`
-  margin-top: 1.0rem; // -1rem에서 0.2rem으로 수정 (텍스트 바로 아래 작은 간격)
-  margin-bottom: 1.5rem; // 아이콘과 SearchWidget 사이 간격 (0.5 + 0.2 + 2.3 = 3rem 유지)
-  width: 25px; // 아이콘 너비 설정
-  height: 25px; // 아이콘 높이 설정
+  margin-top: 1.25rem;
+  margin-bottom: 1.875rem;
+  width: 31.25px;
+  height: 31.25px;
 `; 
