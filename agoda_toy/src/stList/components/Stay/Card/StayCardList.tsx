@@ -131,6 +131,19 @@ const STAY_LIST = [
     salePrice: 531651,
     totalPrice: 2064225,
   },
+  {
+    imageUrl: StayPic8,
+    korname: '힐튼 도쿄 오다이바',
+    star: 4,
+    engName: 'Hilton Tokyo Odaiba',
+    review: 8.7,
+    reviewCount: 4564,
+    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
+    location: '오다이바, 도쿄',
+    realPrice: 780651,
+    salePrice: 531651,
+    totalPrice: 2064225,
+  },
 ];
 
 export default function StayCardList() {
@@ -151,7 +164,6 @@ export default function StayCardList() {
         currentGroupStart={currentGroupStart}
         onPageChange={setCurrentPage}
         onGroupChange={setCurrentGroupStart}
-        totalStays={STAY_LIST.length}
       />
     </Container>
   );
