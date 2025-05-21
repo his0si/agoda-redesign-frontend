@@ -235,16 +235,16 @@ export default function SearchWidget(props: SearchWidgetProps) {
 
 const MainFlexWrapper = styled.div`
   display: flex;
-  min-width: 65rem; 
-  max-width: 96rem; 
+  min-width: 81.25rem;
+  max-width: 120rem;
   width: 100%; 
   gap: 0rem; 
 `;
 
 const FormCard = styled.div<{ theme: DefaultTheme }>`
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 56px 16px 16px 16px; 
-  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15); 
+  border-radius: 70px 20px 20px 20px;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
   overflow: visible; 
   flex: 1; 
   display: flex; 
@@ -253,11 +253,11 @@ const FormCard = styled.div<{ theme: DefaultTheme }>`
 
 const FormSection = styled.section`
   flex-grow: 1; 
-  padding: 1.2rem; 
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; 
-  max-width: 36rem; 
+  gap: 0.75rem;
+  max-width: 45rem;
   width: 100%;      
   margin: 0 auto;   
 `;
@@ -275,20 +275,20 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      height: 1.76rem;
-      width: 0.08rem;
+      height: 2.2rem;
+      width: 0.1rem;
       background-color: ${({ theme }) => theme.colors.gray300};
     }
   }
 
   & > * {
     flex: 1;
-    border-radius: 16px 0 0 16px;
+    border-radius: 20px 0 0 20px;
   }
 
   & > *:last-child {
-    border-radius: 0 16px 16px 0;
-    margin-left: -0.08rem;
+    border-radius: 0 20px 20px 0;
+    margin-left: -0.1rem;
     border-left: none;
     &::after {
       content: none;
@@ -297,14 +297,14 @@ const DateInputsWrapper = styled.div<{ theme: DefaultTheme }>`
 
   &:focus-within {
     & > * {
-      border-radius: 16px;
+      border-radius: 20px;
     }
   }
 `;
 
 const OccupancyInputsWrapper = styled.div`
   display: flex;
-  gap: 0.8rem; 
+  gap: 1rem;
   & > * {
     flex: 1; 
   }

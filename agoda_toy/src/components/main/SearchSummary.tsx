@@ -53,21 +53,21 @@ const SummaryContainer = styled.aside<{ theme: DefaultTheme }>`
   align-items: flex-start; // 텍스트 왼쪽 정렬을 위해 변경
   background: ${({ theme }) => theme.colors.primary}; // Updated
   color: ${({ theme }) => theme.colors.white}; // Updated
-  padding: 1.6rem; 
-  width: 18rem; 
-  min-height: 16.8rem; 
-  border-radius: 20px 20px 60px 20px; 
-  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.25); // 0px 10px 10px 0px -> 0px 8px 8px 0px
+  padding: 2rem; // 1.6rem * 1.25
+  width: 22.5rem; // 18rem * 1.25
+  min-height: 21rem; // 16.8rem * 1.25
+  border-radius: 25px 25px 75px 25px; // 20px*1.25, 20px*1.25, 60px*1.25, 20px*1.25
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25); // 8px*1.25, 8px*1.25
 `;
 
 const InfoSection = styled.div`
   width: 100%;
-  margin-bottom: 1.6rem; // 버튼과의 간격, rem 단위 사용 2rem -> 1.6rem
-  margin-top: 2.4rem; // 기존 2rem에서 0.4rem 증가시켜 텍스트를 아래로 이동
+  margin-bottom: 2rem; // 1.6rem * 1.25
+  margin-top: 3rem; // 2.4rem * 1.25
 `;
 
 const InfoItem = styled.div`
-  margin-bottom: 1.2rem; // Adjusted from 0.8rem to increase spacing
+  margin-bottom: 1.5rem; // 1.2rem * 1.25
   &:last-child {
     margin-bottom: 0;
   }
@@ -75,7 +75,7 @@ const InfoItem = styled.div`
 
 const LabelText = styled.p<{ theme: DefaultTheme }>`
   font-family: 'SUIT', sans-serif;
-  font-size: 13px; 
+  font-size: 16.25px; // 13px * 1.25
   font-weight: 300; 
   line-height: 1.4;
   margin-bottom: 0.1em; 
@@ -83,7 +83,7 @@ const LabelText = styled.p<{ theme: DefaultTheme }>`
 
 const ValueText = styled.p<{ theme: DefaultTheme }>`
   font-family: 'SUIT', sans-serif;
-  font-size: 12.8px; 
+  font-size: 16px; // 12.8px * 1.25
   opacity: 0.8;
   font-weight: 300;
   line-height: 1.4;
@@ -97,13 +97,18 @@ const SearchButton = styled.button<{ theme: DefaultTheme }>`
   border: none;
   padding: 0; // 내부 여백 제거
   border-radius: 50%; // 원형 클릭 영역 유지
-  width: 4.8rem; // 버튼 크기, rem 단위 사용 6rem -> 4.8rem
-  height: 4.8rem; // 버튼 크기, rem 단위 사용 6rem -> 4.8rem
+  width: 6rem; // 4.8rem * 1.25
+  height: 6rem; // 4.8rem * 1.25
   cursor: pointer;
   box-shadow: none; // 그림자 제거
   align-self: flex-end; // 오른쪽 정렬로 변경
   margin-top: auto; // InfoSection 아래로 밀어내기
   transition: background-color 0.2s ease-in-out; // 부드러운 배경색 변경 효과 추가
+
+  img {
+    width: 56.25%; // 45% * 1.25 
+    height: 87.5%; // 70% * 1.25
+  }
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.3); // 호버 시 투명도 30%의 하얀색 배경 (예시)

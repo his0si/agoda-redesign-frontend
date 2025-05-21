@@ -41,14 +41,14 @@ const InputContainer = styled.button<{
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray100}; // Updated from #F3F4F6
-  border-radius: 1.12rem; // 14px -> 11.2px
-  padding: 1.2rem; // 1.5rem -> 1.2rem
+  border-radius: 1.4rem; // 1.12rem * 1.25
+  padding: 1.5rem; // 1.2rem * 1.25
   border: none;
   cursor: pointer;
   text-align: left;
   width: 100%;
   font-family: 'SUIT', sans-serif; // Added explicit font-family
-  font-size: 11.2px; // Explicit font size 14px -> 11.2px
+  font-size: 14px; // 11.2px * 1.25
   font-weight: 500; // Explicit font weight
   line-height: 1.4; // Added explicit line-height for better readability
 
@@ -70,9 +70,9 @@ const InputContainer = styled.button<{
 `;
 
 const IconWrapper = styled.span<{ theme: DefaultTheme }>`
-  margin-right: 0.8rem; // 1rem -> 0.8rem
+  margin-right: 1rem; // 0.8rem * 1.25
   color: ${({ theme }) => theme.colors.gray900}; // Updated from #555555
-  font-size: 1.6rem; // 아이콘 크기 (react-icons 사용 시), rem 단위 사용 2rem -> 1.6rem
+  font-size: 2rem; // 1.6rem * 1.25
   display: flex;
   align-items: center;
 `;
