@@ -7,9 +7,11 @@ export default defineConfig({
   plugins: [react(), svgr()],
   resolve: {
     alias: [
+      { find: '@', replacement: '/src' },
       { find: '@stInfo', replacement: '/src/stInfo' },
       { find: '@stInfo/assets', replacement: '/src/setInfo/assets' },
       { find: '@stList', replacement: '/src/stList' },
+      { find: '@stList/assets', replacement: '/src/stList/assets' },
     ],
   },
 });
