@@ -1,24 +1,15 @@
-import StList from '@stList/page/StList';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
-import MainPage from './pages/MainPage';
+import router from './router';
 import theme from './styles/theme/theme';
-import Layout from './common/layout/MainLayout';
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <Global />
-        <Router>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route element={<Layout />}>
-              <Route path="/staylist" element={<StList />} />
-            </Route>
-          </Routes>
-        </Router>
+        <RouterProvider router={router} />
       </ThemeProvider>
     </>
   );

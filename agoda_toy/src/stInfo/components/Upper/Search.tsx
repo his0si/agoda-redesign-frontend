@@ -32,6 +32,7 @@ const Container = styled.div`
   padding: 0.625rem;
   width: 59rem;
   height: 2.88rem;
+  margin-bottom: 1.75rem;
 
   gap: 2.5rem;
 
