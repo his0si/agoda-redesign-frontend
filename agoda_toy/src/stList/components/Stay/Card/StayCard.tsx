@@ -63,6 +63,11 @@ const Container = styled.div`
   border: 0.0625rem solid #acacac;
   border-radius: 1.25rem;
   background-color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.fourth};
+  }
 `;
 
 const StayImage = styled.img`

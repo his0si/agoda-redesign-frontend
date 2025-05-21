@@ -21,7 +21,7 @@ const STAY_LIST = [
     engName: 'Hilton Tokyo Odaiba',
     review: 8.7,
     reviewCount: 4564,
-    tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
+    tags: ['조식', '피트니스 센터', '무료 Wi-Fi', '인터넷'],
     location: '오다이바, 도쿄',
     realPrice: 780651,
     salePrice: 531651,
