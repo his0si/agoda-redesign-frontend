@@ -1,20 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+const StepIndicator = () => <div />;
+const GuestForm = () => <div />;
+const InfoCard = () => <div />;
 
 const GuestInfoPage = () => {
   return (
     <Container>
       {/* 좌측 진행 단계 표시 */}
       <StepIndicatorArea>
-        {/* TODO: 단계 UI 구현 */}
+        <StepIndicator />
       </StepIndicatorArea>
       {/* 중앙 투숙객 정보 입력 폼 */}
       <FormArea>
-        {/* TODO: 입력 폼 구현 */}
+        <GuestForm />
       </FormArea>
       {/* 우측 숙소/가격 정보 카드 */}
       <InfoCardArea>
-        {/* TODO: 카드 UI 구현 */}
+        <InfoCard />
       </InfoCardArea>
     </Container>
   );
