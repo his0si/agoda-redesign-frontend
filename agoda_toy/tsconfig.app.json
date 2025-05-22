@@ -4,7 +4,9 @@
     "paths": {
       "@src/*": ["src/*"],
       "@stInfo/*": ["src/stInfo/*"],
-      "@stInfo/assets/*": ["src/stInfo/assets/*"]
+      "@stInfo/assets/*": ["src/stInfo/assets/*"],
+      "@stList/*": ["src/stList/*"],
+      "@stList/assets/*": ["src/stList/assets/*"]
     },
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
