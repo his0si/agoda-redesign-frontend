@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
+      "@src/*": ["src/*"],
       "@stInfo/*": ["src/stInfo/*"],
       "@stInfo/assets/*": ["src/stInfo/assets/*"],
       "@stList/*": ["src/stList/*"],
