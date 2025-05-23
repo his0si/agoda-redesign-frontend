@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import imgCard2 from '../assets/img_card2.png';
+import StarIconPath from '../assets/icon_hotel_star1.svg'; // Import as a path
 
 const CardContainer = styled.div`
   border: 1px solid #EAEAEA;
@@ -7,6 +9,7 @@ const CardContainer = styled.div`
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-sizing: border-box;
 `;
 
 const HotelImage = styled.img`
@@ -98,6 +101,9 @@ const InfoCard = () => {
   // Placeholder data - replace with actual props or state
   const hotelName = "도쿄 프린스 호텔";
   const rating = "8.6 (4,745)"; // TODO: Parse and display stars
+  const numericRatingString = rating.split(' ')[0];
+  const numericRatingValue = parseFloat(numericRatingString);
+  const numStars = Number.isFinite(numericRatingValue) ? Math.round(numericRatingValue / 2) : 0;
   const checkInDate = "2025년 4월 15일";
   const checkOutDate = "2025년 4월 20일";
   const roomType = "1 x 슈페리어 트윈 (33m²)";
@@ -107,7 +113,7 @@ const InfoCard = () => {
   const taxesAndFees = "₩ 382,855";
   const totalPrice = "₩ 1,970,260";
   // Placeholder image URL
-  const imageUrl = "https://via.placeholder.com/80x60"; // Replace with actual image path or URL
+  const imageUrl = imgCard2;
 
 
   return (
@@ -116,7 +122,12 @@ const InfoCard = () => {
         <HotelImage src={imageUrl} alt={hotelName} />
         <HotelDetails>
           <HotelName>{hotelName}</HotelName>
-          <HotelRating>{rating} ★★★★<span style={{color: "#DEDEDE"}}>☆</span></HotelRating> {/* Placeholder stars, with one greyed out */}
+          <HotelRating>
+            {rating}{' '}
+            {Array(numStars).fill(0).map((_, i) => (
+              <img key={i} src={StarIconPath} alt="star" style={{ width: "1em", height: "1em", fill: "#3B7080", marginRight: '2px' }} />
+            ))}
+          </HotelRating>
         </HotelDetails>
       </HotelInfoContainer>
 

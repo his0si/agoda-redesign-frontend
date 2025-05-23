@@ -20,7 +20,6 @@ const StepIndicatorArea = styled.div`
 `;
 
 const FormArea = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +29,7 @@ const FormArea = styled.div`
 const InfoCardArea = styled.div`
   width: 350px;
   margin-top: 80px;
-  margin-left: 40px;
+  margin-left: 20px;
 `;
 
 const GuestInfoPage = () => {
