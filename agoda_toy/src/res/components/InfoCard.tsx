@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import imgCard2 from '../assets/img_card2.png';
+import StarIconPath from '../assets/icon_hotel_star1.svg'; // Import as a path
 
 const CardContainer = styled.div`
   border: 1px solid #EAEAEA;
@@ -7,6 +9,7 @@ const CardContainer = styled.div`
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-sizing: border-box;
 `;
 
 const HotelImage = styled.img`
@@ -23,6 +26,13 @@ const HotelInfoContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const NameAndStarsWrapper = styled.div`
+  display: flex;
+  align-items: baseline; /* Aligns text baseline of name with stars */
+  gap: 8px; /* Space between hotel name and stars */
+  margin-bottom: 4px; /* Space before the rating text below */
+`;
+
 const HotelDetails = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,7 +41,7 @@ const HotelDetails = styled.div`
 const HotelName = styled.h3`
   font-size: 15px;
   font-weight: bold;
-  margin: 0 0 4px 0;
+  margin: 0; /* Original margin removed, NameAndStarsWrapper handles spacing */
   color: #1A1A1A;
 `;
 
@@ -54,17 +64,13 @@ const BookingLabel = styled.span`
  color: #4F4F4F;
 `;
 
-const BookingValue = styled.span``;
 
 const EditLink = styled.a`
   font-size: 13px;
-  color: #007CEE; // Blue color for the link
+  color: #000000; // Change to black
   text-decoration: underline;
   cursor: pointer;
-  font-weight: normal; // Ensure it's not bold by default
-  &:hover {
-    color: #0056b3;
-  }
+  font-weight: bold;
 `;
 
 const PriceSectionTitle = styled.h4`
@@ -92,12 +98,16 @@ const TotalPriceRow = styled(PriceRow)`
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid #EAEAEA;
+  text-decoration: underline;
 `;
 
 const InfoCard = () => {
   // Placeholder data - replace with actual props or state
   const hotelName = "도쿄 프린스 호텔";
   const rating = "8.6 (4,745)"; // TODO: Parse and display stars
+  const numericRatingString = rating.split(' ')[0];
+  const numericRatingValue = parseFloat(numericRatingString);
+  const numStars = Number.isFinite(numericRatingValue) ? Math.round(numericRatingValue / 2) : 0;
   const checkInDate = "2025년 4월 15일";
   const checkOutDate = "2025년 4월 20일";
   const roomType = "1 x 슈페리어 트윈 (33m²)";
@@ -107,7 +117,7 @@ const InfoCard = () => {
   const taxesAndFees = "₩ 382,855";
   const totalPrice = "₩ 1,970,260";
   // Placeholder image URL
-  const imageUrl = "https://via.placeholder.com/80x60"; // Replace with actual image path or URL
+  const imageUrl = imgCard2;
 
 
   return (
@@ -115,8 +125,13 @@ const InfoCard = () => {
       <HotelInfoContainer>
         <HotelImage src={imageUrl} alt={hotelName} />
         <HotelDetails>
-          <HotelName>{hotelName}</HotelName>
-          <HotelRating>{rating} ★★★★<span style={{color: "#DEDEDE"}}>☆</span></HotelRating> {/* Placeholder stars, with one greyed out */}
+          <NameAndStarsWrapper>
+            <HotelName>{hotelName}</HotelName>
+            {Array(numStars).fill(0).map((_, i) => (
+              <img key={i} src={StarIconPath} alt="star" style={{ width: "1em", height: "1em", fill: "#3B7080", marginRight: '-5px' }} />
+            ))}
+          </NameAndStarsWrapper>
+          <HotelRating>{rating}</HotelRating>
         </HotelDetails>
       </HotelInfoContainer>
 
