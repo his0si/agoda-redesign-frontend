@@ -31,6 +31,7 @@ const MainPageContainer = styled.main`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 `;
 
 const ContentWrapper = styled.div`
