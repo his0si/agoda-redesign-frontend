@@ -14,18 +14,18 @@ const SEARCH_TAG_LIST = [
 
 export default function SearchTagList() {
   return (
-    <PopularSearchFilterBox>
+    <PopularSearchFilterWrapper>
       <PopularSearchListHeader>도쿄 인기 검색 조건</PopularSearchListHeader>
       <TagList>
         {SEARCH_TAG_LIST.map((tag) => (
           <SearchTag tagName={tag.tagName} />
         ))}
       </TagList>
-    </PopularSearchFilterBox>
+    </PopularSearchFilterWrapper>
   );
 }
 
-const PopularSearchFilterBox = styled.div`
+const PopularSearchFilterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
