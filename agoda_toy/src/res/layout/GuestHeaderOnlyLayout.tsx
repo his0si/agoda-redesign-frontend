@@ -1,17 +1,19 @@
-import Header from '../../common/components/Header';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import Header from '../../common/components/Header';
 
-export default function GuestHeaderOnlyLayout() {
+const GuestHeaderOnlyLayout = () => {
   return (
-    <>
-      <Header isMainPage={false} />
+    <div style={{ zoom: '0.8' }}>
+      <Header />
       <GuestLayoutWrapper>
         <Outlet />
       </GuestLayoutWrapper>
-    </>
+    </div>
   );
-}
+};
+
+export default GuestHeaderOnlyLayout;
 
 const GuestLayoutWrapper = styled.main`
   width: 120rem;

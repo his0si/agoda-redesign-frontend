@@ -2,14 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchWidget from '../components/SearchWidget';
 
-const BACKGROUND_IMAGE_URL = '/images/background.png';
-
 interface MainPageProps {}
 
 export default function MainPage(props: MainPageProps) {
   return (
     <MainPageContainer>
-      {/* <BackgroundImage src={BACKGROUND_IMAGE_URL} alt="Background" /> */}
       <ContentWrapper>
         <CatchphraseText><span>꿈꾸던 여행을 현실로 </span> </CatchphraseText>
         <GlitterIcon src="/images/main_icn_glitter.svg" alt="glitter icon" />
@@ -22,15 +19,11 @@ export default function MainPage(props: MainPageProps) {
 const MainPageContainer = styled.main`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 150vh;
   position: relative;
   overflow-y: auto;
-  background-image: url(${BACKGROUND_IMAGE_URL});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow-x: hidden;
 `;
 
 const ContentWrapper = styled.div`
@@ -40,9 +33,11 @@ const ContentWrapper = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, calc(-50% - 2.5rem));
-  z-index: 1;
+  transform: translate(-50%, -50%);
+  max-width: 90rem;
+  width: calc(100% - 4rem);
   padding: 2rem;
+  z-index: 10;
 `;
 
 const CatchphraseText = styled.h1`
@@ -52,7 +47,6 @@ const CatchphraseText = styled.h1`
   font-size: 37.5px;
   font-weight: 200;
   line-height: normal;
-  margin-top: 7rem;
   margin-bottom: 0.625rem;
   span {
     font-style: italic !important;
