@@ -26,6 +26,13 @@ const HotelInfoContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+const NameAndStarsWrapper = styled.div`
+  display: flex;
+  align-items: baseline; /* Aligns text baseline of name with stars */
+  gap: 8px; /* Space between hotel name and stars */
+  margin-bottom: 4px; /* Space before the rating text below */
+`;
+
 const HotelDetails = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,7 +41,7 @@ const HotelDetails = styled.div`
 const HotelName = styled.h3`
   font-size: 15px;
   font-weight: bold;
-  margin: 0 0 4px 0;
+  margin: 0; /* Original margin removed, NameAndStarsWrapper handles spacing */
   color: #1A1A1A;
 `;
 
@@ -57,17 +64,13 @@ const BookingLabel = styled.span`
  color: #4F4F4F;
 `;
 
-const BookingValue = styled.span``;
 
 const EditLink = styled.a`
   font-size: 13px;
-  color: #007CEE; // Blue color for the link
+  color: #000000; // Change to black
   text-decoration: underline;
   cursor: pointer;
-  font-weight: normal; // Ensure it's not bold by default
-  &:hover {
-    color: #0056b3;
-  }
+  font-weight: bold;
 `;
 
 const PriceSectionTitle = styled.h4`
@@ -95,6 +98,7 @@ const TotalPriceRow = styled(PriceRow)`
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid #EAEAEA;
+  text-decoration: underline;
 `;
 
 const InfoCard = () => {
@@ -121,13 +125,13 @@ const InfoCard = () => {
       <HotelInfoContainer>
         <HotelImage src={imageUrl} alt={hotelName} />
         <HotelDetails>
-          <HotelName>{hotelName}</HotelName>
-          <HotelRating>
-            {rating}{' '}
+          <NameAndStarsWrapper>
+            <HotelName>{hotelName}</HotelName>
             {Array(numStars).fill(0).map((_, i) => (
-              <img key={i} src={StarIconPath} alt="star" style={{ width: "1em", height: "1em", fill: "#3B7080", marginRight: '2px' }} />
+              <img key={i} src={StarIconPath} alt="star" style={{ width: "1em", height: "1em", fill: "#3B7080", marginRight: '-5px' }} />
             ))}
-          </HotelRating>
+          </NameAndStarsWrapper>
+          <HotelRating>{rating}</HotelRating>
         </HotelDetails>
       </HotelInfoContainer>
 

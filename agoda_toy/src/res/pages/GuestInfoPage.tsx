@@ -29,7 +29,7 @@ const FormArea = styled.div`
 const InfoCardArea = styled.div`
   width: 350px;
   margin-top: 80px;
-  margin-left: 20px;
+  margin-left: 100px;
 `;
 
 const GuestInfoPage = () => {
