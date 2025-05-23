@@ -88,12 +88,14 @@ const Select = styled.select`
 const Textarea = styled.textarea`
   padding: 10px 12px;
   border: 1px solid #D6DADE;
-  border-radius: 4px;
+  border-radius: 8px; // Increased for more rounded corners
   font-size: 14px;
   min-height: 90px; // Adjusted height
-  resize: vertical;
+  resize: none; // Disable resizing
+  overflow-y: auto; // Ensure vertical scrolling on overflow
   background-color: #F7F9FA;
   color: #1A1A1A;
+  width: 95%; // User's previous adjustment
   &::placeholder {
     color: #828282;
   }
