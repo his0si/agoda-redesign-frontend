@@ -8,13 +8,13 @@ export default function Layout() {
   const { pathname } = useLocation();
   const showFooter = pathname.includes('stinfo') || pathname.includes('stlist');
   return (
-    <>
+    <div style={{ zoom: '0.8' }}>
       <Header />
       <LayoutWrapper>
         <Outlet />
       </LayoutWrapper>
       {showFooter && <Footer />}
-    </>
+    </div>
   );
 }
 

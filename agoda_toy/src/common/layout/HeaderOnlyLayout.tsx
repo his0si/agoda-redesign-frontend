@@ -4,12 +4,12 @@ import styled from 'styled-components';
 
 export default function HeaderOnlyLayout() {
   return (
-    <>
+    <div style={{ zoom: '0.8' }}>
       <Header isMainPage={true} />
       <LayoutWrapper>
         <Outlet />
       </LayoutWrapper>
-    </>
+    </div>
   );
 }
 
