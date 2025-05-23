@@ -32,9 +32,9 @@
       "@stList/assets/*": ["src/stList/assets/*"]
     }
   },
-  "include": ["src", "vite.config.ts"], // Include Vite config and other necessary files
-  "references": [ // Keep if you still want to use project references locally
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["src", "vite.config.ts"] // Include Vite config and other necessary files
+  // "references": [ // Keep if you still want to use project references locally
+  //   { "path": "./tsconfig.app.json" },
+  //   { "path": "./tsconfig.node.json" }
+  // ]
 }
