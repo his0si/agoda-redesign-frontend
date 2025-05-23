@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import StayReview from './StayReview';
 import StayName from './StayName';
-import StayTag from './StayAmenityTag';
+import StayAmenityTag from './StayAmenityTag';
 import StayAddress from './StayLocation';
 import StayPrice from './StayPrice';
 
@@ -41,7 +41,7 @@ export default function StayCard({
             <StayName korname={korname} star={star} engName={engName} />
             <StayReview review={review} reviewCount={reviewCount} />
           </NameReviewFrame>
-          <StayTag tags={tags} />
+          <StayAmenityTag tags={tags} />
         </LeftContent>
         <RightContent>
           <StayAddress location={location} />
@@ -63,6 +63,11 @@ const Container = styled.div`
   border: 0.0625rem solid #acacac;
   border-radius: 1.25rem;
   background-color: ${({ theme }) => theme.colors.white};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.fourth};
+  }
 `;
 
 const StayImage = styled.img`
