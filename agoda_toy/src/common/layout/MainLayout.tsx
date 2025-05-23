@@ -4,16 +4,16 @@ import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Layout() {
-  const location = useLocation();
-  const isStInfo = location.pathname;
-
+  // const location = useLocation();
+  const { pathname } = useLocation();
+  const showFooter = pathname.includes('stinfo') || pathname.includes('stlist');
   return (
     <>
       <Header />
       <LayoutWrapper>
         <Outlet />
       </LayoutWrapper>
-      {isStInfo.includes('stinfo') && <Footer />}
+      {showFooter && <Footer />}
     </>
   );
 }

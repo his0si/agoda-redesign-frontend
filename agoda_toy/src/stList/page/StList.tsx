@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Search from '@/stInfo/components/Upper/Search';
-import StayCardList from '@/stList/components/Stay/Card/StayCardList';
-import StayCardListHeader from '@/stList/components/Stay/Card/StayCardListHeader';
+import Search from '@stInfo/components/Upper/Search';
+import StayCardListHeader from '@stList/components/Stay/Card/StayCardListHeader';
 import styled from 'styled-components';
 import StayFilter from '../components/Stay/Filter/StayFilter';
+import StayCardList from '../components/Stay/Card/StayCardList';
 
 const MIN = 0;
 const MAX = 10000000;
@@ -15,7 +15,7 @@ export default function StList() {
   return (
     <>
       <StayContent>
-        <Search width="100%" />
+        <Search width="82.9375rem" />
         <SearchResultSection>
           <StayFilter
             min={minPrice}
@@ -36,6 +36,7 @@ export default function StList() {
 const StayContent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 32px;
 `;
 
