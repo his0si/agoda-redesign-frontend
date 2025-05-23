@@ -23,8 +23,9 @@ const MainPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 150vh;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
   position: relative;
   overflow-y: auto;
   background-image: url(${BACKGROUND_IMAGE_URL});
