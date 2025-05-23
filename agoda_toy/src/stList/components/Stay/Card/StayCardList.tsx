@@ -11,7 +11,7 @@ import StayPic7 from '@stList/assets/imgs/img_card7.png';
 import StayPic8 from '@stList/assets/imgs/img_card8.png';
 import styled from 'styled-components';
 import Pagination from '../../Pagination';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const STAY_LIST = [
   {
@@ -24,7 +24,7 @@ const STAY_LIST = [
     tags: ['조식', '피트니스 센터', '무료 Wi-Fi', '인터넷'],
     location: '오다이바, 도쿄',
     realPrice: 780651,
-    salePrice: 531651,
+    salePrice: 31651,
     totalPrice: 2064225,
   },
   {
@@ -144,16 +144,31 @@ const STAY_LIST = [
     salePrice: 531651,
     totalPrice: 2064225,
   },
-];
+]; // ✅ StayCardList.tsx
 
-export default function StayCardList() {
+interface StayCardListProps {
+  min: number;
+  max: number;
+}
+
+export default function StayCardList({ min, max }: StayCardListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentGroupStart, setCurrentGroupStart] = useState(1);
   const ITEMS_PER_PAGE = 8;
 
+  // ✅ useMemo로 필터링 최적화
+  const filteredList = useMemo(
+    () =>
+      STAY_LIST.filter(
+        (stay) => stay.salePrice >= min && stay.salePrice <= max
+      ),
+    [min, max]
+  );
+
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIdx = currentPage * ITEMS_PER_PAGE;
-  const currentPageList = STAY_LIST.slice(startIdx, endIdx);
+  const currentPageList = filteredList.slice(startIdx, endIdx);
+
   return (
     <Container>
       {currentPageList.map((hotel, idx) => (
@@ -171,6 +186,7 @@ export default function StayCardList() {
 
 const Container = styled.div`
   display: flex;
+  width: 61.5778rem; // 필터 후 검색결과 없을 시 width 유지
   flex-direction: column;
   align-items: center;
   gap: 32px;
