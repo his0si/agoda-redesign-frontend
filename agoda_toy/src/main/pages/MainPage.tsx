@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchWidget from '../components/main/SearchWidget';
+import SearchWidget from '../components/SearchWidget';
 
 const BACKGROUND_IMAGE_URL = '/images/background.png';
 
