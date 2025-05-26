@@ -101,7 +101,7 @@ const PageTitle = styled.h1`
 const CouponInputWrapper = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 8px;
+  margin-top: 16px;
 `;
 
 const CouponInput = styled.input`
@@ -110,14 +110,29 @@ const CouponInput = styled.input`
   border: 1px solid #D6DADE;
   border-radius: 16px;
   font-size: 16px;
-  padding: 10px 75px 10px 12px;
+  line-height: 71px;
+  padding: 0 75px 0 12px;
   background: #fff;
   color: #1A1A1A;
   box-sizing: border-box;
   &::placeholder {
     color: #C4C4C4;
     font-size: 16px;
+    line-height: 71px;
   }
+`;
+
+const CouponLabel = styled.label`
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  background: #fff;
+  padding: 0 8px;
+  font-size: 14px;
+  color: #BDBDBD;
+  font-weight: bold;
+  z-index: 2;
+  pointer-events: none;
 `;
 
 const CouponButton = styled.button`
@@ -137,14 +152,6 @@ const CouponButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const CouponLabel = styled.label`
-  font-size: 14px;
-  color: #828282;
-  margin-bottom: 4px;
-  margin-left: 8px;
-  display: block;
 `;
 
 const PaymentForm = () => {
@@ -206,8 +213,8 @@ const PaymentForm = () => {
       </Section>
       <Section>
         <SectionTitle>예약 혜택 (선택)</SectionTitle>
-        <CouponLabel htmlFor="coupon">할인코드</CouponLabel>
         <CouponInputWrapper>
+          <CouponLabel htmlFor="coupon">할인코드</CouponLabel>
           <CouponInput
             id="coupon"
             placeholder="할인코드 입력"
