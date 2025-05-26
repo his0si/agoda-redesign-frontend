@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import backArrowUrl from '../imgs/icon_back.svg';
 
-const BackArrow = styled.div`
-  width: 12px; // Chevron width
-  height: 12px; // Chevron height
-  border-left: 2px solid #555; // Arrow line color and thickness
-  border-bottom: 2px solid #555; // Arrow line color and thickness
-  transform: rotate(45deg);
+const BackArrow = styled.img`
+  width: 24px;
+  height: 24px;
   cursor: pointer;
-  margin-bottom: 60px; // Increased margin to match image
-  margin-left: 6px; // To visually center it better with the circles
+  margin-bottom: 60px;
+  margin-left: 6px;
 `;
 
 const StepperContainer = styled.div`
@@ -39,7 +37,7 @@ const StepIndicator = () => {
   // Assuming the first step is active for now
   return (
     <StepperContainer>
-      <BackArrow />
+      <BackArrow src={backArrowUrl} alt="뒤로가기" />
       <StepCircle isActive />
       <StepConnector />
       <StepCircle />
