@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import RoomSlider from './RoomSlider';
+import type { MiddleProps } from '@src/stInfo/types/middleProps';
 
-export default function Room() {
+export default function Room(props: MiddleProps) {
   return (
     <Container>
       <RoomTitle>객실 선택</RoomTitle>
-      <RoomSlider />
+      <RoomSlider {...props} />
     </Container>
   );
 }
