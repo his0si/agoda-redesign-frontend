@@ -3,10 +3,11 @@ import ModalPics from './ModalPics';
 import ModalMiddle from './ModalMiddle';
 import ModalLeft from './ModalLeft';
 import StInfoModalLayout from './StInfoModalLayout';
+import type { ModalClose } from '@src/stInfo/types/modalClose';
 
-export default function StInfoModal() {
+export default function StInfoModal({ handleModalClose }: ModalClose) {
   return (
-    <StInfoModalLayout>
+    <StInfoModalLayout handleModalClose={handleModalClose}>
       <Title>슈페리어트윈</Title>
       <ModalPics />
       <ModalMiddle />
