@@ -165,24 +165,25 @@ const TermsSection = styled(Section)`
   margin-top: 12px; // Add some space above this section
 `;
 
-const SubmitButton = styled.button`
-  background-color: #B0B8C1; 
+const SubmitButton = styled.button<{ enabled: boolean }>`
+  width: 514px;
+  height: 72px;
+  border-radius: 20px;
+  padding: 21px 212px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: ${({ enabled }) => (enabled ? '#3D8587' : '#D6DADE')};
   color: white;
-  font-size: 15px; // Adjusted size
+  font-size: 16px;
   font-weight: bold;
-  padding: 14px 20px; // Adjusted padding
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 24px; // Increased margin
+  cursor: ${({ enabled }) => (enabled ? 'pointer' : 'not-allowed')};
+  margin-top: 24px;
+  transition: background 0.2s;
   &:hover {
-    background-color: #929BA6;
-  }
-  &:disabled {
-    background-color: #D6DADE;
-    color: #828282;
-    cursor: not-allowed;
+    background-color: ${({ enabled }) => (enabled ? '#2e6e6e' : '#D6DADE')};
   }
 `;
 
@@ -240,6 +241,20 @@ const GuestForm = () => {
   const validateFirstName = (value: string) => /^[a-zA-Z]+$/.test(value);
   const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
   const validatePhone = (value: string) => /^01[016789]-?\d{3,4}-?\d{4}$/.test(value);
+
+  // Validation for enabling the button
+  const isFormValid =
+    lastName &&
+    firstName &&
+    !firstNameError &&
+    email &&
+    !emailError &&
+    country &&
+    countryCode &&
+    phoneNumber &&
+    !phoneError &&
+    agePolicy &&
+    thirdPartyPolicy;
 
   return (
     <FormContainer>
@@ -375,7 +390,7 @@ const GuestForm = () => {
       </Section>
 
       <Section>
-        <SectionTitle>별도 요청 <span style={{color: '#828282', fontWeight: 'normal'}}>(선택)</span></SectionTitle>
+        <SectionTitle>별도 요청 (선택)</SectionTitle>
         <p style={{fontSize: '13px', color: '#4F4F4F', marginTop: '-15px', marginBottom: '15px', lineHeight: '1.6'}}>
 숙소는 최선을 다해 요청 사항을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br />
 다만, 사정에 따라 제공 여부가 보장되지 않을 수 있습니다.
@@ -419,7 +434,9 @@ const GuestForm = () => {
         </TermsSection>
       </Section>
       
-      <SubmitButton>다음 단계</SubmitButton>
+      <SubmitButton type="submit" enabled={!!isFormValid} disabled={!isFormValid}>
+        다음 단계
+      </SubmitButton>
     </FormContainer>
   );
 };
