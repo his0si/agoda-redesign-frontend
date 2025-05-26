@@ -13,12 +13,13 @@ const CardContainer = styled.div`
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   box-sizing: border-box;
+  margin-top: 48px;
 `;
 
 const HotelImage = styled.img`
-  width: 60px; 
-  height: 60px; 
-  border-radius: 4px;
+  width: 82.8px; 
+  height: 82.8px; 
+  border-radius: 20px;
   margin-right: 12px;
   object-fit: cover;
 `;
@@ -39,17 +40,18 @@ const NameAndStarsWrapper = styled.div`
 const HotelDetails = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 `;
 
 const HotelName = styled.h3`
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0; /* Original margin removed, NameAndStarsWrapper handles spacing */
   color: #1A1A1A;
 `;
 
 const HotelRating = styled.div`
-  font-size: 13px;
+  font-size: 14px;
   color: #4F4F4F;
   // TODO: Add star icons for rating
 `;
