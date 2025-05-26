@@ -60,28 +60,28 @@ const BookingDetailRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center; // Vertically align items
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 12px;
-  color: #4F4F4F;
+  color: #000;
 `;
 
 const BookingLabel = styled.span`
- color: #4F4F4F;
+ color: #000;
+ font-size: 14px;
 `;
 
-
 const EditLink = styled.a`
-  font-size: 13px;
-  color: #000000; // Change to black
+  font-size: 14px;
+  color: #000; // Change to black
   text-decoration: underline;
   cursor: pointer;
   font-weight: bold;
 `;
 
 const PriceSectionTitle = styled.h4`
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 24px;
+  margin-top: 48px;
   margin-bottom: 12px;
   color: #1A1A1A;
   border-top: 1px solid #EAEAEA;
@@ -91,18 +91,16 @@ const PriceSectionTitle = styled.h4`
 const PriceRow = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 10px;
-  color: #4F4F4F;
+  color: #000;
 `;
 
 const TotalPriceRow = styled(PriceRow)`
   font-weight: bold;
-  font-size: 16px; // Slightly larger for total
+  font-size: 20px;
   color: #1A1A1A;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #EAEAEA;
+  margin-top: 32px;
   text-decoration: underline;
 `;
 
@@ -159,7 +157,7 @@ const InfoCard = () => {
         <span>{roomPrice}</span>
       </PriceRow>
       <PriceRow>
-        <span style={{ color: "#828282" }}>1객실, 4박</span>
+        <span style={{ color: "#000" }}>1객실, 4박</span>
         <span /> 
       </PriceRow>
       <PriceRow>
