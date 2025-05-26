@@ -1,26 +1,44 @@
 import styled from 'styled-components';
 import CloseIcon from '../../myrev/assets/my_rev_x.svg?react';
 import { WrapSvgIcon } from '@stInfo/styles/Svg';
+import type { ModalClose } from '@src/stInfo/types/modalClose';
 
 type ModalLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function ModalLayout({ children }: ModalLayoutProps) {
+type ModalTypes = ModalLayoutProps & ModalClose;
+
+export default function ModalLayout({
+  children,
+  handleModalClose,
+}: ModalTypes) {
   return (
-    <Container>
-      <Header>
-        <CloseBtnIcon />
-      </Header>
-      <Frame>{children}</Frame>
-    </Container>
+    <Overlay>
+      <Container>
+        <Header>
+          <CloseBtnIcon onClick={handleModalClose} />
+        </Header>
+        <Frame>{children}</Frame>
+      </Container>
+    </Overlay>
   );
 }
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`;
 
 const Container = styled.div`
   display: flex;
   width: 75.125rem;
-  height: 50.9375rem;
+  height: 53.9rem;
   flex-direction: column;
   flex-shrink: 0;
 
