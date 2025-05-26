@@ -192,7 +192,7 @@ const SubmitButton = styled.button<{ enabled: boolean }>`
 const PageTitle = styled.h1`
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     color: #3D8587;
     align-self: flex-start; 
 `;
