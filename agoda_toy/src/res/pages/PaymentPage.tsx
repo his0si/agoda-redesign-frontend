@@ -1,11 +1,11 @@
 import React from 'react';
 import StepPageLayout from '../components/StepPageLayout';
-import GuestForm from '../components/GuestForm';
+import PaymentForm from '../components/PaymentForm';
 
-const GuestInfoPage = () => (
+const PaymentPage = () => (
   <StepPageLayout>
-    <GuestForm />
+    <PaymentForm />
   </StepPageLayout>
 );
 
-export default GuestInfoPage; 
+export default PaymentPage; 

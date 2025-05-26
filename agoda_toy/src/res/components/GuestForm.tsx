@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const FormContainer = styled.div`
   width: 100%;
@@ -284,6 +285,8 @@ const GuestForm = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <FormContainer>
       <PageTitle>1. 투숙객 정보</PageTitle>
@@ -473,7 +476,12 @@ const GuestForm = () => {
         </TermsSection>
       </Section>
       
-      <SubmitButton type="submit" enabled={!!isFormValid} disabled={!isFormValid}>
+      <SubmitButton
+        type="button"
+        enabled={!!isFormValid}
+        disabled={!isFormValid}
+        onClick={() => { if (isFormValid) navigate('/payment'); }}
+      >
         다음 단계
       </SubmitButton>
     </FormContainer>
