@@ -61,7 +61,7 @@ const BookingDetailRow = styled.div`
   justify-content: space-between;
   align-items: center; // Vertically align items
   font-size: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   color: #000;
 `;
 
@@ -82,7 +82,7 @@ const PriceSectionTitle = styled.h4`
   font-size: 20px;
   font-weight: bold;
   margin-top: 48px;
-  margin-bottom: 12px;
+  margin-bottom: 28px;
   color: #1A1A1A;
   border-top: 1px solid #EAEAEA;
   padding-top: 20px;
@@ -92,7 +92,7 @@ const PriceRow = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   color: #000;
 `;
 
@@ -100,7 +100,7 @@ const TotalPriceRow = styled(PriceRow)`
   font-weight: bold;
   font-size: 20px;
   color: #1A1A1A;
-  margin-top: 32px;
+  margin-top: 56px;
   text-decoration: underline;
 `;
 
