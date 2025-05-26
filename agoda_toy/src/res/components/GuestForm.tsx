@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
@@ -18,19 +18,19 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 18px; // Adjusted size
+  font-size: 18px;
   font-weight: bold;
-  color: #1A1A1A; // Darker color
+  color: #3D8587;
   margin-top: 0;
-  margin-bottom: 24px; // Increased bottom margin
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
 `;
 
-const RequiredAsterisk = styled.span`
-  color: #FF6651;
-  margin-left: 2px; // Reduced margin
-  font-weight: bold; // Make asterisk bold
+const RequiredAsterisk = styled.span<LabelProps>`
+  color: ${({ color }) => color || '#FF6651'};
+  margin-left: 2px;
+  font-weight: bold;
 `;
 
 const FormRow = styled.div`
@@ -46,10 +46,16 @@ const FormGroup = styled.div`
   margin-bottom: 0; // Removed default bottom margin, will control with FormRow or inline style
 `;
 
-const Label = styled.label`
-  font-size: 13px; // Adjusted size
-  color: #4F4F4F; // Adjusted color
-  margin-bottom: 8px; // Increased margin
+interface LabelProps {
+  color?: string;
+}
+
+const Label = styled.label<LabelProps>`
+  font-size: 14px;
+  color: ${({ color }) => color || '#4F4F4F'};
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
 `;
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -58,34 +64,45 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input = styled.input<InputProps>`
   padding: 10px 12px;
-  border: 1px solid ${({ error }) => (error ? '#FF6651' : '#D6DADE')}; // Lighter border, red if error
-  border-radius: 6px;
+  border: 1px solid
+    ${({ error, value }) =>
+      error ? '#FF6651' : value && String(value).length > 0 ? '#3D8587' : '#D6DADE'};
+  border-radius: 16px;
   font-size: 14px;
-  background-color: #fff; // Light background for input
+  background-color: #fff;
   color: #1A1A1A;
+  width: 450px;
+  height: 71px;
+  box-sizing: border-box;
   &::placeholder {
-    color: #828282; // Placeholder color
+    color: #828282;
   }
   &:focus {
-    border-color:#3D8587
+    border-color: ${({ error }) => (error ? '#FF6651' : '#3D8587')};
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 124, 238, 0.15);
-    background-color: #fff; // White background on focus
+    background-color: #fff;
   }
 `;
 
 const Select = styled.select`
   padding: 10px 12px;
   border: 1px solid #D6DADE;
-  border-radius: 4px;
+  border-radius: 16px;
   font-size: 14px;
-  background-color: #F7F9FA;
+  background-color: #fff;
   color: #1A1A1A;
+  width: 450px;
+  height: 71px;
+  box-sizing: border-box;
   &:focus {
-    border-color: #3D8587
+    border-color: #3D8587;
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 124, 238, 0.15);
     background-color: #fff;
+  }
+  &:not(:focus) {
+    border-color: ${({ value }) => value && String(value).length > 0 ? '#3D8587' : '#D6DADE'};
   }
 `;
 
@@ -175,59 +192,98 @@ const ErrorText = styled.span`
   margin-top: 4px;
 `;
 
+const PhoneRow = styled.div`
+  display: flex;
+  gap: 26px;
+`;
+
+const CountryCodeSelect = styled(Select)`
+  width: 135px;
+  height: 69px;
+`;
+
+const PhoneInput = styled(Input)`
+  width: 289px;
+  height: 69px;
+`;
+
 const GuestForm = () => {
-  const [lastName, setLastName] = React.useState('');
-  const [firstName, setFirstName] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  // State for input values
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
-  const [firstNameError, setFirstNameError] = React.useState(false);
-  const [emailError, setEmailError] = React.useState(false);
+  // State for error
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
-  const validateFirstName = (value) => /^[a-zA-Z]+$/.test(value);
-  const validateEmail = (value) => /^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(value);
+  // Add state for country and countryCode
+  const [country, setCountry] = useState('KR');
+  const [countryCode, setCountryCode] = useState('+82');
+
+  // Validation functions
+  const validateFirstName = (value: string) => /^[a-zA-Z]+$/.test(value);
+  const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
+  const validatePhone = (value: string) => /^01[016789]-?\d{3,4}-?\d{4}$/.test(value);
 
   return (
     <FormContainer>
-        <PageTitle>1. 투숙객 정보</PageTitle>
+      <PageTitle>1. 투숙객 정보</PageTitle>
       <Section>
         <SectionTitle>
-            필수 입력 정보 
+        * 필수 입력 정보 
             <span style={{fontSize: '12px', color: '#828282', fontWeight: 'normal', marginLeft: 'auto'}}>
                  * 표시는 필수 정보입니다.
             </span>
         </SectionTitle>
         <FormGroup style={{ marginBottom: '16px'}}>
-            <Label htmlFor="lastName">성 <RequiredAsterisk>*</RequiredAsterisk></Label>
-            <Input
-              type="text"
-              id="lastName"
-              placeholder="영문으로 작성해 주세요"
-              value={lastName}
-              onChange={e => setLastName(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup style={{ marginBottom: '16px'}}>
-            <Label htmlFor="firstName" style={{ color: firstNameError ? '#FF6651' : undefined }}>
-              이름 <RequiredAsterisk>*</RequiredAsterisk>
-            </Label>
-            <Input
-              type="text"
-              id="firstName"
-              placeholder="영문으로 작성해 주세요"
-              value={firstName}
-              onChange={e => {
-                setFirstName(e.target.value);
-                setFirstNameError(!validateFirstName(e.target.value));
-              }}
-              error={firstNameError}
-            />
-            {firstNameError && (
-              <ErrorText>영문 알파벳 대문자(A-Z) 또는 소문자(a-z)만을 사용해 입력해 주세요</ErrorText>
-            )}
-          </FormGroup>
+          <Label
+            htmlFor="lastName"
+            color={lastName ? '#3D8587' : '#4F4F4F'}
+          >
+            성
+            <RequiredAsterisk color={lastName ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
+          </Label>
+          <Input
+            type="text"
+            id="lastName"
+            placeholder="영문으로 작성해 주세요"
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+          />
+        </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
-          <Label htmlFor="email" style={{ color: emailError ? '#FF6651' : undefined }}>
-            이메일 <RequiredAsterisk>*</RequiredAsterisk>
+          <Label
+            htmlFor="firstName"
+            color={firstNameError ? '#FF6651' : firstName ? '#3D8587' : '#4F4F4F'}
+          >
+            이름
+            <RequiredAsterisk color={firstNameError ? '#FF6651' : firstName ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
+          </Label>
+          <Input
+            type="text"
+            id="firstName"
+            placeholder="영문으로 작성해 주세요"
+            value={firstName}
+            onChange={e => {
+              setFirstName(e.target.value);
+              setFirstNameError(!!e.target.value && !validateFirstName(e.target.value));
+            }}
+            error={firstNameError}
+          />
+          {firstNameError && (
+            <ErrorText>영문 알파벳 대문자(A-Z) 또는 소문자(a-z)만을 사용해 입력해 주세요</ErrorText>
+          )}
+        </FormGroup>
+        <FormGroup style={{ marginBottom: '16px'}}>
+          <Label
+            htmlFor="email"
+            color={emailError ? '#FF6651' : email ? '#3D8587' : '#4F4F4F'}
+          >
+            이메일
+            <RequiredAsterisk color={emailError ? '#FF6651' : email ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
           </Label>
           <Input
             type="email"
@@ -236,7 +292,7 @@ const GuestForm = () => {
             value={email}
             onChange={e => {
               setEmail(e.target.value);
-              setEmailError(!validateEmail(e.target.value));
+              setEmailError(!!e.target.value && !validateEmail(e.target.value));
             }}
             error={emailError}
           />
@@ -245,25 +301,64 @@ const GuestForm = () => {
           )}
         </FormGroup>
         <FormGroup  style={{ marginBottom: '16px'}}>
-          <Label htmlFor="country">거주 국가/지역<RequiredAsterisk>*</RequiredAsterisk></Label>
-          <Select id="country">
+          <Label
+            htmlFor="country"
+            color={country ? '#3D8587' : '#4F4F4F'}
+          >
+            거주 국가/지역
+            <RequiredAsterisk color={country ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
+          </Label>
+          <Select
+            id="country"
+            value={country}
+            onChange={e => setCountry(e.target.value)}
+          >
             <option value="KR">대한민국</option>
             {/* TODO: Add more countries */}
           </Select>
         </FormGroup>
-        <FormRow>
-          <FormGroup style={{ flex: '0 0 100px' }}> {/* Adjusted width */}
-            <Label htmlFor="countryCode">국가 코드<RequiredAsterisk>*</RequiredAsterisk></Label>
-            <Select id="countryCode">
-              <option value="+82">+82 대한민국</option> {/* Added country name */}
+        <PhoneRow>
+          <FormGroup style={{ flex: '0 0 135px' }}>
+            <Label
+              htmlFor="countryCode"
+              color={countryCode ? '#3D8587' : '#4F4F4F'}
+            >
+              국가 코드
+              <RequiredAsterisk color={countryCode ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
+            </Label>
+            <CountryCodeSelect
+              id="countryCode"
+              value={countryCode}
+              onChange={e => setCountryCode(e.target.value)}
+            >
+              <option value="+82">+82</option>
               {/* TODO: Add more country codes */}
-            </Select>
+            </CountryCodeSelect>
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="phoneNumber">전화번호<RequiredAsterisk>*</RequiredAsterisk></Label>
-            <Input type="tel" id="phoneNumber" placeholder="입력해 주세요" defaultValue="010-1234-5678" />
+            <Label
+              htmlFor="phoneNumber"
+              color={phoneError ? '#FF6651' : phoneNumber ? '#3D8587' : '#4F4F4F'}
+            >
+              전화번호
+              <RequiredAsterisk color={phoneError ? '#FF6651' : phoneNumber ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
+            </Label>
+            <PhoneInput
+              type="tel"
+              id="phoneNumber"
+              placeholder="입력해 주세요"
+              value={phoneNumber}
+              onChange={e => {
+                setPhoneNumber(e.target.value);
+                setPhoneError(!!e.target.value && !validatePhone(e.target.value));
+              }}
+              error={phoneError}
+            />
+            {phoneError && (
+              <ErrorText>올바른 전화번호 형식으로 입력해 주세요</ErrorText>
+            )}
           </FormGroup>
-        </FormRow>
+        </PhoneRow>
       </Section>
 
       <Section>
