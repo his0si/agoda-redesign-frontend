@@ -43,7 +43,7 @@ const Container = styled.nav`
   flex-shrink: 0;
 
   border-radius: 1.25rem;
-  border: 1px solid #acacac;
+  border: 1px solid rgba(172, 172, 172, 1);
   background: var(--AGODA-White, #fff);
 `;
 

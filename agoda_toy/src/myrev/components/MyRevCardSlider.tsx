@@ -1,12 +1,15 @@
+import type { ReviewModalHandlers } from '../types/modalFnTypes';
 import MyRevCard from './MyRevCard';
 import styled from 'styled-components';
 
-export default function MyRevCardSlider() {
+type MyRevCardSliderProps = ReviewModalHandlers;
+
+export default function MyRevCardSlider(props: MyRevCardSliderProps) {
   return (
     <Container>
-      <MyRevCard />
-      <MyRevCard />
-      <MyRevCard />
+      <MyRevCard {...props} />
+      <MyRevCard {...props} />
+      <MyRevCard {...props} />
     </Container>
   );
 }
