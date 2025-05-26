@@ -2,7 +2,7 @@ import IconHotelBottomScore from '@stInfo/assets/svgs/icn_hotel_bottom_score.svg
 import styled from 'styled-components';
 
 export default function Rate() {
-  return <div>Rate</div>;
+  return <IconStar />;
 }
 
 export const IconStar = styled(IconHotelBottomScore)`
