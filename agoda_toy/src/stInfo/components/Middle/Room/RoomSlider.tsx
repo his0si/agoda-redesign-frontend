@@ -45,10 +45,7 @@ const ROOM_LIST = [
   },
 ];
 
-export default function RoomSlider({
-  handleModalOpen,
-  handleModalClose,
-}: MiddleProps) {
+export default function RoomSlider({ handleModalOpen }: MiddleProps) {
   return (
     <Container>
       {ROOM_LIST.map(({ image, title, description, realprice, saleprice }) => (
