@@ -176,12 +176,14 @@ const SubmitButton = styled.button<{ enabled: boolean }>`
   gap: 8px;
   background-color: ${({ enabled }) => (enabled ? '#3D8587' : '#D6DADE')};
   color: white;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: normal;
   border: none;
   cursor: ${({ enabled }) => (enabled ? 'pointer' : 'not-allowed')};
   margin-top: 24px;
+  margin-bottom: 32px;
   transition: background 0.2s;
+  white-space: nowrap;
   &:hover {
     background-color: ${({ enabled }) => (enabled ? '#2e6e6e' : '#D6DADE')};
   }
@@ -391,7 +393,7 @@ const GuestForm = () => {
 
       <Section>
         <SectionTitle>별도 요청 (선택)</SectionTitle>
-        <p style={{fontSize: '13px', color: '#4F4F4F', marginTop: '-15px', marginBottom: '15px', lineHeight: '1.6'}}>
+        <p style={{fontSize: '13px', color: '#C4C4C4', marginTop: '-15px', marginBottom: '15px', lineHeight: '1.6'}}>
 숙소는 최선을 다해 요청 사항을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br />
 다만, 사정에 따라 제공 여부가 보장되지 않을 수 있습니다.
 </p>
