@@ -7,6 +7,7 @@ import StList from './stList/page/StList';
 import MainPage from './main/pages/MainPage';
 import MyRev from './myrev/pages/MyRev';
 import GuestInfoPage from './res/pages/GuestInfoPage';
+import MyRevModal from './myrev/components/myRev02Modal/MyRevModal';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     path: '/guestinfo',
     element: <GuestHeaderOnlyLayout />,
     children: [{ path: '', element: <GuestInfoPage /> }],
+  },
+  {
+    path: 'modal',
+    element: <MyRevModal />,
   },
 ]);
 
