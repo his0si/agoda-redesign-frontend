@@ -56,7 +56,7 @@ const Container = styled.div`
   align-self: stretch;
 
   border-radius: 1.5rem;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   background: var(--AGODA-White, #fff);
 
   gap: 2.56rem;

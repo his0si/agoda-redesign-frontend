@@ -13,6 +13,6 @@ const Tag = styled.button`
   height: 1.75rem;
   background: #fff;
   border-radius: 1.25rem;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   padding: 0 1.3125rem; //height 보다 padding 값이 큰 관계로,  padding-block : 0으로
 `;

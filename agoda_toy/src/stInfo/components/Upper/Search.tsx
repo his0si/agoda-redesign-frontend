@@ -40,7 +40,7 @@ const Container = styled.div<{ $width: string }>`
   gap: 2.5rem;
 
   border-radius: 6.25rem;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   background: var(--AGODA-White, #fff);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 `;

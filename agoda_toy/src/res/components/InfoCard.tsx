@@ -4,7 +4,7 @@ import imgCard2 from '../assets/img_card2.png';
 import StarIconPath from '../assets/icon_hotel_star1.svg'; // Import as a path
 
 const CardContainer = styled.div`
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   border-radius: 6px;
   padding: 16px;
   background-color: #fff;

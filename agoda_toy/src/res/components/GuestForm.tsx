@@ -10,7 +10,7 @@ const FormContainer = styled.div`
 
 const Section = styled.section`
   background-color: #fff;
-  border: 1px solid #000; // Lighter border
+  border: 1px solid rgba(172, 172, 172, 1); // Lighter border
   border-radius: 20px; // Slightly smaller radius
   padding: 24px 32px; // Adjusted padding
   margin-bottom: 20px; // Adjusted margin
@@ -91,7 +91,7 @@ const Input = styled.input<InputProps>`
 
 const Select = styled.select`
   padding: 10px 12px;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   border-radius: 16px;
   font-size: 16px;
   background-color: #fff;
@@ -114,7 +114,7 @@ const Textarea = styled.textarea`
   width: 450px;
   height: 114px;
   min-height: 114px;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   border-radius: 12px;
   font-size: 16px;
   padding: 16px 218px 78px 24px;

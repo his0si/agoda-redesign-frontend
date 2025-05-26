@@ -38,7 +38,7 @@ const Container = styled.div`
   gap: 1.5rem;
 
   border-radius: 1.25rem;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   background: var(--AGODA-White, #fff);
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 `;
@@ -63,7 +63,7 @@ const AboutFrame = styled.div`
 
   width: 18.5rem;
   height: 15.4rem;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   background: var(--AGODA-White, #fff);
 `;
 
@@ -91,7 +91,7 @@ const Coupon = styled.div`
   align-items: center;
 
   border-radius: 0.5rem;
-  border: 1px solid #000;
+  border: 1px solid rgba(172, 172, 172, 1);
   background: var(--AGODA-Gray100, #f3f4f6);
 
   ${({ theme }) => theme.fonts.title.md};
