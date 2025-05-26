@@ -32,7 +32,7 @@ const Container = styled.div`
   gap: 0.5rem;
 
   border-radius: 1.25rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray100};
+  border: 1px solid #000;
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 `;

@@ -102,7 +102,7 @@ const ControlButton = styled.button`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #757575;
+  border: 1px solid #000;
   color: #333;
   padding: 0;
   cursor: pointer;

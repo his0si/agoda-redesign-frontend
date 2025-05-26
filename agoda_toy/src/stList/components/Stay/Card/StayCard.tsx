@@ -60,7 +60,7 @@ const Container = styled.div`
   display: flex;
   width: 984px;
   height: 18.5rem;
-  border: 0.0625rem solid #acacac;
+  border: 0.0625rem solid #000;
   border-radius: 1.25rem;
   background-color: ${({ theme }) => theme.colors.white};
   cursor: pointer;

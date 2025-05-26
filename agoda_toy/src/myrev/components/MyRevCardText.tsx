@@ -36,7 +36,7 @@ const Container = styled.div`
   flex-shrink: 0;
 
   border-radius: 1.25rem;
-  border: 1px solid #acacac;
+  border: 1px solid #000;
   background: var(--AGODA-White, #fff);
 
   position: relative;

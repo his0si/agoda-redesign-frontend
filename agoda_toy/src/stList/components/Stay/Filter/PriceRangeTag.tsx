@@ -108,7 +108,7 @@ const LabelWrapper = styled.div`
 `;
 const PriceRangeLine = styled.div`
   width: 100%;
-  border-bottom: 1px dashed #acacac;
+  border-bottom: 1px dashed #000;
 `;
 
 const TagFrame = styled.div`
@@ -125,7 +125,7 @@ const TagLabel = styled.p`
 const InputBox = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid #acacac;
+  border: 1px solid #000;
   border-radius: 1.25rem;
   background-color: #fff;
   padding: 0.625rem 1.3125rem;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import backArrowUrl from '../imgs/icon_back.svg';
+import activeBarUrl from '../imgs/active_bar.svg';
+import inactiveBarUrl from '../imgs/inactive_bar_1.svg';
 
 const BackArrow = styled.img`
   width: 44px;
@@ -13,38 +15,37 @@ const BackArrow = styled.img`
 `;
 
 const StepperContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  width: 44px;
+  height: 711px;
 `;
 
-const StepCircle = styled.div<{ isActive?: boolean }>`
-  width: 16px; // Slightly smaller to match image
-  height: 16px;
-  border-radius: 50%;
-  background-color: ${(props) => (props.isActive ? '#007CEE' : '#FFFFFF')}; // Active: blue, Inactive: white
-  border: ${(props) => (props.isActive ? '4px solid #CDE5FF' : '2px solid #DEDEDE')}; // Active: thicker light blue, Inactive: grey
-  margin-bottom: 5px;
-  box-sizing: border-box;
-`;
-
-const StepConnector = styled.div`
+const VerticalLine = styled.div`
+  position: absolute;
+  left: 22px;
+  top: 22px;
   width: 1px;
-  height: 80px; // Adjusted height
-  background-color: #DEDEDE; // Lighter grey
-  margin: 5px 0;
+  height: 645px;
+  background: #DEDEDE;
+`;
+
+const StepCircleImg = styled.img<{ top: number }>`
+  position: absolute;
+  left: 0px;
+  width: 44px;
+  height: 44px;
+  top: ${({ top }) => top}px;
 `;
 
 const StepIndicator = () => {
-  // Assuming the first step is active for now
+  // 원 위치: 첫번째(활성화) 0px, 두번째 333px, 세번째 667px (예시, 실제 위치는 디자인에 맞게 조정)
   return (
     <StepperContainer>
       <BackArrow src={backArrowUrl} alt="뒤로가기" />
-      <StepCircle isActive />
-      <StepConnector />
-      <StepCircle />
-      <StepConnector />
-      <StepCircle />
+      <VerticalLine />
+      <StepCircleImg src={activeBarUrl} alt="활성화" top={0} />
+      <StepCircleImg src={inactiveBarUrl} alt="비활성화" top={333} />
+      <StepCircleImg src={inactiveBarUrl} alt="비활성화" top={667} />
     </StepperContainer>
   );
 };

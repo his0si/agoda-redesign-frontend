@@ -26,7 +26,7 @@ const Container = styled.div`
   align-items: center;
   gap: 0.5rem;
   border-radius: 1.25rem;
-  border: 1px solid var(--AGODA-Gray100, #f3f4f6);
+  border: 1px solid #000;
   background: var(--AGODA-White, #fff);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 `;

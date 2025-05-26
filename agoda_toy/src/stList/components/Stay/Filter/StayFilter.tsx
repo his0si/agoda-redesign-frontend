@@ -36,7 +36,8 @@ const Container = styled.div`
   flex-shrink: 0;
   border-radius: 1.25rem;
   gap: 0.75rem;
-  border: 1px solid #acacac;
+  border: 1px solid #000;
+  background-color: #000;
 `;
 
 const StayFilterTitle = styled.p`
