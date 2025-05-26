@@ -20,12 +20,12 @@ const StepperContainer = styled.div`
   height: 711px;
 `;
 
-const VerticalLine = styled.div`
+const VerticalLine = styled.div<{ currentStep: 1 | 2 }>`
   position: absolute;
   left: 22px;
   top: 22px;
   width: 1px;
-  height: 645px;
+  height: ${({ currentStep }) => (currentStep === 2 ? '333px' : '645px')};
   background: #DEDEDE;
 `;
 
@@ -37,15 +37,21 @@ const StepCircleImg = styled.img<{ top: number }>`
   top: ${({ top }) => top}px;
 `;
 
-const StepIndicator = () => {
-  // 원 위치: 첫번째(활성화) 0px, 두번째 333px, 세번째 667px (예시, 실제 위치는 디자인에 맞게 조정)
+interface StepIndicatorProps {
+  currentStep: 1 | 2;
+}
+
+const StepIndicator = ({ currentStep }: StepIndicatorProps) => {
+  // currentStep: 1(투숙객 정보), 2(결제 정보)
   return (
     <StepperContainer>
       <BackArrow src={backArrowUrl} alt="뒤로가기" />
-      <VerticalLine />
+      <VerticalLine currentStep={currentStep} />
       <StepCircleImg src={activeBarUrl} alt="활성화" top={0} />
       <StepCircleImg src={inactiveBarUrl} alt="비활성화" top={333} />
-      <StepCircleImg src={inactiveBarUrl} alt="비활성화" top={667} />
+      {currentStep === 1 && (
+        <StepCircleImg src={inactiveBarUrl} alt="비활성화" top={667} />
+      )}
     </StepperContainer>
   );
 };

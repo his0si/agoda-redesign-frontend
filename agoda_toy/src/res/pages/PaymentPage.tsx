@@ -3,7 +3,7 @@ import StepPageLayout from '../components/StepPageLayout';
 import PaymentForm from '../components/PaymentForm';
 
 const PaymentPage = () => (
-  <StepPageLayout>
+  <StepPageLayout currentStep={2}>
     <PaymentForm />
   </StepPageLayout>
 );

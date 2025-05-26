@@ -33,12 +33,13 @@ const InfoCardArea = styled.div`
 
 interface StepPageLayoutProps {
   children: React.ReactNode;
+  currentStep: 1 | 2;
 }
 
-const StepPageLayout = ({ children }: StepPageLayoutProps) => (
+const StepPageLayout = ({ children, currentStep }: StepPageLayoutProps) => (
   <Container>
     <StepIndicatorArea>
-      <StepIndicator />
+      <StepIndicator currentStep={currentStep} />
     </StepIndicatorArea>
     <FormArea>
       {children}

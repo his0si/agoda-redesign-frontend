@@ -3,7 +3,7 @@ import StepPageLayout from '../components/StepPageLayout';
 import GuestForm from '../components/GuestForm';
 
 const GuestInfoPage = () => (
-  <StepPageLayout>
+  <StepPageLayout currentStep={1}>
     <GuestForm />
   </StepPageLayout>
 );
