@@ -31,7 +31,8 @@ const router = createBrowserRouter([
   },
   {
     path: 'modal',
-    element: <MyRevModal />,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    element: <MyRevModal handleModalClose={() => {}} />,
   },
 ]);
 
