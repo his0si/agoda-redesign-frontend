@@ -1,11 +1,14 @@
 import MyRevCardText from './MyRevCardText';
 import MyRevCardImg from './MyRevCardImg';
 import styled from 'styled-components';
+import type { ReviewModalHandlers } from '../types/modalFnTypes';
 
-export default function MyRevCard() {
+type MyRevCardProps = ReviewModalHandlers;
+
+export default function MyRevCard(props: MyRevCardProps) {
   return (
     <Container>
-      <MyRevCardText />
+      <MyRevCardText {...props} />
       <MyRevCardImg />
     </Container>
   );

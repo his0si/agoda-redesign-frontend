@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import MyRevWriteReviewBtn from './MyRevWriteReviewBtn';
+import type { handleWriteRevOpenType } from '../types/modalFnTypes';
 
-export default function MyRevCardText() {
+export default function MyRevCardText({
+  handleWriteRevOpen,
+}: handleWriteRevOpenType) {
   return (
     <Container>
       <BookNumberFrame>
@@ -22,7 +25,7 @@ export default function MyRevCardText() {
         <Title>숙소</Title>
         <Date>Shibakoen</Date>
       </HotelName>
-      <Button />
+      <Button handleWriteRevOpen={handleWriteRevOpen} />
     </Container>
   );
 }

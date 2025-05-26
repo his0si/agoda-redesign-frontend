@@ -1,7 +1,10 @@
 import styled from 'styled-components';
+import type { handleWriteRevOpenType } from '../types/modalFnTypes';
 
-export default function MyRevWriteReviewBtn() {
-  return <Button>후기 작성</Button>;
+export default function MyRevWriteReviewBtn({
+  handleWriteRevOpen,
+}: handleWriteRevOpenType) {
+  return <Button onClick={handleWriteRevOpen}>후기 작성</Button>;
 }
 
 const Button = styled.button`
