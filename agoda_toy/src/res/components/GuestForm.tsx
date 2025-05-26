@@ -68,14 +68,15 @@ const Input = styled.input<InputProps>`
     ${({ error, value }) =>
       error ? '#FF6651' : value && String(value).length > 0 ? '#3D8587' : '#D6DADE'};
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 16px;
   background-color: #fff;
   color: #1A1A1A;
   width: 450px;
   height: 71px;
   box-sizing: border-box;
   &::placeholder {
-    color: #828282;
+    color: #C4C4C4;
+    font-size: 16px;
   }
   &:focus {
     border-color: ${({ error }) => (error ? '#FF6651' : '#3D8587')};
@@ -83,13 +84,16 @@ const Input = styled.input<InputProps>`
     box-shadow: 0 0 0 2px rgba(0, 124, 238, 0.15);
     background-color: #fff;
   }
+  &:not(:focus) {
+    border-color: ${({ value }) => value && String(value).length > 0 ? '#3D8587' : '#D6DADE'};
+  }
 `;
 
 const Select = styled.select`
   padding: 10px 12px;
   border: 1px solid #D6DADE;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 16px;
   background-color: #fff;
   color: #1A1A1A;
   width: 450px;
@@ -107,21 +111,25 @@ const Select = styled.select`
 `;
 
 const Textarea = styled.textarea`
-  padding: 10px 12px;
+  width: 450px;
+  height: 114px;
+  min-height: 114px;
   border: 1px solid #D6DADE;
-  border-radius: 8px; // Increased for more rounded corners
-  font-size: 14px;
-  min-height: 90px; // Adjusted height
-  resize: none; // Disable resizing
-  overflow-y: auto; // Ensure vertical scrolling on overflow
-  background-color: #fff; // Light background for input
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 16px 218px 78px 24px;
+  resize: none;
+  overflow-y: hidden;
+  background-color: #fff;
   color: #1A1A1A;
-  width: 100%; 
+  box-sizing: border-box;
   &::placeholder {
-    color: #828282;
+    color: #C4C4C4;
+    font-size: 14px;
+    white-space: nowrap;
   }
   &:focus {
-    border-color:#3D8587
+    border-color: #3D8587;
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 124, 238, 0.15);
     background-color: #fff;
@@ -135,11 +143,11 @@ const CheckboxGroup = styled.div`
   }
 `;
 
-const CheckboxLabel = styled.label`
+const CheckboxLabel = styled.label<{ checked?: boolean }>`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #4F4F4F;
+  color: ${({ checked }) => (checked ? '#3D8587' : '#C4C4C4')};
   cursor: pointer;
   line-height: 1.5;
 `;
@@ -222,6 +230,11 @@ const GuestForm = () => {
   // Add state for country and countryCode
   const [country, setCountry] = useState('KR');
   const [countryCode, setCountryCode] = useState('+82');
+
+  // Checkbox state
+  const [agreeAll, setAgreeAll] = useState(false);
+  const [agePolicy, setAgePolicy] = useState(false);
+  const [thirdPartyPolicy, setThirdPartyPolicy] = useState(false);
 
   // Validation functions
   const validateFirstName = (value: string) => /^[a-zA-Z]+$/.test(value);
@@ -373,21 +386,33 @@ const GuestForm = () => {
       <Section>
         <SectionTitle>이용 약관</SectionTitle>
         <CheckboxGroup>
-          <CheckboxLabel>
-            <CheckboxInput name="agreeAll" />
+          <CheckboxLabel checked={agreeAll}>
+            <CheckboxInput
+              name="agreeAll"
+              checked={agreeAll}
+              onChange={e => setAgreeAll(e.target.checked)}
+            />
             <strong>전체 동의</strong>
           </CheckboxLabel>
         </CheckboxGroup>
         <TermsSection> {/* Inner section with different background */}
           <CheckboxGroup>
-            <CheckboxLabel>
-              <CheckboxInput name="agePolicy" />
+            <CheckboxLabel checked={agePolicy}>
+              <CheckboxInput
+                name="agePolicy"
+                checked={agePolicy}
+                onChange={e => setAgePolicy(e.target.checked)}
+              />
               18세 이상 및 이용약관 동의 (필수)
             </CheckboxLabel>
           </CheckboxGroup>
           <CheckboxGroup>
-            <CheckboxLabel>
-              <CheckboxInput name="thirdPartyPolicy" />
+            <CheckboxLabel checked={thirdPartyPolicy}>
+              <CheckboxInput
+                name="thirdPartyPolicy"
+                checked={thirdPartyPolicy}
+                onChange={e => setThirdPartyPolicy(e.target.checked)}
+              />
               개인정보 제3자 제공동의 (필수)
             </CheckboxLabel>
           </CheckboxGroup>
