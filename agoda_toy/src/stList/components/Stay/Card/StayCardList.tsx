@@ -1,5 +1,4 @@
 // HotelList.tsx 또는 StlistPage.tsx
-import StayCard from '@/stList/components/Stay/Card/StayCard';
 // import Review from '@stInfo/components/Review/Review';
 import StayPic1 from '@stList/assets/imgs/img_card1.png';
 import StayPic2 from '@stList/assets/imgs/img_card2.png';
@@ -12,6 +11,7 @@ import StayPic8 from '@stList/assets/imgs/img_card8.png';
 import styled from 'styled-components';
 import Pagination from '../../Pagination';
 import { useMemo, useState } from 'react';
+import StayCard from './StayCard';
 
 const STAY_LIST = [
   {

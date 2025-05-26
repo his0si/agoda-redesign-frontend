@@ -20,7 +20,8 @@
     "react-router-dom": "^7.6.0",
     "styled-components": "^6.1.18",
     "styled-reset": "^4.5.2",
-    "stylelint": "^16.19.1"
+    "stylelint": "^16.19.1",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
