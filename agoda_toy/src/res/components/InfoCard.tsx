@@ -4,8 +4,11 @@ import imgCard2 from '../assets/img_card2.png';
 import StarIconPath from '../assets/icon_hotel_star1.svg'; // Import as a path
 
 const CardContainer = styled.div`
+  width: 368.2875px;
+  height: 500.25px;
   border: 1px solid rgba(172, 172, 172, 1);
-  border-radius: 6px;
+  border-radius: 20px;
+  /* border-alignment: inside; // CSS 표준 미지원, Figma 전용 옵션 */
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
