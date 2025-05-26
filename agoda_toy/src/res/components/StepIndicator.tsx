@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import backArrowUrl from '../imgs/icon_back.svg';
 
 const BackArrow = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  top: 137px;
+  left: 106px;
   cursor: pointer;
-  margin-bottom: 60px;
-  margin-left: 6px;
+  z-index: 10;
 `;
 
 const StepperContainer = styled.div`
