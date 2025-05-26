@@ -28,8 +28,8 @@ export default function UpcomingResCard() {
 
   return (
     <Container>
-      <UpcomingResThumb imageUrl={res.imageUrl} />
       <UpcomingResInfo {...res} />
+      <UpcomingResThumb imageUrl={res.imageUrl} />
     </Container>
   );
 }

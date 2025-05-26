@@ -43,10 +43,13 @@ export default function UpcomingResInfo({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1.69rem;
+
+  box-sizing: border-box;
   width: 46.25rem;
   height: 16.5rem;
-  flex-shrink: 0;
+  padding-inline-start: 2.5rem;
 
   border-radius: 1.25rem;
   border: 1px solid #acacac;

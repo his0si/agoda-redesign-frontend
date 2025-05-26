@@ -16,5 +16,6 @@ export default function UpcomingResThumb({ imageUrl }: UpcomingResThumbProps) {
 const ResImage = styled.img`
   width: 18.25rem;
   height: 16.5rem;
+  border-radius: 1.25rem;
   object-fit: cover;
 `;
