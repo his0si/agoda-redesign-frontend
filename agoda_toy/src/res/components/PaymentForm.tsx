@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import StepIndicator from './StepIndicator';
 import InfoCard from './InfoCard';
+import LockIcon from '../imgs/icon_lock.svg';
 
 const FormContainer = styled.div`
   width: 100%;
@@ -166,6 +167,39 @@ const ErrorText = styled.span`
   margin-top: 4px;
 `;
 
+const CardNumberInputWrapper = styled.div`
+  position: relative;
+  width: 450px;
+  height: 71px;
+  display: flex;
+  align-items: center;
+`;
+
+const LockIconImg = styled.img`
+  position: absolute;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+`;
+
+const MaskedCardNumber = styled.span`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #1A1A1A;
+  letter-spacing: 2px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+`;
+
 const PaymentForm = () => {
   const [cardName, setCardName] = useState('');
   const [cardNameError, setCardNameError] = useState(false);
@@ -177,6 +211,16 @@ const PaymentForm = () => {
   const validateCardName = (value: string) => /^[a-zA-Z]{1,30}$/.test(value);
 
   const isFormValid = cardName && !cardNameError && cardNumber && cardPassword && email;
+
+  const maskCardNumber = (value: string) => {
+    if (!value) return '';
+    const masked = value
+      .split('')
+      .map((char, idx) => (idx === value.length - 1 ? char : '*'))
+      .join('');
+    // Add space every 4 chars from the left
+    return masked.replace(/(.{4})/g, '$1 ').trim();
+  };
 
   return (
     <FormContainer>
@@ -217,14 +261,40 @@ const PaymentForm = () => {
           )}
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
-          <Label htmlFor="cardNumber">카드 번호</Label>
-          <Input
-            type="password"
-            id="cardNumber"
-            placeholder="카드 번호"
-            value={cardNumber}
-            onChange={e => setCardNumber(e.target.value)}
-          />
+          <Label htmlFor="cardNumber">카드 번호<RequiredAsterisk>*</RequiredAsterisk></Label>
+          <CardNumberInputWrapper>
+            <MaskedCardNumber aria-hidden="true">{maskCardNumber(cardNumber)}</MaskedCardNumber>
+            <Input
+              type="text"
+              id="cardNumber"
+              aria-label="카드 번호"
+              placeholder=""
+              maxLength={16}
+              value={cardNumber}
+              onChange={e => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length <= 16) setCardNumber(value);
+              }}
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                background: 'transparent',
+                color: 'transparent',
+                letterSpacing: '2px',
+                fontSize: '16px',
+                fontFamily: 'inherit',
+                padding: '0 12px',
+                width: '100%',
+                height: '100%',
+                border: '1px solid #D6DADE',
+                borderRadius: '16px',
+                caretColor: '#1A1A1A',
+              }}
+              autoComplete="off"
+              inputMode="numeric"
+            />
+            <LockIconImg src={LockIcon} alt="lock" />
+          </CardNumberInputWrapper>
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
           <Label htmlFor="cardPassword">카드 비밀번호</Label>
