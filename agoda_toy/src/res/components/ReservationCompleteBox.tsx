@@ -173,6 +173,52 @@ const InfoText = styled.div`
   line-height: 1.4;
 `;
 
+const CheckRow = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 80px;
+  margin: 32px 0 12px 0;
+`;
+
+const CheckCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const CheckLabel = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 8px;
+`;
+
+const CheckDate = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+`;
+
+const PaymentInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px 0 0 0;
+`;
+
+const PaymentLabel = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 24px;
+`;
+
+const PaymentValue = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+`;
+
 const ReservationCompleteBox = () => {
   return (
     <FormContainer>
@@ -187,19 +233,21 @@ const ReservationCompleteBox = () => {
             <InfoText>1 x 슈페리어 트윈 (33m²) | 성인 2명</InfoText>
           </HotelTextCol>
         </HotelInfoRow>
-        <Row>
-          <Label>체크인</Label>
-          <Value>2025.04.15(목)</Value>
-        </Row>
-        <Row>
-          <Label>체크 아웃</Label>
-          <Value>2025.04.20(화)</Value>
-        </Row>
+        <CheckRow>
+          <CheckCol>
+            <CheckLabel>체크인</CheckLabel>
+            <CheckDate>2025.04.15(목)</CheckDate>
+          </CheckCol>
+          <CheckCol>
+            <CheckLabel>체크 아웃</CheckLabel>
+            <CheckDate>2025.04.20(화)</CheckDate>
+          </CheckCol>
+        </CheckRow>
         <Divider />
-        <Row>
-          <Label>결제 정보</Label>
-          <Value>신한카드 일시불</Value>
-        </Row>
+        <PaymentInfoBox>
+          <PaymentLabel>결제 정보</PaymentLabel>
+          <PaymentValue>신한카드 일시불</PaymentValue>
+        </PaymentInfoBox>
         <TotalRow>
           <Label>총액 (KRW)</Label>
           <Value>₩ 1,970,260</Value>
