@@ -18,7 +18,6 @@ const PageTitle = styled.h1`
   font-weight: bold;
   margin-bottom: 32px;
   color: #3D8587;
-  text-align: center;
 `;
 
 const Section = styled.section`
