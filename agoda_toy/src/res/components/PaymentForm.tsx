@@ -123,6 +123,12 @@ const CouponInput = styled.input`
     font-size: 16px;
     line-height: 71px;
   }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #3D8587;
+    background: #fff;
+  }
 `;
 
 const CouponLabel = styled.label`
@@ -155,6 +161,10 @@ const CouponButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
 `;
 
 const RequiredAsterisk = styled.span<{ color?: string }>`
@@ -229,8 +239,16 @@ const PaymentForm = () => {
   const [coupon, setCoupon] = useState('');
 
   const validateCardName = (value: string) => /^[a-zA-Z]{1,30}$/.test(value);
+  const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
+  const isCardNumberValid = (value: string) => value.length === 16;
+  const isCardPasswordValid = (value: string) => value.length === 4;
 
-  const isFormValid = cardName && !cardNameError && cardNumber && cardPassword && email;
+  const isFormValid =
+    cardName &&
+    !cardNameError &&
+    isCardNumberValid(cardNumber) &&
+    isCardPasswordValid(cardPassword) &&
+    validateEmail(email);
 
   const maskCardNumber = (value: string) => {
     if (!value) return '';
@@ -250,12 +268,6 @@ const PaymentForm = () => {
       .join('');
     return masked;
   };
-
-  // Helper for email validation
-  const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
-
-  const isCardNumberValid = (value: string) => value.length === 16;
-  const isCardPasswordValid = (value: string) => value.length === 4;
 
   return (
     <FormContainer>
