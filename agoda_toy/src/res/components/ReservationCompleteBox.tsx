@@ -139,10 +139,10 @@ const TotalRow = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  width: 514px;
+  width: 850px;
   height: 72px;
   border-radius: 20px;
-  padding: 21px 212px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
