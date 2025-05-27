@@ -9,6 +9,12 @@ export type handleWriteRevOpenType = {
   handleWriteRevOpen: () => void;
 };
 
+export type handleModifyRevOpenType = {
+  handleModifyRevOpen: () => void;
+};
+
+export type MyRevCardText = handleModifyRevOpenType & handleWriteRevOpenType;
+
 export type handleModalCloseType = {
   handleModalClose: () => void;
 };
