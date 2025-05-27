@@ -47,7 +47,7 @@ const StepIndicator = ({ currentStep }: StepIndicatorProps) => {
   return (
     <StepperContainer>
       {currentStep !== 3 && <BackArrow src={backArrowUrl} alt="뒤로가기" />}
-      <VerticalLine currentStep={currentStep} />
+      {currentStep !== 3 && <VerticalLine currentStep={currentStep} />}
       {currentStep === 3 ? (
         <StepCircleImg src={activeBarUrl} alt="활성화" top={0} />
       ) : (

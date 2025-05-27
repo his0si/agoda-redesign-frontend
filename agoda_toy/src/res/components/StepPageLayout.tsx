@@ -39,7 +39,7 @@ interface StepPageLayoutProps {
 const StepPageLayout = ({ children, currentStep }: StepPageLayoutProps) => (
   <Container>
     <StepIndicatorArea>
-      <StepIndicator currentStep={currentStep} />
+      <StepIndicator currentStep={currentStep as 1 | 2 | 3} />
     </StepIndicatorArea>
     <FormArea>
       {children}
