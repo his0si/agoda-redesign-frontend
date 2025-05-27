@@ -154,14 +154,29 @@ const CouponButton = styled.button`
   justify-content: center;
 `;
 
+const RequiredAsterisk = styled.span`
+  color: #FF6651;
+  margin-left: 2px;
+  font-weight: bold;
+`;
+
+const ErrorText = styled.span`
+  font-size: 12px;
+  color: #FF6651;
+  margin-top: 4px;
+`;
+
 const PaymentForm = () => {
   const [cardName, setCardName] = useState('');
+  const [cardNameError, setCardNameError] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
   const [cardPassword, setCardPassword] = useState('');
   const [email, setEmail] = useState('');
   const [coupon, setCoupon] = useState('');
 
-  const isFormValid = cardName && cardNumber && cardPassword && email;
+  const validateCardName = (value: string) => /^[a-zA-Z]{1,30}$/.test(value);
+
+  const isFormValid = cardName && !cardNameError && cardNumber && cardPassword && email;
 
   return (
     <FormContainer>
@@ -171,14 +186,35 @@ const PaymentForm = () => {
           * 결제 방법 선택
         </SectionTitle>
         <FormGroup style={{ marginBottom: '16px'}}>
-          <Label htmlFor="cardName">카드 명의자 이름 *</Label>
+          <Label
+            htmlFor="cardName"
+            style={{ color: cardNameError ? '#FF6651' : cardName ? '#3D8587' : '#4F4F4F' }}
+          >
+            카드 명의자 이름
+            <RequiredAsterisk>*</RequiredAsterisk>
+          </Label>
           <Input
             type="text"
             id="cardName"
             placeholder="영문으로 작성해 주세요"
             value={cardName}
-            onChange={e => setCardName(e.target.value)}
+            maxLength={30}
+            onChange={e => {
+              const value = e.target.value;
+              setCardName(value);
+              setCardNameError(!!value && !validateCardName(value));
+            }}
+            style={{
+              borderColor: cardNameError
+                ? '#FF6651'
+                : cardName && cardName.length > 0
+                ? '#3D8587'
+                : '#D6DADE',
+            }}
           />
+          {cardNameError && (
+            <ErrorText>영문 알파벳 대문자(A-Z) 또는 소문자(a-z)만을 사용해 입력해 주세요</ErrorText>
+          )}
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
           <Label htmlFor="cardNumber">카드 번호</Label>
