@@ -1,12 +1,7 @@
 import ModalRate from './ModalRate';
 import styled from 'styled-components';
 import ModalReview from './ModalReview';
-
-const RATE_QUESTIONS = [
-  '숙소의 위치가 만족스러우셨나요?',
-  '숙소의 위생상태가 만족스러우셨나요?',
-  '직원의 서비스가 만족스러우셨나요?',
-];
+import { RATE_QUESTIONS } from '@src/myrev/constant/ratequestions';
 
 export default function ModalRight() {
   return (
