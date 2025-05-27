@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import MyRevWriteReviewBtn from './MyRevWriteReviewBtn';
-import type { handleWriteRevOpenType } from '../types/modalFnTypes';
+import type { MyRevCardText } from '../types/modalFnTypes';
+import MyRevModifyReviewBtn from './MyRevModifyReviewBtn';
 
 export default function MyRevCardText({
   handleWriteRevOpen,
-}: handleWriteRevOpenType) {
+  handleModifyRevOpen,
+}: MyRevCardText) {
   return (
     <Container>
       <BookNumberFrame>
@@ -25,7 +27,8 @@ export default function MyRevCardText({
         <Title>숙소</Title>
         <Date>Shibakoen</Date>
       </HotelName>
-      <Button handleWriteRevOpen={handleWriteRevOpen} />
+      <MyRevWriteReviewBtn handleWriteRevOpen={handleWriteRevOpen} />
+      <MyRevModifyReviewBtn handleModifyRevOpen={handleModifyRevOpen} />
     </Container>
   );
 }
@@ -91,10 +94,4 @@ const Title = styled.p`
 
 const Date = styled.p`
   ${({ theme }) => theme.fonts.caption.sm};
-`;
-
-const Button = styled(MyRevWriteReviewBtn)`
-  position: absolute;
-  bottom: 1.5rem;
-  right: 2.5rem;
 `;

@@ -1,19 +1,17 @@
-import ModalRate from './ModalRate';
+import React from 'react';
 import styled from 'styled-components';
-import ModalReview from './ModalReview';
+import ModalRate from '../myRev02Modal/ModalRate';
 import { RATE_QUESTIONS } from '@src/myrev/constant/ratequestions';
 
-export default function ModalRight() {
+export default function Questions() {
   return (
-    <Container>
+    <>
       <QuestionsContainer>
         {RATE_QUESTIONS.map((question) => (
           <ModalRate key={question} question={question} />
         ))}
       </QuestionsContainer>
-
-      <ModalReview />
-    </Container>
+    </>
   );
 }
 
@@ -21,9 +19,4 @@ const QuestionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
 `;

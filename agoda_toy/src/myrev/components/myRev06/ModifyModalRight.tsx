@@ -1,15 +1,15 @@
 import React from 'react';
-import Profile from './Profile';
-import ReviewPics from './ReviewPics';
+import Questions from './Questions';
 import Review from './Review';
+import Pics from './Pics';
 import styled from 'styled-components';
 
-export default function MyReviewRight() {
+export default function ModifyModalRight() {
   return (
     <Container>
-      <Profile />
-      <ReviewPics />
+      <Questions />
       <Review />
+      <Pics />
     </Container>
   );
 }
@@ -17,5 +17,5 @@ export default function MyReviewRight() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.88rem;
 `;
