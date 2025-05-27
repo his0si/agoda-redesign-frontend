@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import StepIndicator from './StepIndicator';
 import InfoCard from './InfoCard';
 import LockIcon from '../imgs/icon_lock.svg';
+import LockIconRed from '../imgs/icon_lock_red.svg';
+import LockIconGreen from '../imgs/icon_lock_green.svg';
 
 const FormContainer = styled.div`
   width: 100%;
@@ -252,6 +254,9 @@ const PaymentForm = () => {
   // Helper for email validation
   const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
 
+  const isCardNumberValid = (value: string) => value.length === 16;
+  const isCardPasswordValid = (value: string) => value.length === 4;
+
   return (
     <FormContainer>
       <PageTitle>2. 결제 정보</PageTitle>
@@ -319,7 +324,7 @@ const PaymentForm = () => {
                 padding: '0 12px',
                 width: '100%',
                 height: '100%',
-                border: '1px solid #D6DADE',
+                border: `1px solid ${cardNumber.length > 0 && !isCardNumberValid(cardNumber) ? '#FF6651' : cardNumber.length === 16 ? '#3D8587' : '#D6DADE'}`,
                 borderRadius: '16px',
                 caretColor: '#1A1A1A',
               }}
@@ -327,11 +332,19 @@ const PaymentForm = () => {
               inputMode="numeric"
             />
             <LockIconImg
-              src={LockIcon}
+              src={
+                cardNumber.length === 0
+                  ? LockIcon
+                  : !isCardNumberValid(cardNumber)
+                  ? LockIconRed
+                  : LockIconGreen
+              }
               alt="lock"
-              style={{ filter: cardNumber.length === 16 ? 'invert(36%) sepia(44%) saturate(1042%) hue-rotate(134deg) brightness(97%) contrast(92%)' : 'grayscale(1) brightness(0.8)' }}
             />
           </CardNumberInputWrapper>
+          {cardNumber.length > 0 && !isCardNumberValid(cardNumber) && (
+            <ErrorText>카드 번호 16자리를 올바른 형식으로 입력해 주세요</ErrorText>
+          )}
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
           <Label htmlFor="cardPassword" style={{ color: cardPassword.length === 4 ? '#3D8587' : '#1A1A1A' }}>
@@ -362,7 +375,7 @@ const PaymentForm = () => {
                 padding: '0 12px',
                 width: '100%',
                 height: '100%',
-                border: '1px solid #D6DADE',
+                border: `1px solid ${cardPassword.length > 0 && !isCardPasswordValid(cardPassword) ? '#FF6651' : cardPassword.length === 4 ? '#3D8587' : '#D6DADE'}`,
                 borderRadius: '16px',
                 caretColor: '#1A1A1A',
               }}
@@ -370,11 +383,19 @@ const PaymentForm = () => {
               inputMode="numeric"
             />
             <LockIconImg
-              src={LockIcon}
+              src={
+                cardPassword.length === 0
+                  ? LockIcon
+                  : !isCardPasswordValid(cardPassword)
+                  ? LockIconRed
+                  : LockIconGreen
+              }
               alt="lock"
-              style={{ filter: cardPassword.length === 4 ? 'invert(36%) sepia(44%) saturate(1042%) hue-rotate(134deg) brightness(97%) contrast(92%)' : 'grayscale(1) brightness(0.8)' }}
             />
           </CardNumberInputWrapper>
+          {cardPassword.length > 0 && !isCardPasswordValid(cardPassword) && (
+            <ErrorText>카드 비밀번호 숫자 4자리를 올바른 형식으로 입력해 주세요</ErrorText>
+          )}
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
           <Label htmlFor="email" style={{ color: validateEmail(email) ? '#3D8587' : '#1A1A1A' }}>
@@ -391,10 +412,13 @@ const PaymentForm = () => {
               borderColor: validateEmail(email)
                 ? '#3D8587'
                 : email && email.length > 0
-                ? '#3D8587'
+                ? '#FF6651'
                 : '#D6DADE',
             }}
           />
+          {email && !validateEmail(email) && (
+            <ErrorText>이메일 주소를 정확히 입력해 주세요</ErrorText>
+          )}
         </FormGroup>
       </Section>
       <Section>
