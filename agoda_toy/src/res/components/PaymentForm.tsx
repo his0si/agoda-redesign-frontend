@@ -155,8 +155,8 @@ const CouponButton = styled.button`
   justify-content: center;
 `;
 
-const RequiredAsterisk = styled.span`
-  color: #FF6651;
+const RequiredAsterisk = styled.span<{ color?: string }>`
+  color: ${({ color }) => color || '#1A1A1A'};
   margin-left: 2px;
   font-weight: bold;
 `;
@@ -200,6 +200,24 @@ const MaskedCardNumber = styled.span`
   z-index: 1;
 `;
 
+const MaskedCardPassword = styled.span`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #1A1A1A;
+  letter-spacing: 2px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+`;
+
 const PaymentForm = () => {
   const [cardName, setCardName] = useState('');
   const [cardNameError, setCardNameError] = useState(false);
@@ -222,6 +240,18 @@ const PaymentForm = () => {
     return masked.replace(/(.{4})/g, '$1 ').trim();
   };
 
+  const maskCardPassword = (value: string) => {
+    if (!value) return '';
+    const masked = value
+      .split('')
+      .map((char, idx) => (idx === value.length - 1 ? char : '*'))
+      .join('');
+    return masked;
+  };
+
+  // Helper for email validation
+  const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
+
   return (
     <FormContainer>
       <PageTitle>2. 결제 정보</PageTitle>
@@ -235,7 +265,7 @@ const PaymentForm = () => {
             style={{ color: cardNameError ? '#FF6651' : cardName ? '#3D8587' : '#4F4F4F' }}
           >
             카드 명의자 이름
-            <RequiredAsterisk>*</RequiredAsterisk>
+            <RequiredAsterisk color={cardNameError ? '#FF6651' : cardName ? '#3D8587' : '#1A1A1A'}>*</RequiredAsterisk>
           </Label>
           <Input
             type="text"
@@ -261,7 +291,10 @@ const PaymentForm = () => {
           )}
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
-          <Label htmlFor="cardNumber">카드 번호<RequiredAsterisk>*</RequiredAsterisk></Label>
+          <Label htmlFor="cardNumber" style={{ color: cardNumber.length === 16 ? '#3D8587' : '#1A1A1A' }}>
+            카드 번호
+            <RequiredAsterisk color={cardNumber.length === 16 ? '#3D8587' : '#1A1A1A'}>*</RequiredAsterisk>
+          </Label>
           <CardNumberInputWrapper>
             <MaskedCardNumber aria-hidden="true">{maskCardNumber(cardNumber)}</MaskedCardNumber>
             <Input
@@ -293,27 +326,74 @@ const PaymentForm = () => {
               autoComplete="off"
               inputMode="numeric"
             />
-            <LockIconImg src={LockIcon} alt="lock" />
+            <LockIconImg
+              src={LockIcon}
+              alt="lock"
+              style={{ filter: cardNumber.length === 16 ? 'invert(36%) sepia(44%) saturate(1042%) hue-rotate(134deg) brightness(97%) contrast(92%)' : 'grayscale(1) brightness(0.8)' }}
+            />
           </CardNumberInputWrapper>
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
-          <Label htmlFor="cardPassword">카드 비밀번호</Label>
-          <Input
-            type="password"
-            id="cardPassword"
-            placeholder="카드 비밀번호"
-            value={cardPassword}
-            onChange={e => setCardPassword(e.target.value)}
-          />
+          <Label htmlFor="cardPassword" style={{ color: cardPassword.length === 4 ? '#3D8587' : '#1A1A1A' }}>
+            카드 비밀번호
+            <RequiredAsterisk color={cardPassword.length === 4 ? '#3D8587' : '#1A1A1A'}>*</RequiredAsterisk>
+          </Label>
+          <CardNumberInputWrapper style={{ marginBottom: 0 }}>
+            <MaskedCardPassword aria-hidden="true">{maskCardPassword(cardPassword)}</MaskedCardPassword>
+            <Input
+              type="text"
+              id="cardPassword"
+              aria-label="카드 비밀번호"
+              placeholder=""
+              maxLength={4}
+              value={cardPassword}
+              onChange={e => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length <= 4) setCardPassword(value);
+              }}
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                background: 'transparent',
+                color: 'transparent',
+                letterSpacing: '2px',
+                fontSize: '16px',
+                fontFamily: 'inherit',
+                padding: '0 12px',
+                width: '100%',
+                height: '100%',
+                border: '1px solid #D6DADE',
+                borderRadius: '16px',
+                caretColor: '#1A1A1A',
+              }}
+              autoComplete="off"
+              inputMode="numeric"
+            />
+            <LockIconImg
+              src={LockIcon}
+              alt="lock"
+              style={{ filter: cardPassword.length === 4 ? 'invert(36%) sepia(44%) saturate(1042%) hue-rotate(134deg) brightness(97%) contrast(92%)' : 'grayscale(1) brightness(0.8)' }}
+            />
+          </CardNumberInputWrapper>
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
-          <Label htmlFor="email">결제 확인 이메일</Label>
+          <Label htmlFor="email" style={{ color: validateEmail(email) ? '#3D8587' : '#1A1A1A' }}>
+            결제 확인 이메일
+            <RequiredAsterisk color={validateEmail(email) ? '#3D8587' : '#1A1A1A'}>*</RequiredAsterisk>
+          </Label>
           <Input
             type="email"
             id="email"
             placeholder="username@domain.com"
             value={email}
             onChange={e => setEmail(e.target.value)}
+            style={{
+              borderColor: validateEmail(email)
+                ? '#3D8587'
+                : email && email.length > 0
+                ? '#3D8587'
+                : '#D6DADE',
+            }}
           />
         </FormGroup>
       </Section>
