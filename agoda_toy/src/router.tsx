@@ -9,6 +9,7 @@ import MyRev from './myrev/pages/MyRev';
 import GuestInfoPage from './res/pages/GuestInfoPage';
 import MyRes from './myres/pages/MyRes';
 import MyRevModal from './myrev/components/myRev02Modal/MyRevModal';
+import PaymentPage from './res/pages/PaymentPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
     path: '/guestinfo',
     element: <GuestHeaderOnlyLayout />,
     children: [{ path: '', element: <GuestInfoPage /> }],
+  },
+  {
+    path: '/payment',
+    element: <GuestHeaderOnlyLayout />,
+    children: [{ path: '', element: <PaymentPage /> }],
   },
   {
     path: 'modal',

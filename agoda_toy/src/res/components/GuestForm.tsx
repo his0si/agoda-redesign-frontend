@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const FormContainer = styled.div`
   width: 100%;
@@ -226,6 +227,7 @@ const GuestForm = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   // State for error
+  const [lastNameError, setLastNameError] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
@@ -240,7 +242,7 @@ const GuestForm = () => {
   const [thirdPartyPolicy, setThirdPartyPolicy] = useState(false);
 
   // Validation functions
-  const validateFirstName = (value: string) => /^[a-zA-Z]+$/.test(value);
+  const validateName = (value: string) => /^[a-zA-Z]{1,30}$/.test(value);
   const validateEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
   const validatePhone = (value: string) => /^01[016789]-?\d{3,4}-?\d{4}$/.test(value);
 
@@ -248,6 +250,7 @@ const GuestForm = () => {
   const isFormValid =
     lastName &&
     firstName &&
+    !lastNameError &&
     !firstNameError &&
     email &&
     !emailError &&
@@ -257,6 +260,32 @@ const GuestForm = () => {
     !phoneError &&
     agePolicy &&
     thirdPartyPolicy;
+
+  // 전체 동의 체크박스 동기화
+  const handleAgreeAllChange = (checked: boolean) => {
+    setAgreeAll(checked);
+    setAgePolicy(checked);
+    setThirdPartyPolicy(checked);
+  };
+  // 개별 체크박스 동기화
+  const handleAgePolicyChange = (checked: boolean) => {
+    setAgePolicy(checked);
+    if (checked && thirdPartyPolicy) {
+      setAgreeAll(true);
+    } else {
+      setAgreeAll(false);
+    }
+  };
+  const handleThirdPartyPolicyChange = (checked: boolean) => {
+    setThirdPartyPolicy(checked);
+    if (checked && agePolicy) {
+      setAgreeAll(true);
+    } else {
+      setAgreeAll(false);
+    }
+  };
+
+  const navigate = useNavigate();
 
   return (
     <FormContainer>
@@ -271,18 +300,27 @@ const GuestForm = () => {
         <FormGroup style={{ marginBottom: '16px'}}>
           <Label
             htmlFor="lastName"
-            color={lastName ? '#3D8587' : '#4F4F4F'}
+            color={lastNameError ? '#FF6651' : lastName ? '#3D8587' : '#4F4F4F'}
           >
             성
-            <RequiredAsterisk color={lastName ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
+            <RequiredAsterisk color={lastNameError ? '#FF6651' : lastName ? '#3D8587' : '#4F4F4F'}>*</RequiredAsterisk>
           </Label>
           <Input
             type="text"
             id="lastName"
             placeholder="영문으로 작성해 주세요"
             value={lastName}
-            onChange={e => setLastName(e.target.value)}
+            maxLength={30}
+            onChange={e => {
+              const value = e.target.value;
+              setLastName(value);
+              setLastNameError(!!value && !validateName(value));
+            }}
+            error={lastNameError}
           />
+          {lastNameError && (
+            <ErrorText>영문 알파벳 대문자(A-Z) 또는 소문자(a-z)만을 사용해 입력해 주세요</ErrorText>
+          )}
         </FormGroup>
         <FormGroup style={{ marginBottom: '16px'}}>
           <Label
@@ -297,9 +335,11 @@ const GuestForm = () => {
             id="firstName"
             placeholder="영문으로 작성해 주세요"
             value={firstName}
+            maxLength={30}
             onChange={e => {
-              setFirstName(e.target.value);
-              setFirstNameError(!!e.target.value && !validateFirstName(e.target.value));
+              const value = e.target.value;
+              setFirstName(value);
+              setFirstNameError(!!value && !validateName(value));
             }}
             error={firstNameError}
           />
@@ -407,7 +447,7 @@ const GuestForm = () => {
             <CheckboxInput
               name="agreeAll"
               checked={agreeAll}
-              onChange={e => setAgreeAll(e.target.checked)}
+              onChange={e => handleAgreeAllChange(e.target.checked)}
             />
             <strong>전체 동의</strong>
           </CheckboxLabel>
@@ -418,7 +458,7 @@ const GuestForm = () => {
               <CheckboxInput
                 name="agePolicy"
                 checked={agePolicy}
-                onChange={e => setAgePolicy(e.target.checked)}
+                onChange={e => handleAgePolicyChange(e.target.checked)}
               />
               18세 이상 및 이용약관 동의 (필수)
             </CheckboxLabel>
@@ -428,7 +468,7 @@ const GuestForm = () => {
               <CheckboxInput
                 name="thirdPartyPolicy"
                 checked={thirdPartyPolicy}
-                onChange={e => setThirdPartyPolicy(e.target.checked)}
+                onChange={e => handleThirdPartyPolicyChange(e.target.checked)}
               />
               개인정보 제3자 제공동의 (필수)
             </CheckboxLabel>
@@ -436,7 +476,12 @@ const GuestForm = () => {
         </TermsSection>
       </Section>
       
-      <SubmitButton type="submit" enabled={!!isFormValid} disabled={!isFormValid}>
+      <SubmitButton
+        type="button"
+        enabled={!!isFormValid}
+        disabled={!isFormValid}
+        onClick={() => { if (isFormValid) navigate('/payment'); }}
+      >
         다음 단계
       </SubmitButton>
     </FormContainer>
