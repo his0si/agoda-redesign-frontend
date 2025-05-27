@@ -1,13 +1,20 @@
 import styled from 'styled-components';
+import type { handleModifyRevOpenType } from '../types/modalFnTypes';
 
-export default function MyRevModifyReviewBtn() {
-  return <Button>후기 수정</Button>;
+export default function MyRevModifyReviewBtn({
+  handleModifyRevOpen,
+}: handleModifyRevOpenType) {
+  return <Button onClick={handleModifyRevOpen}>후기 수정</Button>;
 }
 
 const Button = styled.button`
+  position: absolute;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2.5rem;
+
   display: flex;
-  width: 7.75rem;
-  height: 2.25rem;
+  width: 8rem;
   padding: 0.5rem 2rem;
   justify-content: center;
   align-items: center;
