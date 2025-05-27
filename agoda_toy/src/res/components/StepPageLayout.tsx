@@ -33,20 +33,22 @@ const InfoCardArea = styled.div`
 
 interface StepPageLayoutProps {
   children: React.ReactNode;
-  currentStep: 1 | 2;
+  currentStep: number;
 }
 
 const StepPageLayout = ({ children, currentStep }: StepPageLayoutProps) => (
   <Container>
     <StepIndicatorArea>
-      <StepIndicator currentStep={currentStep} />
+      <StepIndicator currentStep={currentStep as 1 | 2 | 3} />
     </StepIndicatorArea>
     <FormArea>
       {children}
     </FormArea>
-    <InfoCardArea>
-      <InfoCard />
-    </InfoCardArea>
+    {currentStep !== 3 && (
+      <InfoCardArea>
+        <InfoCard />
+      </InfoCardArea>
+    )}
   </Container>
 );
 

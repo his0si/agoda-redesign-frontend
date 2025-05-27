@@ -10,6 +10,7 @@ import GuestInfoPage from './res/pages/GuestInfoPage';
 import MyRes from './myres/pages/MyRes';
 import MyRevModal from './myrev/components/myRev02Modal/MyRevModal';
 import PaymentPage from './res/pages/PaymentPage';
+import ReservationCompletePage from './res/pages/ReservationCompletePage';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
     path: '/payment',
     element: <GuestHeaderOnlyLayout />,
     children: [{ path: '', element: <PaymentPage /> }],
+  },
+  {
+    path: '/reservation-complete',
+    element: <GuestHeaderOnlyLayout />,
+    children: [{ path: '', element: <ReservationCompletePage /> }],
   },
   {
     path: 'modal',
