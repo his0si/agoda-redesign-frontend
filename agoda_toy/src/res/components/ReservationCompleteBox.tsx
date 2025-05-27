@@ -127,12 +127,16 @@ const Divider = styled.div`
   margin: 18px 0 12px 0;
 `;
 
-const TotalRow = styled(Row)`
-  font-size: 20px;
+const TotalRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  font-size: 24px;
   font-weight: bold;
   color: #1A1A1A;
   text-decoration: underline;
-  margin-top: 18px;
+  margin-top: 100px;
 `;
 
 const SubmitButton = styled.button`
@@ -219,6 +223,18 @@ const PaymentValue = styled.div`
   color: #000;
 `;
 
+const TotalLabel = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: #1A1A1A;
+`;
+
+const TotalValue = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: #1A1A1A;
+`;
+
 const ReservationCompleteBox = () => {
   return (
     <FormContainer>
@@ -249,8 +265,8 @@ const ReservationCompleteBox = () => {
           <PaymentValue>신한카드 일시불</PaymentValue>
         </PaymentInfoBox>
         <TotalRow>
-          <Label>총액 (KRW)</Label>
-          <Value>₩ 1,970,260</Value>
+          <TotalLabel>총액 (KRW)</TotalLabel>
+          <TotalValue>₩ 1,970,260</TotalValue>
         </TotalRow>
       </Section>
       <SubmitButton>예약 완료</SubmitButton>
