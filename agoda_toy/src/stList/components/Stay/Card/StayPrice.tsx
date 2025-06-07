@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 interface StayPriceProps {
   realPrice: number;
-  salePrice: number;
+  discountPrice: number;
   totalPrice: number;
 }
 export default function StayPrice({
   realPrice,
-  salePrice,
+  discountPrice,
   totalPrice,
 }: StayPriceProps) {
   return (
@@ -16,7 +16,7 @@ export default function StayPrice({
         <PriceLabel>1박당 요금</PriceLabel>
         <PriceRow>
           <RealPrice>₩{realPrice.toLocaleString()}</RealPrice>
-          <SalePrice>₩{salePrice.toLocaleString()}</SalePrice>
+          <SalePrice>₩{discountPrice.toLocaleString()}</SalePrice>
         </PriceRow>
         <TotalPrice>총액 ₩{totalPrice.toLocaleString()}</TotalPrice>
       </PriceFrame>

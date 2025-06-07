@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import Search from '@stInfo/components/Upper/Search';
 import StayCardListHeader from '@stList/components/Stay/Card/StayCardListHeader';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import StayFilter from '../components/Stay/Filter/StayFilter';
 import StayCardList from '../components/Stay/Card/StayCardList';
+import StayFilter from '../components/Stay/Filter/StayFilter';
 
 const MIN = 0;
 const MAX = 10000000;
@@ -11,11 +12,18 @@ const MAX = 10000000;
 export default function StList() {
   const [minPrice, setMinPrice] = useState(MIN);
   const [maxPrice, setMaxPrice] = useState(MAX);
+  const location = useLocation();
+  const { destination, checkInDate, checkOutDate } = location.state || {};
 
   return (
     <>
       <StayContent>
-        <Search width="82.9375rem" />
+        <Search
+          width="82.9375rem"
+          destination={destination}
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+        />
         <SearchResultSection>
           <StayFilter
             min={minPrice}
@@ -25,7 +33,13 @@ export default function StList() {
           />
           <StayCardSection>
             <StayCardListHeader />
-            <StayCardList min={minPrice} max={maxPrice} />
+            <StayCardList
+              min={minPrice}
+              max={maxPrice}
+              destination={destination}
+              checkInDate={checkInDate}
+              checkOutDate={checkOutDate}
+            />
           </StayCardSection>
         </SearchResultSection>
       </StayContent>
