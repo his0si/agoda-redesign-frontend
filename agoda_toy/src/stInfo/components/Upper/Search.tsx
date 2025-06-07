@@ -2,27 +2,47 @@ import IconSearchLocation from '../../assets/svgs/icn_search_location.svg?react'
 import IconCalender from '../../assets/svgs/calender.svg?react';
 import IconCalender2 from '../../assets/svgs/main_icn_cndin.svg?react';
 import styled from 'styled-components';
-import IconSearch from '../../assets/svgs/Property 1=Default.svg?react';
+import IconSearch from '../../assets/svgs/Search.svg?react';
+import IconPerson from '../../assets/svgs/icn_search_peo.svg?react';
 import { WrapSvgIcon } from '../../styles/Svg';
 
 interface SearchProps {
   width?: string;
+  destination: string;
+  checkInDate: string;
+  checkOutDate: string;
+  adults: string;
+  roomCounts: number;
 }
-export default function Search({ width = '59rem' }: SearchProps) {
+export default function Search({
+  width = '59rem',
+  destination,
+  checkInDate,
+  checkOutDate,
+  adults,
+  roomCounts,
+}: SearchProps) {
   return (
     <Container $width={width}>
       <TypoSearchLocation>
         <SearchLocationIcon />
-        도쿄
+        {destination}
       </TypoSearchLocation>
       <TypoSearchCal>
         <IconCalenderIn />
-        2025.04.13
+        {checkInDate}
       </TypoSearchCal>
       <TypoSearchCal>
         <IconCalenderOut />
-        2025.04.14
+        {checkOutDate}
       </TypoSearchCal>
+      <IconTypoWrapper>
+        <PersonIcon />
+        <AdultsRoomsWrapper>
+          <TypoSearchAdults>성인 {adults}명</TypoSearchAdults>
+          <TypoSearchRooms>객실 {roomCounts}개</TypoSearchRooms>
+        </AdultsRoomsWrapper>
+      </IconTypoWrapper>
       <SearchIconWrapper />
     </Container>
   );
@@ -40,7 +60,7 @@ const Container = styled.div<{ $width: string }>`
   gap: 2.5rem;
 
   border-radius: 6.25rem;
-  border: 1px solid rgba(172, 172, 172, 1);
+  border: 1px solid #f1f1f1;
   background: var(--AGODA-White, #fff);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 `;
@@ -64,14 +84,50 @@ const TypoSearchCal = styled.div`
   gap: 1.25rem;
   ${({ theme }) => theme.fonts.title.lg};
 `;
+const TypoSearchAdults = styled.p`
+  color: #1e1e1e;
+  font-family: 'Noto Sans KR';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const TypoSearchRooms = styled.p`
+  color: #8f8f8f;
+  font-family: 'Noto Sans KR';
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const AdultsRoomsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
+`;
+
+const IconTypoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+`;
 
 const SearchIconWrapper = styled(SearchIcon)`
   display: flex;
-  width: 2.875rem;
-  height: 2.875rem;
+  width: 1.875rem;
+  height: 1.875rem;
   padding: 0.5rem;
   align-items: center;
   gap: 0.5rem;
-  border-radius: 6.25rem;
-  background: var(--AGODA-Primary, #006a71);
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.primary};
+`;
+
+const PersonIcon = styled(IconPerson)`
+  width: 18px;
+  height: 18px;
 `;
