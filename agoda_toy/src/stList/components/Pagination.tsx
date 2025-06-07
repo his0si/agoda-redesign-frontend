@@ -4,48 +4,38 @@ import ArrowLeftIc from '@stList/assets/svgs/arrow_left.svg?react';
 
 interface PaginationProps {
   currentPage: number;
-  currentGroupStart: number;
+  totalPage: number;
   onPageChange: (page: number) => void;
-  onGroupChange: (newStart: number) => void;
 }
 
 export default function Pagination({
   currentPage,
-  currentGroupStart,
+  totalPage,
   onPageChange,
-  onGroupChange,
 }: PaginationProps) {
-  const totalPages = 18;
-
-  const isFirstGroup = currentGroupStart === 1;
-  const visiblePages = isFirstGroup
-    ? Array.from({ length: 8 }, (_, i) => i + 1) // 1~8
-    : Array.from({ length: 10 }, (_, i) => i + 9).filter(
-        (page) => page <= totalPages
-      );
-
-  const handleNextGroup = () => {
-    if (isFirstGroup) {
-      onGroupChange(9);
-      onPageChange(9);
+  const handleNextPage = () => {
+    if (currentPage < totalPage) {
+      onPageChange(currentPage + 1);
     }
   };
 
-  const handlePrevGroup = () => {
-    if (!isFirstGroup) {
-      onGroupChange(1);
-      onPageChange(1);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
     }
   };
+
+  const visiblePages = Array.from({ length: totalPage }, (_, i) => i + 1);
 
   return (
     <PaginationWrapper>
-      {!isFirstGroup && (
-        <ArrowButton onClick={handlePrevGroup}>
+      {currentPage > 1 && (
+        <ArrowButton onClick={handlePrevPage}>
           <ArrowLeftIcon />
           <PaginationText>이전</PaginationText>
         </ArrowButton>
       )}
+
       {visiblePages.map((page) => (
         <PageNumber
           key={page}
@@ -55,8 +45,9 @@ export default function Pagination({
           {page}
         </PageNumber>
       ))}
-      {isFirstGroup && (
-        <ArrowButton onClick={handleNextGroup}>
+
+      {currentPage < totalPage && totalPage > 10 && (
+        <ArrowButton onClick={handleNextPage}>
           <PaginationText>다음</PaginationText>
           <ArrowRightIcon />
         </ArrowButton>

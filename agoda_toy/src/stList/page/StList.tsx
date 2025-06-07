@@ -1,11 +1,10 @@
+import { useGetAllAccommodations } from '@src/stList/hooks/useGetAllAccommodations';
 import Search from '@stInfo/components/Upper/Search';
-import StayCardListHeader from '@stList/components/Stay/Card/StayCardListHeader';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import StayCardList from '../components/Stay/Card/StayCardList';
 import StayFilter from '../components/Stay/Filter/StayFilter';
-import { useGetAllAccommodations } from '@src/stList/hooks/useGetAllAccommodations';
 
 const MIN = 0;
 const MAX = 10000000;
@@ -17,7 +16,7 @@ export default function StList() {
   const { destination, checkInDate, checkOutDate, adults, rooms } =
     location.state || {};
 
-  const { data } = useGetAllAccommodations({
+  useGetAllAccommodations({
     query: destination,
     startDate: checkInDate,
     endDate: checkOutDate,
@@ -44,16 +43,14 @@ export default function StList() {
             setMin={setMinPrice}
             setMax={setMaxPrice}
           />
-          <StayCardSection>
-            <StayCardListHeader totalCount={data?.totalCount ?? 0} />
-            <StayCardList
-              min={minPrice}
-              max={maxPrice}
-              destination={destination}
-              startDate={checkInDate}
-              endDate={checkOutDate}
-            />
-          </StayCardSection>
+
+          <StayCardList
+            min={minPrice}
+            max={maxPrice}
+            destination={destination}
+            startDate={checkInDate}
+            endDate={checkOutDate}
+          />
         </SearchResultSection>
       </StayContent>
     </>
@@ -65,12 +62,6 @@ const StayContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 32px;
-`;
-
-const StayCardSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 `;
 
 const SearchResultSection = styled.div`

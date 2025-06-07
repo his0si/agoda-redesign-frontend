@@ -25,6 +25,11 @@ export default function PriceRangeTag({
 
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.replace(/[^0-9]/g, '');
+    setMinInput(formatWithComma(raw));
+  };
+
+  const handleMinBlur = () => {
+    const raw = minInput.replace(/[^0-9]/g, '');
     const num = Number(raw);
     if (!isNaN(num)) {
       const limited = Math.min(Math.max(num, MIN), max - 1);
@@ -37,6 +42,11 @@ export default function PriceRangeTag({
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.replace(/[^0-9]/g, '');
+    setMaxInput(formatWithComma(raw));
+  };
+
+  const handleMaxBlur = () => {
+    const raw = maxInput.replace(/[^0-9]/g, '');
     const num = Number(raw);
     if (!isNaN(num)) {
       const limited = Math.max(Math.min(num, MAX), min + 1);
@@ -60,11 +70,11 @@ export default function PriceRangeTag({
             <PriceInput
               value={minInput}
               onChange={handleMinChange}
+              onBlur={handleMinBlur}
               size={minInput.length || 1}
             />
           </InputBox>
         </TagFrame>
-        {/* <PriceRangeLineIcon /> */}
         <PriceRangeLine />
         <TagFrame>
           <InputBox>
@@ -72,6 +82,7 @@ export default function PriceRangeTag({
             <PriceInput
               value={maxInput}
               onChange={handleMaxChange}
+              onBlur={handleMaxBlur}
               size={maxInput.length || 1}
             />
           </InputBox>
@@ -96,7 +107,6 @@ const TagWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  // ← 좌우 여백도 줄 수 있음
 `;
 
 const LabelWrapper = styled.div`
@@ -106,6 +116,7 @@ const LabelWrapper = styled.div`
   padding-left: 1.56rem;
   font: ${({ theme }) => theme.fonts.caption.xsmall};
 `;
+
 const PriceRangeLine = styled.div`
   width: 100%;
   border-bottom: 1px dashed rgba(172, 172, 172, 1);
