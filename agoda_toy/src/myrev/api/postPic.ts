@@ -1,15 +1,19 @@
-import axiosInstance from '@src/common/api/axiosInstance';
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const baseUrl = import.meta.env.VITE_API_URL;
 
-export const post = async () => {
-  const response = await axios.post('/images');
+export const postPics = async (images: File[]) => {
+  const formData = new FormData();
+
+  images.forEach((file) => {
+    formData.append('images', file);
+  });
+
+  const response = await axios.post(`${baseUrl}/images`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
   return response.data;
 };
