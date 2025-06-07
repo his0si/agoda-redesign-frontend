@@ -4,50 +4,37 @@ import StayName from './StayName';
 import StayAmenityTag from './StayAmenityTag';
 import StayAddress from './StayLocation';
 import StayPrice from './StayPrice';
-
-interface StayCardProps {
-  imageUrl: string;
-  korname: string;
-  engName: string;
-  star: number;
-  review: number;
-  reviewCount: number;
-  tags: string[];
-  location: string;
-  realPrice: number;
-  salePrice: number;
-  totalPrice: number;
-}
+import type { Accommodation } from '@src/stList/types/getAccommodationsResponse.types';
 
 export default function StayCard({
-  imageUrl,
-  korname,
-  review,
+  korName,
   engName,
   star,
-  reviewCount,
-  tags,
+  accommodationImage,
   location,
-  realPrice,
-  salePrice,
+  totalScore,
+  reviewCount,
+  provisionTags,
+  price,
+  discountPrice,
   totalPrice,
-}: StayCardProps) {
+}: Accommodation) {
   return (
     <Container>
-      <StayImage src={imageUrl} alt="호텔 이미지" />
+      <StayImage src={accommodationImage} alt="호텔 이미지" />
       <Frame>
         <LeftContent>
           <NameReviewFrame>
-            <StayName korname={korname} star={star} engName={engName} />
-            <StayReview review={review} reviewCount={reviewCount} />
+            <StayName korname={korName} star={star} engName={engName} />
+            <StayReview review={totalScore} reviewCount={reviewCount} />
           </NameReviewFrame>
-          <StayAmenityTag tags={tags} />
+          <StayAmenityTag tags={provisionTags} />
         </LeftContent>
         <RightContent>
           <StayAddress location={location} />
           <StayPrice
-            realPrice={realPrice}
-            salePrice={salePrice}
+            realPrice={price}
+            discountPrice={discountPrice}
             totalPrice={totalPrice}
           />
         </RightContent>
@@ -80,7 +67,6 @@ const Frame = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 24px;
-
   flex: 1;
 `;
 
