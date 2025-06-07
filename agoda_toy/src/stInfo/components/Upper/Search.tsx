@@ -9,18 +9,18 @@ import { WrapSvgIcon } from '../../styles/Svg';
 interface SearchProps {
   width?: string;
   destination: string;
-  checkInDate: string;
-  checkOutDate: string;
+  startDate: string;
+  endDate: string;
   adults: string;
-  roomCounts: number;
+  rooms: number;
 }
 export default function Search({
   width = '59rem',
   destination,
-  checkInDate,
-  checkOutDate,
+  startDate,
+  endDate,
   adults,
-  roomCounts,
+  rooms,
 }: SearchProps) {
   return (
     <Container $width={width}>
@@ -30,17 +30,17 @@ export default function Search({
       </TypoSearchLocation>
       <TypoSearchCal>
         <IconCalenderIn />
-        {checkInDate}
+        {startDate}
       </TypoSearchCal>
       <TypoSearchCal>
         <IconCalenderOut />
-        {checkOutDate}
+        {endDate}
       </TypoSearchCal>
       <IconTypoWrapper>
         <PersonIcon />
         <AdultsRoomsWrapper>
           <TypoSearchAdults>성인 {adults}명</TypoSearchAdults>
-          <TypoSearchRooms>객실 {roomCounts}개</TypoSearchRooms>
+          <TypoSearchRooms>객실 {rooms}개</TypoSearchRooms>
         </AdultsRoomsWrapper>
       </IconTypoWrapper>
       <SearchIconWrapper />

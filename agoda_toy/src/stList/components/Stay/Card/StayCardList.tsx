@@ -4,139 +4,6 @@ import styled from 'styled-components';
 import Pagination from '../../Pagination';
 import StayCard from './StayCard';
 
-// const STAY_LIST = [
-//   {
-//     imageUrl: StayPic1,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi', '인터넷'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 31651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic2,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic3,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic4,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic5,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic6,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic7,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic8,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic8,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-//   {
-//     imageUrl: StayPic8,
-//     korname: '힐튼 도쿄 오다이바',
-//     star: 4,
-//     engName: 'Hilton Tokyo Odaiba',
-//     review: 8.7,
-//     reviewCount: 4564,
-//     tags: ['조식', '피트니스 센터', '무료 Wi-Fi'],
-//     location: '오다이바, 도쿄',
-//     realPrice: 780651,
-//     salePrice: 531651,
-//     totalPrice: 2064225,
-//   },
-// ]; // ✅ StayCardList.tsx
-
 interface StayCardListProps {
   min: number;
   max: number;
@@ -160,12 +27,13 @@ export default function StayCardList({
     query: destination,
     startDate,
     endDate,
-    // page: currentPage - 1, // page도 원하면 전달 가능
+    minPrice: min,
+    maxPrice: max,
+    page: 0,
   });
 
-  console.log('accommodations data:', data);
+  const totalPage = data?.totalPage ?? 1;
 
-  // ✅ useMemo로 필터링 최적화
   const filteredList = useMemo(() => {
     const accommodations = data?.accommodations || [];
     return accommodations.filter(
@@ -187,6 +55,7 @@ export default function StayCardList({
         currentGroupStart={currentGroupStart}
         onPageChange={setCurrentPage}
         onGroupChange={setCurrentGroupStart}
+        totalPage={totalPage}
       />
     </Container>
   );

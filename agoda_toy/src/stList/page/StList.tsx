@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import StayCardList from '../components/Stay/Card/StayCardList';
 import StayFilter from '../components/Stay/Filter/StayFilter';
+import { useGetAllAccommodations } from '@src/stList/hooks/useGetAllAccommodations';
 
 const MIN = 0;
 const MAX = 10000000;
@@ -13,7 +14,17 @@ export default function StList() {
   const [minPrice, setMinPrice] = useState(MIN);
   const [maxPrice, setMaxPrice] = useState(MAX);
   const location = useLocation();
-  const { destination, checkInDate, checkOutDate } = location.state || {};
+  const { destination, checkInDate, checkOutDate, adults, rooms } =
+    location.state || {};
+
+  const { data } = useGetAllAccommodations({
+    query: destination,
+    startDate: checkInDate,
+    endDate: checkOutDate,
+    minPrice,
+    maxPrice,
+    page: 0,
+  });
 
   return (
     <>
@@ -21,8 +32,10 @@ export default function StList() {
         <Search
           width="82.9375rem"
           destination={destination}
-          checkInDate={checkInDate}
-          checkOutDate={checkOutDate}
+          startDate={checkInDate}
+          endDate={checkOutDate}
+          adults={adults}
+          rooms={rooms}
         />
         <SearchResultSection>
           <StayFilter
@@ -32,13 +45,13 @@ export default function StList() {
             setMax={setMaxPrice}
           />
           <StayCardSection>
-            <StayCardListHeader />
+            <StayCardListHeader totalCount={data?.totalCount ?? 0} />
             <StayCardList
               min={minPrice}
               max={maxPrice}
               destination={destination}
-              checkInDate={checkInDate}
-              checkOutDate={checkOutDate}
+              startDate={checkInDate}
+              endDate={checkOutDate}
             />
           </StayCardSection>
         </SearchResultSection>
