@@ -4,18 +4,29 @@ import ReivewCardHeader from './ReivewCardHeader';
 import ReviewCardContent from './ReviewCardContent';
 import ReviewCardImg from './ReviewCardImg';
 import ReviewCardThumb from './ReviewCardThumb';
+import type { ReviewTypes } from './Review';
 
-export default function ReviewCard() {
+export default function ReviewCard({
+  name,
+  averageScore,
+  reviewImages,
+  reviewText,
+  createdAt,
+}: ReviewTypes) {
   return (
     <Container>
       <Frame>
         <Profile />
         <ContentFrame>
           <TextFrame>
-            <ReivewCardHeader />
-            <ReviewCardContent />
+            <ReivewCardHeader
+              createdAt={createdAt}
+              averageScore={averageScore}
+              name={name}
+            />
+            <ReviewCardContent reviewText={reviewText} />
           </TextFrame>
-          <ReviewCardImg />
+          <ReviewCardImg reviewImages={reviewImages} />
           <ReviewCardThumb />
         </ContentFrame>
       </Frame>

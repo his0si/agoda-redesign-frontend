@@ -36,7 +36,7 @@ export default function FooterTravel() {
           <CountryFrame key={pro}>
             <HeadlineTitle>{pro}</HeadlineTitle>
             {hotels.map((text) => (
-              <HeadlineDescription>{text}</HeadlineDescription>
+              <HeadlineDescription key={text}>{text}</HeadlineDescription>
             ))}
           </CountryFrame>
         ))}

@@ -1,15 +1,24 @@
+import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function PopInfoTop() {
+  const { accommodationId } = useParams();
+
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetAccommodation(accommodationId);
+
   return (
     <Container>
       <SaleAndCost>
         <Sales>할인가</Sales>
-        <Cost>￦ 349,202</Cost>
+        <Cost>￦ {data?.price}</Cost>
       </SaleAndCost>
       <PopInfoTagFrame>
-        <PopInfoTopTag>GOLDEN WEEK</PopInfoTopTag>
-        <PopInfoTopTag>2025 새로 지어진 숙소</PopInfoTopTag>
+        <PopInfoTopTag>{data?.provisionTags[0]}</PopInfoTopTag>
+        <PopInfoTopTag>{data?.provisionTags[1]}</PopInfoTopTag>
       </PopInfoTagFrame>
     </Container>
   );
