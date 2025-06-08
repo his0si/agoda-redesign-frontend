@@ -1,5 +1,5 @@
+import { useGetAllAccommodations } from '@src/stList/hooks/useGetAllAccommodations';
 import Search from '@stInfo/components/Upper/Search';
-import StayCardListHeader from '@stList/components/Stay/Card/StayCardListHeader';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -13,7 +13,17 @@ export default function StList() {
   const [minPrice, setMinPrice] = useState(MIN);
   const [maxPrice, setMaxPrice] = useState(MAX);
   const location = useLocation();
-  const { destination, checkInDate, checkOutDate } = location.state || {};
+  const { destination, checkInDate, checkOutDate, adults, rooms } =
+    location.state || {};
+
+  useGetAllAccommodations({
+    query: destination,
+    startDate: checkInDate,
+    endDate: checkOutDate,
+    minPrice,
+    maxPrice,
+    page: 0,
+  });
 
   return (
     <>
@@ -21,8 +31,10 @@ export default function StList() {
         <Search
           width="82.9375rem"
           destination={destination}
-          checkInDate={checkInDate}
-          checkOutDate={checkOutDate}
+          startDate={checkInDate}
+          endDate={checkOutDate}
+          adults={adults}
+          rooms={rooms}
         />
         <SearchResultSection>
           <StayFilter
@@ -31,16 +43,14 @@ export default function StList() {
             setMin={setMinPrice}
             setMax={setMaxPrice}
           />
-          <StayCardSection>
-            <StayCardListHeader />
-            <StayCardList
-              min={minPrice}
-              max={maxPrice}
-              destination={destination}
-              checkInDate={checkInDate}
-              checkOutDate={checkOutDate}
-            />
-          </StayCardSection>
+
+          <StayCardList
+            min={minPrice}
+            max={maxPrice}
+            destination={destination}
+            startDate={checkInDate}
+            endDate={checkOutDate}
+          />
         </SearchResultSection>
       </StayContent>
     </>
@@ -52,12 +62,6 @@ const StayContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 32px;
-`;
-
-const StayCardSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 `;
 
 const SearchResultSection = styled.div`

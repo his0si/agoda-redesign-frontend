@@ -54,4 +54,5 @@ export const Tag = styled.div`
   padding: 0.25rem 0.5rem;
   font-size: 1rem;
   font-weight: 400;
+  white-space: nowrap;
 `;

@@ -3,6 +3,6 @@ import type { GetAccommodationsParams } from '@src/stList/types/getAccommodation
 
 export const getAccommodations = async (params: GetAccommodationsParams) => {
   const response = await axiosInstance.get('/accommodations', { params });
-  return response.data;
   console.log(response.data);
+  return response.data;
 };

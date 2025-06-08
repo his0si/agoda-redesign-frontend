@@ -14,4 +14,7 @@ export interface Accommodation {
 
 export interface GetAccommodationsResponse {
   accommodations: Accommodation[];
+  currentPage: number;
+  totalPage: number;
+  totalCount: number;
 }
