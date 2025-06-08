@@ -6,6 +6,8 @@ import RoomPic3 from '../../../assets/imgs/img_card3.png';
 import RoomPic4 from '../../../assets/imgs/img_card4.png';
 import RoomPic5 from '../../../assets/imgs/img_card5.png';
 import type { MiddleProps } from '@src/stInfo/types/middleProps';
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
+import useHorizontalScroll from './useHorizontalScroll';
 
 const ROOM_LIST = [
   {
@@ -46,21 +48,24 @@ const ROOM_LIST = [
 ];
 
 export default function RoomSlider({ handleModalOpen }: MiddleProps) {
+  const listWrapperRef = useHorizontalScroll();
   return (
-    <Container>
-      {ROOM_LIST.map(({ image, title, description, realprice, saleprice }) => (
-        <RoomCard
-          handleModalOpen={handleModalOpen}
-          image={image}
-          title={title}
-          description={description}
-          realprice={realprice}
-          saleprice={saleprice}
-        />
-      ))}
-      <RoomSliderBar />
-      <RoomSliderBarRectangle />
-    </Container>
+    <>
+      <Container ref={listWrapperRef}>
+        {ROOM_LIST.map(
+          ({ image, title, description, realprice, saleprice }) => (
+            <RoomCard
+              handleModalOpen={handleModalOpen}
+              image={image}
+              title={title}
+              description={description}
+              realprice={realprice}
+              saleprice={saleprice}
+            />
+          )
+        )}
+      </Container>
+    </>
   );
 }
 
@@ -70,23 +75,27 @@ const Container = styled.div`
   align-items: center;
   gap: 0.875rem;
   align-self: stretch;
-  overflow-x: hidden;
-`;
+  overflow-x: auto;
 
-const RoomSliderBar = styled.div`
-  display: flex;
-  height: 0.375rem;
-  padding-right: 62.5rem;
-  align-items: center;
-  align-self: stretch;
+  width: 87.9rem;
+  height: 30rem;
 
-  border-radius: 6.25rem;
-  background: ${({ theme }) => theme.colors.gray100};
-`;
+  &::-webkit-scrollbar {
+    height: 0.4rem;
+  }
 
-const RoomSliderBarRectangle = styled.div`
-  width: 25.375rem;
-  height: 0.375rem;
-  border-radius: 6.25rem;
-  background: ${({ theme }) => theme.colors.secondary};
+  &::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #55a3b5;
+    border-radius: 6.25rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #55a3b5;
+    border-radius: 6.25rem;
+  }
 `;
