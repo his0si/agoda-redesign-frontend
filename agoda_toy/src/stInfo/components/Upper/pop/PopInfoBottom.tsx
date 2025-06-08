@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 import BarGraph from './BarGraph';
 import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
+import { useParams } from 'react-router-dom';
 
 export default function PopInfoBottom() {
-  const { data } = useGetAccommodation(1);
+  const { accommodationId } = useParams();
+
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetAccommodation(accommodationId);
 
   return (
     <Container>

@@ -1,8 +1,14 @@
 import styled, { css } from 'styled-components';
 import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
+import { useParams } from 'react-router-dom';
 
 export default function Photo() {
-  const { data } = useGetAccommodation(1);
+  const { accommodationId } = useParams();
+
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetAccommodation(accommodationId);
   const images = data?.accommodationImages;
 
   if (!images || images.length < 5) return null;

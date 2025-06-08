@@ -2,9 +2,15 @@ import styled from 'styled-components';
 import IconScriptMore from '../../../assets/svgs/icn_script_frame_more.svg?react';
 import { WrapSvgIcon } from '@stInfo/styles/Svg';
 import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
+import { useParams } from 'react-router-dom';
 
 export default function Script() {
-  const { data } = useGetAccommodation(1);
+  const { accommodationId } = useParams();
+
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetAccommodation(accommodationId);
 
   return (
     <Container>

@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { IconStar } from '@stInfo/components/common/Rate';
 import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
-
-const accommodationId = 1;
+import { useParams } from 'react-router-dom';
 
 export default function HotelName() {
-  const { data } = useGetAccommodation(accommodationId);
+  const { accommodationId } = useParams();
 
-  console.log(data);
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetAccommodation(accommodationId);
 
   return (
     <Container>
