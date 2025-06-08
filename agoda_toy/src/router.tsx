@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from './common/layout/MainLayout';
 import HeaderOnlyLayout from './common/layout/HeaderOnlyLayout';
 import GuestHeaderOnlyLayout from './res/layout/GuestHeaderOnlyLayout';
@@ -13,6 +13,10 @@ import PaymentPage from './res/pages/PaymentPage';
 import ReservationCompletePage from './res/pages/ReservationCompletePage';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/main" replace />,
+  },
   {
     path: '/',
     element: <Layout />,
@@ -45,7 +49,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'modal',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     element: <MyRevModal handleModalClose={() => {}} />,
   },
 ]);
