@@ -3,7 +3,7 @@ import axiosInstance from '@src/common/api/axiosInstance';
 
 export const getAccommodationReviews = async (accomodationId: number) => {
   const response = await axiosInstance.get(
-    `/accomodations/${accomodationId}/reviews`
+    `accommodations/${accomodationId}/reviews`
   );
   return response.data;
 };

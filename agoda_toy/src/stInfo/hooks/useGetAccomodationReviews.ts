@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getAccommodationReviews } from '../api/getAccomodationReviews';
 
-export const useGetReview = (accomodationId: number) => {
+export const useGetAccommodationReviews = (accomodationId: number) => {
   return useQuery({
-    queryKey: ['useGetReview', accomodationId],
+    queryKey: ['getAccommodationReviews', accomodationId],
     queryFn: () => getAccommodationReviews(accomodationId),
   });
 };
