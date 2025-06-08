@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import { IconStar } from '@stInfo/components/common/Rate';
+import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
+
+const accommodationId = 1;
 
 export default function HotelName() {
+  const { data } = useGetAccommodation(accommodationId);
+
+  console.log(data);
+
   return (
     <Container>
       <HotelTopGroup>
