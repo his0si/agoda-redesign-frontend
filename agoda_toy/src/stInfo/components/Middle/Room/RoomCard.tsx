@@ -44,7 +44,8 @@ export default function RoomCard({
 
 const Container = styled.div`
   display: flex;
-  width: 20.4375rem;
+  width: 100%;
+  height: 26.4rem;
   padding-bottom: 0.75rem;
   flex-direction: column;
   align-items: flex-start;
