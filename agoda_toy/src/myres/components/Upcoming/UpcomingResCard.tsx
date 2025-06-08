@@ -1,35 +1,34 @@
 import styled from 'styled-components';
 import UpcomingResInfo from './UpcomingResInfo';
 import UpcomingResThumb from './UpcomingResThumb';
-import StayPic1 from '@stList/assets/imgs/img_card1.png';
-
-interface UpcomingReservation {
+interface UpcomingResCardProps {
   imageUrl: string;
-  resNum: number;
-  stayName: string;
-  stayLocation: string;
-  checkinDate: string;
-  checkoutDate: string;
+  status: string;
+  location: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  resNum: string;
 }
 
-const MY_RES_LIST: UpcomingReservation[] = [
-  {
-    imageUrl: StayPic1,
-    resNum: 123456,
-    stayName: 'Tokyo Prince',
-    stayLocation: 'Shibakoen',
-    checkinDate: '2025.04.15(토)',
-    checkoutDate: '2025.04.20(토)',
-  },
-];
-
-export default function UpcomingResCard() {
-  const res = MY_RES_LIST[0];
-
+export default function UpcomingResCard({
+  imageUrl,
+  resNum,
+  location,
+  name,
+  startDate,
+  endDate,
+}: UpcomingResCardProps) {
   return (
     <Container>
-      <UpcomingResInfo {...res} />
-      <UpcomingResThumb imageUrl={res.imageUrl} />
+      <UpcomingResInfo
+        resNum={resNum}
+        stayLocation={location}
+        stayName={name}
+        checkinDate={startDate}
+        checkoutDate={endDate}
+      />
+      <UpcomingResThumb imageUrl={imageUrl} />
     </Container>
   );
 }

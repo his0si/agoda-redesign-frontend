@@ -17,8 +17,8 @@ export default function SearchTagList() {
     <PopularSearchFilterWrapper>
       <PopularSearchListHeader>도쿄 인기 검색 조건</PopularSearchListHeader>
       <TagList>
-        {SEARCH_TAG_LIST.map((tag) => (
-          <SearchTag tagName={tag.tagName} />
+        {SEARCH_TAG_LIST.map((tag, idx) => (
+          <SearchTag key={idx} tagName={tag.tagName} />
         ))}
       </TagList>
     </PopularSearchFilterWrapper>

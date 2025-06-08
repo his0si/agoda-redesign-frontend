@@ -31,6 +31,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 0.69rem;
+  margin-bottom: 1.25rem;
   width: 18.75rem;
   height: 25.5625rem;
   flex-shrink: 0;

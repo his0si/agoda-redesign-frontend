@@ -14,32 +14,32 @@ export default function AmenContent() {
     <Container>
       <Frame>
         {AMEN_LIST[0].map((text) => (
-          <Text>{text}</Text>
+          <Text key={text}>{text}</Text>
         ))}
       </Frame>
       <Frame>
         {AMEN_LIST[1].map((text) => (
-          <Text>{text}</Text>
+          <Text key={text}>{text}</Text>
         ))}
       </Frame>
       <Frame>
         {AMEN_LIST[2].map((text) => (
-          <Text>{text}</Text>
+          <Text key={text}>{text}</Text>
         ))}
       </Frame>
       <Frame>
         {AMEN_LIST[3].map((text) => (
-          <Text>{text}</Text>
+          <Text key={text}>{text}</Text>
         ))}
       </Frame>
       <Frame>
         {AMEN_LIST[4].map((text) => (
-          <Text>{text}</Text>
+          <Text key={text}>{text}</Text>
         ))}
       </Frame>
       <Frame>
         {AMEN_LIST[5].map((text) => (
-          <Text>{text}</Text>
+          <Text key={text}>{text}</Text>
         ))}
       </Frame>
     </Container>

@@ -1,15 +1,12 @@
-import styled from 'styled-components';
-import ImgCard1 from '@stList/assets/imgs/img_card1.png';
-import ImgCard2 from '@stList/assets/imgs/img_card2.png';
-import ImgCard3 from '@stList/assets/imgs/img_card3.png';
+import styled, { css } from 'styled-components';
 
-export default function ModalPics() {
+export default function ModalPics({ pics }: { pics: string[] }) {
   return (
     <Container>
-      <BigImg />
+      <BigImageBox bgurl={pics[0]} />
       <Frame>
-        <SmallImg />
-        <SmallImg2 />
+        <SmallImageBox bgurl={pics[1]} />
+        <SmallImageBox bgurl={pics[1]} />
       </Frame>
     </Container>
   );
@@ -29,29 +26,28 @@ const Frame = styled.div`
   justify-content: space-between;
 `;
 
-const BigImg = styled.div`
+const BigImg = (imageUrl: string) => css`
   width: 37.25rem;
   height: 23.8125rem;
   flex-shrink: 0;
 
   border-radius: 0.5rem;
-  background: url(${ImgCard1}) lightgray 50% / cover no-repeat;
+  background: url(${imageUrl}) lightgray 50% / cover no-repeat;
 `;
 
-const SmallImg = styled.div`
+const BigImageBox = styled.div<{ bgurl: string }>`
+  ${({ bgurl }) => BigImg(bgurl)}
+`;
+
+const SmallImg = (imageUrl: string) => css`
   width: 18.1875rem;
   height: 18.1875rem;
   flex-shrink: 0;
   aspect-ratio: 1/1;
   border-radius: 0.5rem;
-  background: url(${ImgCard2}) lightgray 50% / cover no-repeat;
+  background: url(${imageUrl}) lightgray 50% / cover no-repeat;
 `;
 
-const SmallImg2 = styled.div`
-  width: 18.1875rem;
-  height: 18.1875rem;
-  flex-shrink: 0;
-  aspect-ratio: 1/1;
-  border-radius: 0.5rem;
-  background: url(${ImgCard3}) lightgray 50% / cover no-repeat;
+const SmallImageBox = styled.div<{ bgurl: string }>`
+  ${({ bgurl }) => SmallImg(bgurl)}
 `;

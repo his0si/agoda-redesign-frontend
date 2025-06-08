@@ -4,7 +4,7 @@ import formatDateRange from '../utils/formatDateRange';
 
 interface MyResItemProps {
   imageUrl: string;
-  status: '예약 완료' | '체크인 완료' | '체크아웃 완료' | '취소된 예약';
+  status: string;
   location: string;
   name: string;
   startDate: string; // e.g., api'2025-07-01'
@@ -56,7 +56,7 @@ const ResInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
+
   gap: 0.125rem;
   white-space: nowrap;
 `;

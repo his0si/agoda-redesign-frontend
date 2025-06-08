@@ -7,9 +7,11 @@ import StInfoModal from '../components/modal/StInfoModal';
 
 export default function StInfo() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedRoomId, setSelectedRoomId] = useState(0);
 
-  function handleModalOpen() {
+  function handleModalOpen(roomId: number) {
     setIsOpen(true);
+    setSelectedRoomId(roomId);
   }
 
   function handleModalClose() {
@@ -20,7 +22,12 @@ export default function StInfo() {
 
   return (
     <>
-      {isOpen && <StInfoModal handleModalClose={handleModalClose} />}
+      {isOpen && (
+        <StInfoModal
+          selectedRoomId={selectedRoomId}
+          handleModalClose={handleModalClose}
+        />
+      )}
       <Container>
         <Upper />
         <Middle {...props} />

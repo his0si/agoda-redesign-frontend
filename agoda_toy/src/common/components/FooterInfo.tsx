@@ -74,7 +74,7 @@ const InfoTitle = styled.h2`
   ${({ theme }) => theme.fonts.headline.sm};
 `;
 
-const InfoText = styled.p`
+const InfoText = styled.div`
   ${({ theme }) => theme.fonts.body.lg};
   color: ${({ theme }) => theme.colors.gray900};
 `;

@@ -1,15 +1,14 @@
-type ReservationStatus =
-  | '예약 완료'
-  | '체크인 완료'
-  | '체크아웃 완료'
-  | '취소된 예약';
-
-export default interface ResItem {
+export interface ReservationItem {
   reservationId: string;
   korName: string;
   accommodationImage: string;
   location: string;
   startDate: string;
   endDate: string;
-  status: ReservationStatus;
+  status: string;
+}
+
+export interface MyReservationsResponse {
+  upcoming: ReservationItem | null;
+  completed: ReservationItem[];
 }
