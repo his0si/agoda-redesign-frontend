@@ -8,11 +8,14 @@ interface RoomCardProps {
   description: string;
   realprice: string;
   saleprice: string;
-  handleModalOpen: () => void;
+  roomId: number;
+
+  handleModalOpen: (roomId: number) => void;
 }
 
 export default function RoomCard({
   image,
+  roomId,
   title,
   description,
   realprice,
@@ -20,7 +23,7 @@ export default function RoomCard({
   handleModalOpen,
 }: RoomCardProps) {
   return (
-    <Container onClick={handleModalOpen}>
+    <Container onClick={() => handleModalOpen(roomId)}>
       <ImageBox imageUrl={image} />
       <Frame>
         <CardContent>
@@ -44,7 +47,7 @@ export default function RoomCard({
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
+  width: 20rem;
   height: 26.4rem;
   padding-bottom: 0.75rem;
   flex-direction: column;
