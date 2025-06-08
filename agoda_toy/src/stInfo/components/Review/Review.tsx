@@ -3,6 +3,7 @@ import ReviewHeader from './ReviewHeader';
 import ReviewCard from './ReviewCard';
 import IconMore from '@stInfo/assets/svgs/Chevron right.svg?react';
 import { useGetAccommodationReviews } from '@src/stInfo/hooks/useGetAccomodationReviews';
+import { useParams } from 'react-router-dom';
 
 export type ReviewTypes = {
   reviewId: number;
@@ -14,7 +15,12 @@ export type ReviewTypes = {
 };
 
 export default function Review() {
-  const { data } = useGetAccommodationReviews(1);
+  const { accommodationId } = useParams();
+
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetAccommodationReviews(accommodationId);
   if (!data) return null;
   const reviewList = data?.reviews;
   const averageScore = reviewList[0]?.averageScore;

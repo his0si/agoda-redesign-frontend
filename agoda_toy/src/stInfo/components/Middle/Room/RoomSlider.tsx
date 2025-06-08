@@ -3,6 +3,7 @@ import RoomCard from './RoomCard';
 import type { MiddleProps } from '@src/stInfo/types/middleProps';
 import useHorizontalScroll from './useHorizontalScroll';
 import { useGetRooms } from '@src/stInfo/hooks/useGetRooms';
+import { useParams } from 'react-router-dom';
 
 type RoomType = {
   roomId: number;
@@ -15,7 +16,12 @@ type RoomType = {
 
 export default function RoomSlider({ handleModalOpen }: MiddleProps) {
   const listWrapperRef = useHorizontalScroll();
-  const { data } = useGetRooms(1);
+  const { accommodationId } = useParams();
+
+  if (!accommodationId) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data } = useGetRooms(accommodationId);
   const roomList = data?.rooms;
 
   if (!data?.rooms) return null;

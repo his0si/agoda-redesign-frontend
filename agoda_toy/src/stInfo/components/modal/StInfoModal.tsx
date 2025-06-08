@@ -15,8 +15,6 @@ export default function StInfoModal({
   const { data } = useGetRoomId(selectedRoomId);
 
   if (!data) return null;
-  console.log(data);
-  console.log(selectedRoomId);
   return (
     <StInfoModalLayout handleModalClose={handleModalClose}>
       <Title>{data?.roomType}</Title>
