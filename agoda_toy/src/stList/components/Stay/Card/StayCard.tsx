@@ -5,8 +5,10 @@ import StayAmenityTag from './StayAmenityTag';
 import StayAddress from './StayLocation';
 import StayPrice from './StayPrice';
 import type { Accommodation } from '@src/stList/types/getAccommodationsResponse.types';
+import { useNavigate } from 'react-router-dom';
 
 export default function StayCard({
+  accommodationId,
   korName,
   engName,
   star,
@@ -19,8 +21,14 @@ export default function StayCard({
   discountPrice,
   totalPrice,
 }: Accommodation) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/stinfo/${accommodationId}`);
+  };
+
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <StayImage src={accommodationImage} alt="호텔 이미지" />
       <Frame>
         <LeftContent>

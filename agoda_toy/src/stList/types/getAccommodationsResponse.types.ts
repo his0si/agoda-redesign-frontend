@@ -1,4 +1,5 @@
 export interface Accommodation {
+  accommodationId: number;
   korName: string;
   engName: string;
   star: number;
