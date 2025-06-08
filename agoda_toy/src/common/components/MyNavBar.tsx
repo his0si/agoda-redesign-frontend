@@ -1,29 +1,39 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MyCnd from '../../assets/mynav/my_res_icn_cnd.svg?react';
 import MyChat from '../../assets/mynav/my_rev_icn_chat.svg?react';
 import MyReview from '../../assets/mynav/my_rev_icn_review.svg?react';
 import MySet from '../../assets/mynav/my_rev_icn_set.svg?react';
-import { useLocation } from 'react-router-dom';
 
 export default function MyNavBar() {
   const location = useLocation();
   const pathname = location.pathname;
+  const navigate = useNavigate(); // 이용후기, 모든 예약 이동
 
   return (
     <Container>
-      <NavFrame $isClicked={pathname.includes('myres')}>
-        <MyCndIcon $isClicked={false} />
+      <NavFrame
+        $isClicked={pathname.includes('myres')}
+        onClick={() => navigate('/myres')}
+      >
+        <MyCndIcon $isClicked={pathname.includes('myres')} />
         <NavText>모든 예약</NavText>
       </NavFrame>
-      <NavFrame $isClicked={pathname.includes('myrev')}>
+
+      <NavFrame
+        $isClicked={pathname.includes('myrev')}
+        onClick={() => navigate('/myrev')}
+      >
         <MyReviewIcon $isClicked={pathname.includes('myrev')} />
         <NavText>이용 후기</NavText>
       </NavFrame>
-      <NavFrame $isClicked={false}>
+
+      <NavFrame $isClicked={false} onClick={() => navigate('/mychat')}>
         <MyChatIcon $isClicked={false} />
         <NavText>메시지</NavText>
       </NavFrame>
-      <NavFrame $isClicked={false}>
+
+      <NavFrame $isClicked={false} onClick={() => navigate('/myset')}>
         <MySetIcon $isClicked={false} />
         <NavText>설정</NavText>
       </NavFrame>

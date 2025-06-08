@@ -10,7 +10,7 @@ export default function MyResContent() {
   return (
     <Container>
       {hasUpcoming ? <UpcomingResCard /> : <NoUpcomingResCard />}
-      <MyResLists showUpcoming={hasUpcoming} />
+      <MyResLists />
     </Container>
   );
 }

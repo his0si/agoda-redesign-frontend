@@ -1,81 +1,14 @@
-// ✅ MyResLists.tsx - 퍼블리싱용 예약 리스트 + 슬라이더 구조
 import styled from 'styled-components';
-import {
-  default as StayPic1,
-  default as StayPic2,
-  default as StayPic3,
-  default as StayPic4,
-  default as StayPic5,
-} from '../assets/imgs/cancelled_stay_1.png';
-import MyResItem from './MyResItem';
+import { useGetReservations } from '../hooks/useGetReservations';
 import MyResSlider from './MyResSlider';
-import type ResItem from '../types/res.types';
+import MyResItem from './MyResItem';
+import UpcomingResCard from './Upcoming/UpcomingResCard';
+import NoUpcomingResCard from './Upcoming/NoUpcomingResCard';
 
-interface MyResListsProps {
-  showUpcoming: boolean;
-}
+import StayPic1 from '../assets/imgs/cancelled_stay_1.png';
+import type { ReservationItem } from '../types/res.types';
 
-const UPCOMING_ITEMS: ResItem[] = [
-  {
-    reservationId: '1',
-    korName: '호텔 이름',
-    accommodationImage: StayPic5,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '예약 완료',
-  },
-];
-
-const COMPLETED_ITEMS: ResItem[] = [
-  {
-    reservationId: '2',
-    korName: '호텔 이름',
-    accommodationImage: StayPic2,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크아웃 완료',
-  },
-  {
-    reservationId: '3',
-    korName: '호텔 이름',
-    accommodationImage: StayPic3,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-  {
-    reservationId: '4',
-    korName: '호텔 이름',
-    accommodationImage: StayPic4,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-  {
-    reservationId: '5',
-    korName: '호텔 이름',
-    accommodationImage: StayPic4,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-  {
-    reservationId: '6',
-    korName: '호텔 이름',
-    accommodationImage: StayPic4,
-    location: 'Itabashi City',
-    startDate: '2025-02-10',
-    endDate: '2025-02-15',
-    status: '체크인 완료',
-  },
-];
-
-const CANCELLED_RES: ResItem = {
+const CANCELLED_RES: ReservationItem = {
   reservationId: '7',
   korName: '호텔 이름',
   accommodationImage: StayPic1,
@@ -85,21 +18,45 @@ const CANCELLED_RES: ResItem = {
   status: '취소된 예약',
 };
 
-export default function MyResLists({ showUpcoming }: MyResListsProps) {
+export default function MyResLists() {
+  const { data, isLoading, error } = useGetReservations();
+
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>예약 데이터를 불러오는 데 실패했습니다.</p>;
+
+  const upcoming = data?.upcoming ? [data.upcoming] : [];
+  const completed = data?.completed || [];
+
+  // "가장 임박한 예약" 결정 로직 → 지금은 API가 upcoming 1개만 주므로 그대로 사용 가능
+  const mostUpcoming = upcoming.length > 0 ? upcoming[0] : null;
+
   return (
     <Container>
-      {showUpcoming && (
-        <ListWrapper>
-          <ListTitle>다가오는 예약</ListTitle>
-          <MyResSlider items={UPCOMING_ITEMS} />
-        </ListWrapper>
-      )}
-
+      {/* 다가오는 예약 카드 */}
       <ListWrapper>
-        <ListTitle>완료된 예약</ListTitle>
-        <MyResSlider items={COMPLETED_ITEMS} />
+        <ListTitle>다가오는 예약</ListTitle>
+        {mostUpcoming ? (
+          <UpcomingResCard
+            resNum={mostUpcoming.reservationId}
+            imageUrl={mostUpcoming.accommodationImage}
+            status={mostUpcoming.status}
+            location={mostUpcoming.location}
+            name={mostUpcoming.korName}
+            startDate={mostUpcoming.startDate}
+            endDate={mostUpcoming.endDate}
+          />
+        ) : (
+          <NoUpcomingResCard />
+        )}
       </ListWrapper>
 
+      {/* 완료된 예약 슬라이더 */}
+      <ListWrapper>
+        <ListTitle>완료된 예약</ListTitle>
+        <MyResSlider items={completed} />
+      </ListWrapper>
+
+      {/* 취소된 예약 */}
       <ListWrapper>
         <ListTitle>취소된 예약</ListTitle>
         <MyResItem
@@ -122,6 +79,7 @@ const Container = styled.div`
   width: 64.5rem;
   padding-inline: 1.5rem;
 `;
+
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;

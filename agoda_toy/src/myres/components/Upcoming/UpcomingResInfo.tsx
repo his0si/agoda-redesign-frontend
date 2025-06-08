@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface UpcomingResInfoProps {
-  resNum: number;
+  resNum: string;
   stayName: string;
   stayLocation: string;
   checkinDate: string;

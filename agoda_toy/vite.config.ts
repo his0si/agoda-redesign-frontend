@@ -22,6 +22,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      '/reservations': {
+        target: 'https://api.efubagoda.kro.kr',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 });
