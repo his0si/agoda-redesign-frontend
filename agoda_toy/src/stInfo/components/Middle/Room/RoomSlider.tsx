@@ -6,7 +6,6 @@ import RoomPic3 from '../../../assets/imgs/img_card3.png';
 import RoomPic4 from '../../../assets/imgs/img_card4.png';
 import RoomPic5 from '../../../assets/imgs/img_card5.png';
 import type { MiddleProps } from '@src/stInfo/types/middleProps';
-import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import useHorizontalScroll from './useHorizontalScroll';
 
 const ROOM_LIST = [
@@ -55,6 +54,7 @@ export default function RoomSlider({ handleModalOpen }: MiddleProps) {
         {ROOM_LIST.map(
           ({ image, title, description, realprice, saleprice }) => (
             <RoomCard
+              key={title}
               handleModalOpen={handleModalOpen}
               image={image}
               title={title}
