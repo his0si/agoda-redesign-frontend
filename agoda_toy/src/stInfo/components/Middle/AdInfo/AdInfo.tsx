@@ -18,6 +18,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 2.875rem;
+
+  margin-bottom: 11.75rem;
 `;
 
 const ContentFrame = styled.div`
@@ -28,6 +30,11 @@ const ContentFrame = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
   align-self: stretch;
+
+  border-radius: 1.25rem;
+  border: 1px solid var(--AGODA-Gray100, #f3f4f6);
+  background: var(--AGODA-White, #fff);
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.h1`
