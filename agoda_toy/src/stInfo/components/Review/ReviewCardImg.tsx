@@ -1,12 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const LIST = [1, 2, 3];
-
-export default function ReviewCardImg() {
+export default function ReviewCardImg({
+  reviewImages,
+}: {
+  reviewImages: string[];
+}) {
   return (
     <Container>
-      {LIST.map((num) => (
-        <ImgFrame key={num} />
+      {reviewImages.map((text: string) => (
+        <ImgBox bgurl={text} key={text} />
       ))}
     </Container>
   );
@@ -19,11 +21,15 @@ const Container = styled.div`
   height: 9.9375rem;
 `;
 
-const ImgFrame = styled.div`
+const ImgFrame = (imageUrl: string) => css`
   width: 10.125rem;
   height: 9.9375rem;
   flex-shrink: 0;
 
   border-radius: 0.5rem;
-  background: var(--AGODA-Gray100, #f3f4f6);
+  background: url(${imageUrl}) lightgray 50% / cover no-repeat;
+`;
+
+const ImgBox = styled.div<{ bgurl: string }>`
+  ${({ bgurl }) => ImgFrame(bgurl)}
 `;

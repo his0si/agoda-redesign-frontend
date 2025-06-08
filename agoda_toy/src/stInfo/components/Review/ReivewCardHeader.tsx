@@ -1,16 +1,26 @@
 import styled from 'styled-components';
 import Stars from '@stInfo/assets/svgs/reviewstars.svg?react';
 
-export default function ReivewCardHeader() {
+export default function ReivewCardHeader({
+  createdAt,
+  name,
+  averageScore,
+}: {
+  createdAt?: string;
+  name: string;
+  averageScore: number;
+}) {
+  if (!createdAt) return null;
+
   return (
     <Container>
       <HeaderFrame>
-        <UserName>황혜연</UserName>
-        <Date>2025.03.15 작성</Date>
+        <UserName>{name}</UserName>
+        <Date>{createdAt} 작성</Date>
       </HeaderFrame>
       <RateFrame>
         <RateStar />
-        <Rate>8.2점</Rate>
+        <Rate>{averageScore ? averageScore.toFixed(2) : 0}점 </Rate>
       </RateFrame>
     </Container>
   );

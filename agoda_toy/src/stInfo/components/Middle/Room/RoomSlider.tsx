@@ -18,6 +18,8 @@ export default function RoomSlider({ handleModalOpen }: MiddleProps) {
   const { data } = useGetRooms(1);
   const roomList = data?.rooms;
 
+  if (!data?.rooms) return null;
+
   return (
     <>
       <Container ref={listWrapperRef}>

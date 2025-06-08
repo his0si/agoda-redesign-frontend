@@ -24,7 +24,7 @@ export default function RoomCard({
 }: RoomCardProps) {
   return (
     <Container onClick={() => handleModalOpen(roomId)}>
-      <ImageBox imageUrl={image} />
+      <ImageBox $imageUrl={image} />
       <Frame>
         <CardContent>
           <CardContentFrame>
@@ -75,8 +75,8 @@ const ImgCard = (imageUrl: string) => css`
   background: url(${imageUrl}) lightgray 50% / cover no-repeat;
 `;
 
-const ImageBox = styled.div<{ imageUrl: string }>`
-  ${({ imageUrl }) => ImgCard(imageUrl)}
+const ImageBox = styled.div<{ $imageUrl: string }>`
+  ${({ $imageUrl }) => ImgCard($imageUrl)}
 `;
 
 const CardContent = styled.div`
