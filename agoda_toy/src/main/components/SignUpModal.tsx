@@ -5,6 +5,7 @@ import KakaoIcon from '../assets/KakaoLogin.png';
 import GoogleIcon from '../assets/GoogleLogin.png';
 import FacebookIcon from '../assets/FacebookLogin.png';
 import AppleIcon from '../assets/AppleLogin.png';
+import { kakaoLogin } from '@src/common/api/memberApi';
 
 export default function SignUpModal() {
   const [email, setEmail] = useState('');
@@ -14,6 +15,19 @@ export default function SignUpModal() {
     // 간단한 이메일 유효성 검사
     setIsValid(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email));
   }, [email]);
+
+  const handleKakaoLogin = async () => {
+    // 실제로는 카카오 인가 코드를 받아와야 하지만, 예시로 prompt로 입력받음
+    const code = prompt('카카오 인가 코드를 입력하세요:');
+    if (!code) return;
+    try {
+      const result = await kakaoLogin(code);
+      alert(`로그인 성공! 환영합니다, ${result.name}님`);
+      // TODO: 로그인 상태 처리 및 토큰 저장 등
+    } catch (err: any) {
+      alert('로그인 실패: ' + (err?.response?.data?.message || err.message));
+    }
+  };
 
   return (
     <ModalOverlay>
@@ -34,7 +48,7 @@ export default function SignUpModal() {
           <DividerText>또는</DividerText>
           <Divider />
         </DividerWrapper>
-        <SocialButton color="#FEE500">
+        <SocialButton color="#FEE500" onClick={handleKakaoLogin}>
           <Icon src={KakaoIcon} alt="kakao" />
           카카오 계정으로 로그인
         </SocialButton>
@@ -181,4 +195,4 @@ const SignUpText = styled.div`
   font-size: 16px;
   margin-top: 16px;
   cursor: pointer;
-`; 
+`;
