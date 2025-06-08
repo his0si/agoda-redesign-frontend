@@ -9,7 +9,7 @@ export default function Script() {
   return (
     <Container>
       <ScriptFrame>
-        <TypoScriptFrameMain>{data.description}</TypoScriptFrameMain>
+        <TypoScriptFrameMain>{data?.description}</TypoScriptFrameMain>
         <TypoScriptFrameMore>
           더보기
           <ScriptMoreIcon />

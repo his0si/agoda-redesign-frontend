@@ -8,16 +8,18 @@ export default function PopInfoBottom() {
   return (
     <Container>
       <TitleBar>
-        <Title>숙소청결도 {data.cleanlinessScore}</Title>
-        <BarGraph value={data.cleanlinessScore * 100} />
+        <Title>숙소청결도 {data?.cleanlinessScore}</Title>
+        <BarGraph
+          value={data?.cleanlinessScore ? data.cleanlinessScore * 100 : 0}
+        />
       </TitleBar>
       <TitleBar>
-        <Title>서비스 {data.serviceScore}</Title>
-        <BarGraph value={data.serviceScore * 100} />
+        <Title>서비스 {data?.serviceScore}</Title>
+        <BarGraph value={data?.serviceScore ? data?.serviceScore * 100 : 0} />
       </TitleBar>
       <TitleBar>
-        <Title>위치 {data.locationScore}</Title>
-        <BarGraph value={data.locationScore * 100} />
+        <Title>위치 {data?.locationScore}</Title>
+        <BarGraph value={data?.locationScore ? data?.locationScore * 100 : 0} />
       </TitleBar>
     </Container>
   );

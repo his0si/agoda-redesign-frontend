@@ -1,20 +1,19 @@
 import styled, { css } from 'styled-components';
-import RightImg from '@stInfo/assets/imgs/img_picture_right.png';
-import LeftImg1 from '@stInfo/assets/imgs/img_picture_left1.png';
-import LeftImg2 from '@stInfo/assets/imgs/img_picture_left2.png';
-import LeftImg3 from '@stInfo/assets/imgs/img_picture_left3.png';
-import LeftImg4 from '@stInfo/assets/imgs/img_picture_left4.png';
+import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
 
 export default function Photo() {
-  console.log(typeof LeftImg1);
+  const { data } = useGetAccommodation(1);
+
+  const bigData = data?.accommodationImages[0];
+
   return (
     <Container>
-      <BigImg />
+      <BigImageBox bgurl={bigData} />
       <LeftContainer>
-        <ImageBox bgurl={LeftImg1} />
-        <ImageBox bgurl={LeftImg2} />
-        <ImageBox bgurl={LeftImg3} />
-        <ImageBox bgurl={LeftImg4} />
+        <ImageBox bgurl={data?.accommodationImages[1]} />
+        <ImageBox bgurl={data?.accommodationImages[2]} />
+        <ImageBox bgurl={data?.accommodationImages[3]} />
+        <ImageBox bgurl={data?.accommodationImages[4]} />
       </LeftContainer>
     </Container>
   );
@@ -32,11 +31,15 @@ const Container = styled.div`
   margin-bottom: 1.38rem;
 `;
 
-const BigImg = styled.div`
+const BigImg = (imageUrl: string) => css`
   width: 43.5rem;
   height: 27.8125rem;
   border-radius: 0.5rem;
-  background: url(${RightImg}) lightgray 50% / cover no-repeat;
+  background: url(${imageUrl}) lightgray 50% / cover no-repeat;
+`;
+
+const BigImageBox = styled.div<{ bgurl: string }>`
+  ${({ bgurl }) => BigImg(bgurl)}
 `;
 
 const LeftContainer = styled.div`

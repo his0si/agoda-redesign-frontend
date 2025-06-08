@@ -8,11 +8,11 @@ export default function PopInfoTop() {
     <Container>
       <SaleAndCost>
         <Sales>할인가</Sales>
-        <Cost>￦ {data.price}</Cost>
+        <Cost>￦ {data?.price}</Cost>
       </SaleAndCost>
       <PopInfoTagFrame>
-        <PopInfoTopTag>{data.provisionTags[0]}</PopInfoTopTag>
-        <PopInfoTopTag>{data.provisionTags[1]}</PopInfoTopTag>
+        <PopInfoTopTag>{data?.provisionTags[0]}</PopInfoTopTag>
+        <PopInfoTopTag>{data?.provisionTags[1]}</PopInfoTopTag>
       </PopInfoTagFrame>
     </Container>
   );

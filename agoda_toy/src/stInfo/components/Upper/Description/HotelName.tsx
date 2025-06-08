@@ -7,21 +7,23 @@ const accommodationId = 1;
 export default function HotelName() {
   const { data } = useGetAccommodation(accommodationId);
 
+  console.log(data);
+
   return (
     <Container>
       <HotelTopGroup>
         <HotelTopFrame>
-          <TypoHotelTopFrameMain>{data.korName}</TypoHotelTopFrameMain>
-          <TypoHotelTopFrameSub>{data.engName}</TypoHotelTopFrameSub>
+          <TypoHotelTopFrameMain>{data?.korName}</TypoHotelTopFrameMain>
+          <TypoHotelTopFrameSub>{data?.engName}</TypoHotelTopFrameSub>
         </HotelTopFrame>
-        <HotelTopAdd>{data.address}</HotelTopAdd>
+        <HotelTopAdd>{data?.address}</HotelTopAdd>
       </HotelTopGroup>
       <HotelBottomGroup>
         <HotelBottom>
           <IconStar />
-          <HotelBottomReview>{data.totalScore}</HotelBottomReview>
+          <HotelBottomReview>{data?.totalScore}</HotelBottomReview>
         </HotelBottom>
-        <HotelBottomReview>리뷰 {data.reviewCount}개</HotelBottomReview>
+        <HotelBottomReview>리뷰 {data?.reviewCount}개</HotelBottomReview>
       </HotelBottomGroup>
     </Container>
   );
