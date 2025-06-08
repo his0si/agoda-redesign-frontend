@@ -1,3 +1,3 @@
 export type MiddleProps = {
-  handleModalOpen: () => void;
+  handleModalOpen: (roomId: number) => void;
 };

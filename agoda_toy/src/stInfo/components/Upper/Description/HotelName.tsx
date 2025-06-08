@@ -1,24 +1,29 @@
 import styled from 'styled-components';
 import { IconStar } from '@stInfo/components/common/Rate';
+import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
+
+const accommodationId = 1;
 
 export default function HotelName() {
+  const { data } = useGetAccommodation(accommodationId);
+
+  console.log(data);
+
   return (
     <Container>
       <HotelTopGroup>
         <HotelTopFrame>
-          <TypoHotelTopFrameMain>도쿄 프린스 호텔</TypoHotelTopFrameMain>
-          <TypoHotelTopFrameSub>Tokyo Prince Hotel</TypoHotelTopFrameSub>
+          <TypoHotelTopFrameMain>{data?.korName}</TypoHotelTopFrameMain>
+          <TypoHotelTopFrameSub>{data?.engName}</TypoHotelTopFrameSub>
         </HotelTopFrame>
-        <HotelTopAdd>
-          3-3-1 Shibakoen, Minato-Ku, 롯폰기, 도쿄/동경, 일본, 105-8560
-        </HotelTopAdd>
+        <HotelTopAdd>{data?.address}</HotelTopAdd>
       </HotelTopGroup>
       <HotelBottomGroup>
         <HotelBottom>
           <IconStar />
-          <HotelBottomReview>8.6</HotelBottomReview>
+          <HotelBottomReview>{data?.totalScore}</HotelBottomReview>
         </HotelBottom>
-        <HotelBottomReview>리뷰 4,745개</HotelBottomReview>
+        <HotelBottomReview>리뷰 {data?.reviewCount}개</HotelBottomReview>
       </HotelBottomGroup>
     </Container>
   );

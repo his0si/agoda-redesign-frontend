@@ -1,20 +1,25 @@
 import styled from 'styled-components';
 import BarGraph from './BarGraph';
+import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
 
 export default function PopInfoBottom() {
+  const { data } = useGetAccommodation(1);
+
   return (
     <Container>
       <TitleBar>
-        <Title>숙소청결도 9.6</Title>
-        <BarGraph value={96} />
+        <Title>숙소청결도 {data?.cleanlinessScore}</Title>
+        <BarGraph
+          value={data?.cleanlinessScore ? data.cleanlinessScore * 100 : 0}
+        />
       </TitleBar>
       <TitleBar>
-        <Title>서비스 8.0</Title>
-        <BarGraph value={80} />
+        <Title>서비스 {data?.serviceScore}</Title>
+        <BarGraph value={data?.serviceScore ? data?.serviceScore * 100 : 0} />
       </TitleBar>
       <TitleBar>
-        <Title>위치 8.8</Title>
-        <BarGraph value={88} />
+        <Title>위치 {data?.locationScore}</Title>
+        <BarGraph value={data?.locationScore ? data?.locationScore * 100 : 0} />
       </TitleBar>
     </Container>
   );

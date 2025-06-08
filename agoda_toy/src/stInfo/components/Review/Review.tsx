@@ -42,7 +42,8 @@ const CardContainer = styled.div`
   align-self: stretch;
   flex-wrap: wrap;
 
-  width: 88rem;
+  width: 90rem;
+  height: 65rem;
 `;
 
 const ContentContainer = styled.div`
