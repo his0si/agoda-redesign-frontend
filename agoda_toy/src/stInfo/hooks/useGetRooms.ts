@@ -3,7 +3,7 @@ import { getRooms } from '../api/getRooms';
 
 export const useGetRooms = (accommodationId: number) => {
   return useQuery({
-    queryKey: ['accommodationId', accommodationId],
+    queryKey: ['getRooms', accommodationId],
     queryFn: () => getRooms(accommodationId),
   });
 };
