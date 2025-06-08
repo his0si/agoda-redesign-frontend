@@ -3,17 +3,18 @@ import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
 
 export default function Photo() {
   const { data } = useGetAccommodation(1);
+  const images = data?.accommodationImages;
 
-  const bigData = data?.accommodationImages[0];
+  if (!images || images.length < 5) return null;
 
   return (
     <Container>
-      <BigImageBox bgurl={bigData} />
+      <BigImageBox bgurl={images[0]} />
       <LeftContainer>
-        <ImageBox bgurl={data?.accommodationImages[1]} />
-        <ImageBox bgurl={data?.accommodationImages[2]} />
-        <ImageBox bgurl={data?.accommodationImages[3]} />
-        <ImageBox bgurl={data?.accommodationImages[4]} />
+        <ImageBox bgurl={images[1]} />
+        <ImageBox bgurl={images[2]} />
+        <ImageBox bgurl={images[3]} />
+        <ImageBox bgurl={images[4]} />
       </LeftContainer>
     </Container>
   );

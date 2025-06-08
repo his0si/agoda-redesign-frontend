@@ -1,66 +1,44 @@
 import styled from 'styled-components';
 import RoomCard from './RoomCard';
-import RoomPic1 from '../../../assets/imgs/img_card1.png';
-import RoomPic2 from '../../../assets/imgs/img_card2.png';
-import RoomPic3 from '../../../assets/imgs/img_card3.png';
-import RoomPic4 from '../../../assets/imgs/img_card4.png';
-import RoomPic5 from '../../../assets/imgs/img_card5.png';
 import type { MiddleProps } from '@src/stInfo/types/middleProps';
 import useHorizontalScroll from './useHorizontalScroll';
+import { useGetRooms } from '@src/stInfo/hooks/useGetRooms';
 
-const ROOM_LIST = [
-  {
-    image: RoomPic1,
-    title: '슈페리어 트윈',
-    description: '싱글베드 2개',
-    realprice: '￦ 310,597',
-    saleprice: '￦ 275,928',
-  },
-  {
-    image: RoomPic2,
-    title: '디럭스스 트윈',
-    description: '싱글베드 2개',
-    realprice: '￦ 335,244',
-    saleprice: '￦ 277,320',
-  },
-  {
-    image: RoomPic3,
-    title: '슈페리어 더블',
-    description: '퀸베드 1개',
-    realprice: '￦ 395,200',
-    saleprice: '￦ 319,459',
-  },
-  {
-    image: RoomPic4,
-    title: '디럭스 킹',
-    description: '킹베드 1개',
-    realprice: '￦ 410,100',
-    saleprice: '￦ 354,292',
-  },
-  {
-    image: RoomPic5,
-    title: '디럭스 트윈',
-    description: '싱글베드 2개+소파베드 1개',
-    realprice: '￦ 421,244',
-    saleprice: '￦ 378,527',
-  },
-];
+type RoomType = {
+  roomId: number;
+  roomImage: string;
+  bed: string;
+  roomType: string;
+  discountPrice: string;
+  price: string;
+};
 
 export default function RoomSlider({ handleModalOpen }: MiddleProps) {
   const listWrapperRef = useHorizontalScroll();
+  const { data } = useGetRooms(1);
+  const roomList = data?.rooms;
+
   return (
     <>
       <Container ref={listWrapperRef}>
-        {ROOM_LIST.map(
-          ({ image, title, description, realprice, saleprice }) => (
+        {roomList.map(
+          ({
+            roomId,
+            roomImage,
+            bed,
+            roomType,
+            discountPrice,
+            price,
+          }: RoomType) => (
             <RoomCard
-              key={title}
-              handleModalOpen={handleModalOpen}
-              image={image}
-              title={title}
-              description={description}
-              realprice={realprice}
-              saleprice={saleprice}
+              roomId={roomId}
+              key={roomId}
+              handleModalOpen={() => handleModalOpen(roomId)}
+              image={roomImage}
+              title={roomType}
+              description={bed}
+              realprice={price}
+              saleprice={discountPrice}
             />
           )
         )}
