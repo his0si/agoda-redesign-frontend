@@ -1,15 +1,18 @@
+import { useGetAccommodation } from '@src/stInfo/hooks/useGetAccomodationId';
 import styled from 'styled-components';
 
 export default function PopInfoTop() {
+  const { data } = useGetAccommodation(1);
+
   return (
     <Container>
       <SaleAndCost>
         <Sales>할인가</Sales>
-        <Cost>￦ 349,202</Cost>
+        <Cost>￦ {data.price}</Cost>
       </SaleAndCost>
       <PopInfoTagFrame>
-        <PopInfoTopTag>GOLDEN WEEK</PopInfoTopTag>
-        <PopInfoTopTag>2025 새로 지어진 숙소</PopInfoTopTag>
+        <PopInfoTopTag>{data.provisionTags[0]}</PopInfoTopTag>
+        <PopInfoTopTag>{data.provisionTags[1]}</PopInfoTopTag>
       </PopInfoTagFrame>
     </Container>
   );
