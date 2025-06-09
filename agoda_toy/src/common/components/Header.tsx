@@ -203,7 +203,7 @@ const Global = styled(GlobalIcon)<IconProps>`
   height: 1.625rem;
   aspect-ratio: 1/1;
   path {
-    fill: white;
+    fill: ${({ isMainPage, theme }) => (isMainPage ? 'white' : theme.colors.black)};
   }
 `;
 
@@ -211,7 +211,7 @@ const Profile = styled(ProfileIcon)<IconProps>`
   width: 2.3125rem;
   height: 2.3125rem;
   path {
-    fill: white;
+    fill: ${({ isMainPage, theme }) => (isMainPage ? 'white' : theme.colors.black)};
   }
 `;
 
