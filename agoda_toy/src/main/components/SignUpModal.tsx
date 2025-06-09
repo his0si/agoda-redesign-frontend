@@ -15,6 +15,15 @@ export default function SignUpModal() {
     setIsValid(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email));
   }, [email]);
 
+  const handleKakaoLogin = () => {
+    const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+    const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    window.location.href = KAKAO_AUTH_URL;
+  };
+
   return (
     <ModalOverlay>
       <ModalContainer>
@@ -24,17 +33,19 @@ export default function SignUpModal() {
           <Input
             placeholder="id@email.com"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             $isValid={isValid}
           />
         </InputWrapper>
-        <LoginButton type="button" disabled={!isValid} $isValid={isValid}>로그인</LoginButton>
+        <LoginButton type="button" disabled={!isValid} $isValid={isValid}>
+          로그인
+        </LoginButton>
         <DividerWrapper>
           <Divider />
           <DividerText>또는</DividerText>
           <Divider />
         </DividerWrapper>
-        <SocialButton color="#FEE500">
+        <SocialButton color="#FEE500" onClick={handleKakaoLogin}>
           <Icon src={KakaoIcon} alt="kakao" />
           카카오 계정으로 로그인
         </SocialButton>
@@ -73,7 +84,7 @@ const ModalContainer = styled.div`
   padding: 50px;
   width: 629px;
   height: 760px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -82,7 +93,7 @@ const ModalContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  color: #17696A;
+  color: #17696a;
   text-align: center;
   font-size: 28px;
   font-weight: 700;
@@ -94,7 +105,7 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.div`
-  color: #17696A;
+  color: #17696a;
   font-size: 16px;
   margin-bottom: 4px;
 `;
@@ -128,7 +139,9 @@ const LoginButton = styled.button<{ $isValid: boolean }>`
   border-radius: 8px;
   margin-bottom: 24px;
   cursor: ${({ $isValid }) => ($isValid ? 'pointer' : 'not-allowed')};
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   box-sizing: border-box;
 `;
 
@@ -141,16 +154,20 @@ const DividerWrapper = styled.div`
 const Divider = styled.div`
   flex: 1;
   height: 1px;
-  background: #E0E0E0;
+  background: #e0e0e0;
 `;
 
 const DividerText = styled.span`
-  color: #BDBDBD;
+  color: #bdbdbd;
   font-size: 16px;
   margin: 0 16px;
 `;
 
-const SocialButton = styled.button<{ color: string; fontColor?: string; border?: string }>`
+const SocialButton = styled.button<{
+  color: string;
+  fontColor?: string;
+  border?: string;
+}>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -158,7 +175,7 @@ const SocialButton = styled.button<{ color: string; fontColor?: string; border?:
   padding: 16px 0;
   background: ${({ color }) => color};
   color: ${({ fontColor }) => fontColor || '#222'};
-  border: ${({ border }) => border ? `1.5px solid ${border}` : 'none'};
+  border: ${({ border }) => (border ? `1.5px solid ${border}` : 'none')};
   border-radius: 8px;
   font-size: 18px;
   font-weight: 700;
@@ -176,9 +193,9 @@ const Icon = styled.img`
 `;
 
 const SignUpText = styled.div`
-  color: #BDBDBD;
+  color: #bdbdbd;
   text-align: center;
   font-size: 16px;
   margin-top: 16px;
   cursor: pointer;
-`; 
+`;

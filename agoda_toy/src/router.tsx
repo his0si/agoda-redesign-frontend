@@ -11,6 +11,7 @@ import MyRes from './myres/pages/MyRes';
 import MyRevModal from './myrev/components/myRev02Modal/MyRevModal';
 import PaymentPage from './res/pages/PaymentPage';
 import ReservationCompletePage from './res/pages/ReservationCompletePage';
+import KakaoCallback from './main/pages/KakaoCallback';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
     path: 'modal',
 
     element: <MyRevModal handleModalClose={() => {}} />,
+  },
+
+  {
+    path: '/oauth/callback/kakao',
+    element: <KakaoCallback />,
   },
 ]);
 
